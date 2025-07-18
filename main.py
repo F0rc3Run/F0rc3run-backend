@@ -5,83 +5,83 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return {"status": "F0rc3Run URL Test API Online"}
+    return {"message": "🚀 F0rc3Run API is online."}
 
 @app.route('/test', methods=['POST'])
-def test_proxy():
+def test_vmess():
     data = request.get_json()
-    link = data.get("link")
+    if not data or "link" not in data:
+        return jsonify({"error": "No link provided"}), 400
 
+    link = data["link"]
     if not link.startswith("vmess://"):
-        return {"error": "Only vmess:// supported"}, 400
+        return jsonify({"error": "Only vmess supported"}), 400
 
     try:
-        vmess_config = parse_vmess(link)
-        xray_config = generate_xray_config(vmess_config)
+        config = make_xray_config(link)
 
-        with open("xray_config.json", "w") as f:
-            json.dump(xray_config, f)
+        with open("config.json", "w") as f:
+            json.dump(config, f)
 
-        xray_proc = subprocess.Popen(["./xray/xray", "-config", "xray_config.json"])
-        time.sleep(2)
+        # Run Xray
+        print("🔧 Starting xray-core...")
+        proc = subprocess.Popen(["./xray", "-config", "config.json"])
+        time.sleep(3)
 
-        t1 = time.time()
+        start = time.time()
         result = subprocess.run([
             "curl", "--socks5", "127.0.0.1:10808", "-m", "6",
             "-s", "-o", "/dev/null", "https://www.google.com"
         ])
-        t2 = time.time()
+        end = time.time()
 
-        xray_proc.terminate()
+        proc.terminate()
 
         if result.returncode == 0:
-            return {"success": True, "latency": int((t2 - t1) * 1000)}
+            return jsonify({"success": True, "latency": int((end - start) * 1000)})
         else:
-            return {"success": False, "error": "request failed"}
+            return jsonify({"success": False, "error": "Connection failed"})
 
     except Exception as e:
-        return {"success": False, "error": str(e)}, 500
+        return jsonify({"error": str(e)}), 500
 
-def parse_vmess(link):
-    encoded = link.replace("vmess://", "")
-    padded = encoded + "=" * (-len(encoded) % 4)
-    decoded = base64.b64decode(padded).decode()
-    return json.loads(decoded)
+def make_xray_config(link):
+    decoded = base64.b64decode(link.replace('vmess://', '') + '===').decode()
+    node = json.loads(decoded)
 
-def generate_xray_config(v):
     return {
         "inbounds": [{
             "port": 10808,
             "listen": "127.0.0.1",
             "protocol": "socks",
-            "settings": {"auth": "no_auth"}
+            "settings": { "auth": "no_auth" }
         }],
         "outbounds": [{
             "protocol": "vmess",
             "settings": {
                 "vnext": [{
-                    "address": v["add"],
-                    "port": int(v["port"]),
+                    "address": node["add"],
+                    "port": int(node["port"]),
                     "users": [{
-                        "id": v["id"],
-                        "alterId": int(v.get("aid", 0)),
-                        "security": v.get("scy", "auto")
+                        "id": node["id"],
+                        "alterId": int(node.get("aid", 0)),
+                        "security": node.get("scy", "auto")
                     }]
                 }]
             },
             "streamSettings": {
-                "network": v.get("net", "tcp"),
-                "security": v.get("tls", ""),
+                "network": node.get("net", "tcp"),
+                "security": node.get("tls", ""),
                 "wsSettings": {
-                    "path": v.get("path", ""),
+                    "path": node.get("path", ""),
                     "headers": {
-                        "Host": v.get("host", "")
+                        "Host": node.get("host", "")
                     }
-                } if v.get("net") == "ws" else {}
+                } if node.get("net") == "ws" else {}
             }
         }]
     }
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host='0.0.0.0', port=port)
