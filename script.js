@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3 class="text-xl font-bold mb-4 text-center text-gray-300">Configuration Preview & Sharing</h3>
                         <div class="border-b border-gray-700 mb-4">
                             <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
-                                <button class="uppercase tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-orange-500 text-orange-400" data-tab-target="#tab-standard">Standard WG</button>
+                                <button class="uppercase tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-indigo-500 text-indigo-400" data-tab-target="#tab-standard">Standard WG</button>
                                 <button class="uppercase tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-500 mx-4" data-tab-target="#tab-amnezia">AmneziaWG</button>
                                 <button class="uppercase tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-500" data-tab-target="#tab-singbox">Sing-Box</button>
                             </nav>
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div id="tab-content-area"></div>
                     </div>
                     <div class="flex flex-col items-center justify-center pt-6 lg:pt-0">
-                        <h3 id="qrcode-title" class="font-semibold text-lg mb-2 text-orange-400"></h3>
+                        <h3 id="qrcode-title" class="font-semibold text-lg mb-2 text-indigo-400"></h3>
                         <div id="qrcode-wrapper" class="p-4 bg-white rounded-lg shadow-md">
                             <div id="qrcode"></div>
                             <p id="qrcode-message" class="hidden text-center text-gray-700 p-8 font-medium">This format is not suitable for QR code scanning.</p>
@@ -132,13 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const templates = [
             { id: "standard", title: "Standard WireGuard Format", content: configs.standard, color: "blue", showSelector: true },
             { id: "amnezia", title: "AmneziaWG Format (Jitter)", content: configs.amnezia, color: "purple", showSelector: true },
-            { id: "singbox", title: "sing-box Format (URL-Test)", content: configs.singbox, color: "teal", showSelector: false }
+            { id: "singbox", title: "sing-box Format (URL-Test)", content: configs.singbox, color: "indigo", showSelector: false }
         ];
         let html = '';
         templates.forEach(data => {
             const endpointSelectorHtml = data.showSelector ? createEndpointSelectorHTML(allEndpoints, selectedEndpoint, `endpoint-selector-${data.id}`) : '';
             html += `<div id="tab-${data.id}" class="tab-pane ${data.id !== 'standard' ? 'hidden' : ''}">
-                <h3 class="font-semibold text-lg mb-2 text-orange-400">${data.title}</h3>
+                <h3 class="font-semibold text-lg mb-2 text-indigo-400">${data.title}</h3>
                 ${createActionButtons(data.content, data.color, data.id)}
                 <pre class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm break-all max-h-[300px]"><code>${escapeHtml(data.content)}</code></pre>
                 ${endpointSelectorHtml}
@@ -267,13 +267,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createEndpointSelectorHTML(endpoints, selectedEndpoint, groupName) {
-        let html = `<div class="mt-6 pt-4 border-t border-gray-700"><h4 class="text-base font-semibold text-gray-300 mb-3 text-center">Select an Endpoint</h4><p class="text-sm text-center text-gray-400 mb-4"><span class="font-bold text-orange-400">Recommended:</span> Endpoints starting with <code class="bg-gray-700 text-orange-300 px-1 rounded">8.x.x.x</code> may offer better performance on some ISPs.</p><div class="max-h-[200px] overflow-y-auto bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">`;
+        let html = `<div class="mt-6 pt-4 border-t border-gray-700"><h4 class="text-base font-semibold text-gray-300 mb-3 text-center">Select an Endpoint</h4><p class="text-sm text-center text-gray-400 mb-4"><span class="font-bold text-indigo-400">Recommended:</span> Endpoints starting with <code class="bg-gray-700 text-indigo-300 px-1 rounded">8.x.x.x</code> may offer better performance on some ISPs.</p><div class="max-h-[200px] overflow-y-auto bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">`;
         endpoints.forEach(ep => {
             const isChecked = ep === selectedEndpoint ? 'checked' : '';
             const isRecommended = ep.startsWith('8.');
-            const labelClass = isRecommended ? 'text-orange-300' : 'text-gray-300';
-            const recommendText = isRecommended ? '<span class="text-xs font-sans font-bold text-orange-500 ml-2">(Recommended)</span>' : '';
-            html += `<label class="flex items-center p-2 rounded-md hover:bg-gray-700/50 transition-colors cursor-pointer"><input type="radio" name="${groupName}" value="${ep}" class="h-4 w-4 text-orange-600 bg-gray-700 border-gray-600 focus:ring-orange-500 focus:ring-offset-gray-800" ${isChecked}><span class="ml-3 ${labelClass} font-mono text-sm">${ep} ${recommendText}</span></label>`;
+            const labelClass = isRecommended ? 'text-indigo-300' : 'text-gray-300';
+            const recommendText = isRecommended ? `<span class="text-xs font-sans font-bold text-indigo-500 ml-2">(Recommended)</span>` : '';
+            html += `<label class="flex items-center p-2 rounded-md hover:bg-gray-700/50 transition-colors cursor-pointer"><input type="radio" name="${groupName}" value="${ep}" class="h-4 w-4 text-purple-600 bg-gray-700 border-gray-600 focus:ring-indigo-500 focus:ring-offset-gray-800" ${isChecked}><span class="ml-3 ${labelClass} font-mono text-sm">${ep} ${recommendText}</span></label>`;
         });
         html += `</div></div>`;
         return html;
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentAccount || !allFetchedEndpoints.length) return;
         generatedConfigs = generateAllFormats(currentAccount, allFetchedEndpoints, newEndpoint);
         populateTabs(generatedConfigs, allFetchedEndpoints, newEndpoint);
-        const activeTab = document.querySelector('.tab-btn.border-orange-500');
+        const activeTab = document.querySelector('.tab-btn.border-indigo-500');
         if (activeTab) {
             const activeTabId = activeTab.dataset.tabTarget;
             if (activeTabId === '#tab-standard') { updateQrCode(generatedConfigs.standard, 'QR Code (Standard WG)'); }
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (button.classList.contains('copy-link-btn')) { const linkToCopy = button.previousElementSibling.value; const originalText = button.innerHTML; navigator.clipboard.writeText(linkToCopy).then(() => { button.innerHTML = 'Link Copied!'; setTimeout(() => { button.innerHTML = originalText; }, 2000); }); return; }
         }
         if (target.classList.contains('tab-btn')) {
-            const activeTabClasses = ['border-orange-500', 'text-orange-400'], inactiveTabClasses = ['border-transparent', 'text-gray-400', 'hover:text-gray-300', 'hover:border-gray-500'];
+            const activeTabClasses = ['border-indigo-500', 'text-indigo-400'], inactiveTabClasses = ['border-transparent', 'text-gray-400', 'hover:text-gray-300', 'hover:border-gray-500'];
             document.querySelectorAll('.tab-btn').forEach(btn => { btn.classList.remove(...activeTabClasses); btn.classList.add(...inactiveTabClasses); });
             target.classList.add(...activeTabClasses); target.classList.remove(...inactiveTabClasses);
             document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
