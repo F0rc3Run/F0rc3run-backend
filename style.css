@@ -1,6 +1,6 @@
 .gradient-text { 
-    /* گرادینت اصلی از رنگ‌های پیشنهادی شما انتخاب شده است */
-    background-image: linear-gradient(to right, #7FFFD4, #66CDAA); 
+    /* گرادینت جدید و دارک بر اساس بنفش و نیلی */
+    background-image: linear-gradient(to right, #6d28d9, #4f46e5); 
     -webkit-background-clip: text; 
     background-clip: text; 
     color: transparent; 
@@ -56,8 +56,8 @@ body {
 }
 
 .markdown-content a { 
-    /* رنگ لینک‌ها برای تطابق با گرادینت جدید تغییر کرد */
-    color: #7FFFD4; 
+    /* رنگ لینک‌ها به نیلی تغییر کرد */
+    color: #818cf8; /* Indigo-400 */
     text-decoration: underline; 
 }
 
