@@ -1,80 +1,72 @@
-/* =================================================================
-   F0rc3Run Custom Dark/Purple Theme
-   ================================================================= */
-
-:root {
-    --bg-color: #0d0d1a;
-    --card-color: #1a1a2e;
-    --border-color: #2a2a4a;
-    --primary-color: #8B5CF6;
-    --primary-hover-color: #7C3AED;
-    --secondary-color: #3B82F6;
-    --secondary-hover-color: #2563EB;
-    --text-color: #e0e0e0;
-    --text-secondary: #94a3b8;
-}
-
 .gradient-text { 
-    background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color)); 
+    background-image: linear-gradient(to right, #fb923c, #f97316); 
     -webkit-background-clip: text; 
     background-clip: text; 
     color: transparent; 
 }
 
 body { 
-    background-color: var(--bg-color); 
+    background-color: #111827; 
 }
 
-/* Custom Button Classes */
-.btn {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    color: white;
-    transition: all 0.2s ease-in-out;
-    border: none;
-    cursor: pointer;
-}
-.btn-primary {
-    background-color: var(--primary-color);
-}
-.btn-primary:hover {
-    background-color: var(--primary-hover-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
-}
-.btn-secondary {
-    background-color: var(--secondary-color);
-}
-.btn-secondary:hover {
-    background-color: var(--secondary-hover-color);
-}
-.btn-neutral {
-    background-color: #374151; /* Gray */
-}
-.btn-neutral:hover {
-    background-color: #4B5563;
-}
-.btn-danger {
-    background-color: #DC2626; /* Red */
-}
-.btn-danger:hover {
-    background-color: #B91C1C;
+.markdown-content h1, 
+.markdown-content h2, 
+.markdown-content h3 { 
+    font-weight: bold; 
+    margin-bottom: 0.75rem; 
+    margin-top: 1.5rem; 
 }
 
-.text-accent {
-    color: var(--primary-color);
+.markdown-content h1 { 
+    font-size: 1.875rem; 
+    line-height: 2.25rem; 
+    border-bottom: 1px solid #4b5563; 
+    padding-bottom: 0.5rem;
 }
 
-/* Markdown Content Styles */
-.markdown-content h1, .markdown-content h2, .markdown-content h3 { font-weight: bold; margin-bottom: 0.75rem; margin-top: 1.5rem; }
-.markdown-content h1 { font-size: 1.875rem; line-height: 2.25rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;}
-.markdown-content h2 { font-size: 1.5rem; line-height: 2rem; }
-.markdown-content h3 { font-size: 1.25rem; line-height: 1.75rem; }
-.markdown-content p, .markdown-content ul, .markdown-content ol { margin-bottom: 1rem; line-height: 1.75; }
-.markdown-content ul, .markdown-content ol { list-style-position: inside; }
-.markdown-content ul { list-style-type: disc; }
-.markdown-content ol { list-style-type: decimal; }
-.markdown-content a { color: var(--primary-color); text-decoration: underline; }
-.markdown-content code { background-color: #1f2937; color: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.9em; }
-.markdown-content strong { color: white; }
+.markdown-content h2 { 
+    font-size: 1.5rem; 
+    line-height: 2rem; 
+}
+
+.markdown-content h3 { 
+    font-size: 1.25rem; 
+    line-height: 1.75rem; 
+}
+
+.markdown-content p, 
+.markdown-content ul, 
+.markdown-content ol { 
+    margin-bottom: 1rem; 
+    line-height: 1.75; 
+}
+
+.markdown-content ul, 
+.markdown-content ol { 
+    list-style-position: inside; 
+}
+
+.markdown-content ul { 
+    list-style-type: disc; 
+}
+
+.markdown-content ol { 
+    list-style-type: decimal; 
+}
+
+.markdown-content a { 
+    color: #fb923c; 
+    text-decoration: underline; 
+}
+
+.markdown-content code { 
+    background-color: #1f2937; 
+    color: #f3f4f6; 
+    padding: 0.2rem 0.4rem; 
+    border-radius: 0.25rem; 
+    font-size: 0.9em; 
+}
+
+.markdown-content strong { 
+    color: #f9fafb; 
+}
