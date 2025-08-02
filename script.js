@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     howToUseBtn.addEventListener('click', () => { 
         // NOTE: You should change this URL to point to your own English README file.
-        fetch('https://raw.githubusercontent.com/F0rc3Run/YourRepoName/main/README.md')
+        fetch('https://raw.githubusercontent.com/F0rc3Run/free-warp-endpoints/refs/heads/main/README.md')
             .then(response => { if (!response.ok) { throw new Error('README.md not found.'); } return response.text(); })
             .then(markdown => { howToUseContent.innerHTML = marked.parse(markdown); howToUseModal.classList.remove('hidden'); })
             .catch(error => { console.error('Error fetching readme:', error); howToUseContent.innerHTML = `<p class="text-red-400">Error: Could not load the help file.</p>`; howToUseModal.classList.remove('hidden'); }); 
