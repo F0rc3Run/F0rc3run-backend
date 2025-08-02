@@ -94,14 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderResults(configs, allEndpoints, selectedEndpoint) {
         resultsDiv.innerHTML = `
-            <div class="bg-gray-800/50 border-gray-700/50 rounded-2xl p-6 md:p-8 mt-8 shadow-2xl">
+            <div class="bg-gray-800 border border-gray-700 rounded-2xl p-6 md:p-8 mt-8 shadow-2xl">
                 <h2 class="text-2xl font-bold mb-6 text-white text-center">Your Configurations are Ready!</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div class="lg:col-span-2">
                         <h3 class="text-xl font-bold mb-4 text-center text-gray-300">Configuration Preview & Sharing</h3>
                         <div class="border-b border-gray-700 mb-4">
                             <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
-                                <button class="uppercase tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-purple-500 text-purple-400" data-tab-target="#tab-standard">Standard WG</button>
+                                <button class="uppercase tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-orange-500 text-orange-400" data-tab-target="#tab-standard">Standard WG</button>
                                 <button class="uppercase tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-500 mx-4" data-tab-target="#tab-amnezia">AmneziaWG</button>
                                 <button class="uppercase tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-400 border-transparent hover:text-gray-300 hover:border-gray-500" data-tab-target="#tab-singbox">Sing-Box</button>
                             </nav>
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div id="tab-content-area"></div>
                     </div>
                     <div class="flex flex-col items-center justify-center pt-6 lg:pt-0">
-                        <h3 id="qrcode-title" class="font-semibold text-lg mb-2 text-accent"></h3>
+                        <h3 id="qrcode-title" class="font-semibold text-lg mb-2 text-orange-400"></h3>
                         <div id="qrcode-wrapper" class="p-4 bg-white rounded-lg shadow-md">
                             <div id="qrcode"></div>
                             <p id="qrcode-message" class="hidden text-center text-gray-700 p-8 font-medium">This format is not suitable for QR code scanning.</p>
@@ -130,16 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateTabs(configs, allEndpoints, selectedEndpoint) {
         const tabContentArea = document.getElementById('tab-content-area');
         const templates = [
-            { id: "standard", title: "Standard WireGuard Format", content: configs.standard, showSelector: true },
-            { id: "amnezia", title: "AmneziaWG Format (Jitter)", content: configs.amnezia, showSelector: true },
-            { id: "singbox", title: "sing-box Format (URL-Test)", content: configs.singbox, showSelector: false }
+            { id: "standard", title: "Standard WireGuard Format", content: configs.standard, color: "blue", showSelector: true },
+            { id: "amnezia", title: "AmneziaWG Format (Jitter)", content: configs.amnezia, color: "purple", showSelector: true },
+            { id: "singbox", title: "sing-box Format (URL-Test)", content: configs.singbox, color: "teal", showSelector: false }
         ];
         let html = '';
         templates.forEach(data => {
             const endpointSelectorHtml = data.showSelector ? createEndpointSelectorHTML(allEndpoints, selectedEndpoint, `endpoint-selector-${data.id}`) : '';
             html += `<div id="tab-${data.id}" class="tab-pane ${data.id !== 'standard' ? 'hidden' : ''}">
-                <h3 class="font-semibold text-lg mb-2 text-accent">${data.title}</h3>
-                ${createActionButtons(data.id, data.content)}
+                <h3 class="font-semibold text-lg mb-2 text-orange-400">${data.title}</h3>
+                ${createActionButtons(data.content, data.color, data.id)}
                 <pre class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm break-all max-h-[300px]"><code>${escapeHtml(data.content)}</code></pre>
                 ${endpointSelectorHtml}
                 ${createDownloadLinks(data.id)}
@@ -267,38 +267,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createEndpointSelectorHTML(endpoints, selectedEndpoint, groupName) {
-        let html = `<div class="mt-6 pt-4 border-t border-gray-700"><h4 class="text-base font-semibold text-gray-300 mb-3 text-center">Select an Endpoint</h4><p class="text-sm text-center text-gray-400 mb-4"><span class="font-bold text-purple-400">Recommended:</span> Endpoints starting with <code class="bg-gray-700 text-purple-300 px-1 rounded">8.x.x.x</code> may offer better performance on some ISPs.</p><div class="max-h-[200px] overflow-y-auto bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">`;
+        let html = `<div class="mt-6 pt-4 border-t border-gray-700"><h4 class="text-base font-semibold text-gray-300 mb-3 text-center">Select an Endpoint</h4><p class="text-sm text-center text-gray-400 mb-4"><span class="font-bold text-orange-400">Recommended:</span> Endpoints starting with <code class="bg-gray-700 text-orange-300 px-1 rounded">8.x.x.x</code> may offer better performance on some ISPs.</p><div class="max-h-[200px] overflow-y-auto bg-gray-900 p-3 rounded-lg border border-gray-700 space-y-2">`;
         endpoints.forEach(ep => {
             const isChecked = ep === selectedEndpoint ? 'checked' : '';
             const isRecommended = ep.startsWith('8.');
-            const labelClass = isRecommended ? 'text-purple-300' : 'text-gray-300';
-            const recommendText = isRecommended ? '<span class="text-xs font-sans font-bold text-purple-500 ml-2">(Recommended)</span>' : '';
-            html += `<label class="flex items-center p-2 rounded-md hover:bg-gray-700/50 transition-colors cursor-pointer"><input type="radio" name="${groupName}" value="${ep}" class="h-4 w-4 text-purple-600 bg-gray-700 border-gray-600 focus:ring-purple-500 focus:ring-offset-gray-800" ${isChecked}><span class="ml-3 ${labelClass} font-mono text-sm">${ep} ${recommendText}</span></label>`;
+            const labelClass = isRecommended ? 'text-orange-300' : 'text-gray-300';
+            const recommendText = isRecommended ? '<span class="text-xs font-sans font-bold text-orange-500 ml-2">(Recommended)</span>' : '';
+            html += `<label class="flex items-center p-2 rounded-md hover:bg-gray-700/50 transition-colors cursor-pointer"><input type="radio" name="${groupName}" value="${ep}" class="h-4 w-4 text-orange-600 bg-gray-700 border-gray-600 focus:ring-orange-500 focus:ring-offset-gray-800" ${isChecked}><span class="ml-3 ${labelClass} font-mono text-sm">${ep} ${recommendText}</span></label>`;
         });
         html += `</div></div>`;
         return html;
     }
 
-    // [اصلاح نهایی] این تابع برای استفاده از کلاس‌های جدید دکمه‌ها بازنویسی شده است
-    function createActionButtons(id, content) {
+    function createActionButtons(content, color, id) {
         const hasDownload = id === 'standard' || id === 'amnezia';
         const filename = id === 'standard' ? 'wg-config.conf' : 'amnezia-config.conf';
-        
-        let buttonsHtml = `
-            <div class="flex space-x-2 mb-2">
-                <button class="btn btn-neutral flex-1 copy-btn" data-clipboard-text="${escape(content)}">Copy</button>`;
-
-        if (hasDownload) {
-            buttonsHtml += `<button class="btn btn-primary flex-1 download-btn" data-download-content="${escape(content)}" data-filename="${filename}">Download .conf</button>`;
-        }
-
-        buttonsHtml += `
-                <button class="btn btn-neutral flex-1 share-btn" data-share-content="${escape(content)}">Share Link</button>
-            </div>
-            <div class="share-result-container hidden mt-2">
-                <input type="text" readonly class="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-300">
-                <button class="copy-link-btn w-full mt-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded-lg text-sm">Copy Link</button>
-            </div>`;
+        let buttonsHtml = `<div class="flex space-x-2 mb-2"><button class="copy-btn flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg" data-clipboard-text="${escape(content)}">Copy</button>`;
+        if (hasDownload) { buttonsHtml += `<button class="download-btn flex-1 bg-${color}-600 hover:bg-${color}-700 text-white font-semibold py-2 px-4 rounded-lg" data-download-content="${escape(content)}" data-filename="${filename}">Download .conf</button>`; }
+        buttonsHtml += `<button class="share-btn flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg" data-share-content="${escape(content)}">Share Link</button></div><div class="share-result-container hidden mt-2"><input type="text" readonly class="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-300"><button class="copy-link-btn w-full mt-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded-lg text-sm">Copy Link</button></div>`;
         return buttonsHtml;
     }
     
@@ -321,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentAccount || !allFetchedEndpoints.length) return;
         generatedConfigs = generateAllFormats(currentAccount, allFetchedEndpoints, newEndpoint);
         populateTabs(generatedConfigs, allFetchedEndpoints, newEndpoint);
-        const activeTab = document.querySelector('.tab-btn.border-purple-500');
+        const activeTab = document.querySelector('.tab-btn.border-orange-500');
         if (activeTab) {
             const activeTabId = activeTab.dataset.tabTarget;
             if (activeTabId === '#tab-standard') { updateQrCode(generatedConfigs.standard, 'QR Code (Standard WG)'); }
@@ -339,8 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (button.classList.contains('copy-link-btn')) { const linkToCopy = button.previousElementSibling.value; const originalText = button.innerHTML; navigator.clipboard.writeText(linkToCopy).then(() => { button.innerHTML = 'Link Copied!'; setTimeout(() => { button.innerHTML = originalText; }, 2000); }); return; }
         }
         if (target.classList.contains('tab-btn')) {
-            const activeTabClasses = ['border-purple-500', 'text-purple-400'];
-            const inactiveTabClasses = ['border-transparent', 'text-gray-400', 'hover:text-gray-300', 'hover:border-gray-500'];
+            const activeTabClasses = ['border-orange-500', 'text-orange-400'], inactiveTabClasses = ['border-transparent', 'text-gray-400', 'hover:text-gray-300', 'hover:border-gray-500'];
             document.querySelectorAll('.tab-btn').forEach(btn => { btn.classList.remove(...activeTabClasses); btn.classList.add(...inactiveTabClasses); });
             target.classList.add(...activeTabClasses); target.classList.remove(...inactiveTabClasses);
             document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
@@ -363,6 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     howToUseBtn.addEventListener('click', () => { 
+        // NOTE: You should change this URL to point to your own English README file.
         fetch('https://raw.githubusercontent.com/F0rc3Run/YourRepoName/main/README.md')
             .then(response => { if (!response.ok) { throw new Error('README.md not found.'); } return response.text(); })
             .then(markdown => { howToUseContent.innerHTML = marked.parse(markdown); howToUseModal.classList.remove('hidden'); })
