@@ -130,16 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateTabs(configs, allEndpoints, selectedEndpoint) {
         const tabContentArea = document.getElementById('tab-content-area');
         const templates = [
-            { id: "standard", title: "Standard WireGuard Format", content: configs.standard, color: "blue", showSelector: true },
-            { id: "amnezia", title: "AmneziaWG Format (Jitter)", content: configs.amnezia, color: "purple", showSelector: true },
-            { id: "singbox", title: "sing-box Format (URL-Test)", content: configs.singbox, color: "teal", showSelector: false }
+            { id: "standard", title: "Standard WireGuard Format", content: configs.standard, showSelector: true },
+            { id: "amnezia", title: "AmneziaWG Format (Jitter)", content: configs.amnezia, showSelector: true },
+            { id: "singbox", title: "sing-box Format (URL-Test)", content: configs.singbox, showSelector: false }
         ];
         let html = '';
         templates.forEach(data => {
             const endpointSelectorHtml = data.showSelector ? createEndpointSelectorHTML(allEndpoints, selectedEndpoint, `endpoint-selector-${data.id}`) : '';
             html += `<div id="tab-${data.id}" class="tab-pane ${data.id !== 'standard' ? 'hidden' : ''}">
                 <h3 class="font-semibold text-lg mb-2 text-accent">${data.title}</h3>
-                ${createActionButtons(data.content, data.color, data.id)}
+                ${createActionButtons(data.id, data.content)}
                 <pre class="bg-gray-900 p-4 rounded-lg overflow-x-auto text-sm break-all max-h-[300px]"><code>${escapeHtml(data.content)}</code></pre>
                 ${endpointSelectorHtml}
                 ${createDownloadLinks(data.id)}
@@ -279,12 +279,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return html;
     }
 
-    function createActionButtons(content, color, id) {
+    // [اصلاح نهایی] این تابع برای استفاده از کلاس‌های جدید دکمه‌ها بازنویسی شده است
+    function createActionButtons(id, content) {
         const hasDownload = id === 'standard' || id === 'amnezia';
         const filename = id === 'standard' ? 'wg-config.conf' : 'amnezia-config.conf';
-        let buttonsHtml = `<div class="flex space-x-2 mb-2"><button class="copy-btn flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg" data-clipboard-text="${escape(content)}">Copy</button>`;
-        if (hasDownload) { buttonsHtml += `<button class="download-btn flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg" data-download-content="${escape(content)}" data-filename="${filename}">Download .conf</button>`; }
-        buttonsHtml += `<button class="share-btn flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg" data-share-content="${escape(content)}">Share Link</button></div><div class="share-result-container hidden mt-2"><input type="text" readonly class="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-300"><button class="copy-link-btn w-full mt-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded-lg text-sm">Copy Link</button></div>`;
+        
+        let buttonsHtml = `
+            <div class="flex space-x-2 mb-2">
+                <button class="btn btn-neutral flex-1 copy-btn" data-clipboard-text="${escape(content)}">Copy</button>`;
+
+        if (hasDownload) {
+            buttonsHtml += `<button class="btn btn-primary flex-1 download-btn" data-download-content="${escape(content)}" data-filename="${filename}">Download .conf</button>`;
+        }
+
+        buttonsHtml += `
+                <button class="btn btn-neutral flex-1 share-btn" data-share-content="${escape(content)}">Share Link</button>
+            </div>
+            <div class="share-result-container hidden mt-2">
+                <input type="text" readonly class="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-300">
+                <button class="copy-link-btn w-full mt-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded-lg text-sm">Copy Link</button>
+            </div>`;
         return buttonsHtml;
     }
     
@@ -349,7 +363,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     howToUseBtn.addEventListener('click', () => { 
-        // NOTE: You should change this URL to point to your own English README file.
         fetch('https://raw.githubusercontent.com/F0rc3Run/YourRepoName/main/README.md')
             .then(response => { if (!response.ok) { throw new Error('README.md not found.'); } return response.text(); })
             .then(markdown => { howToUseContent.innerHTML = marked.parse(markdown); howToUseModal.classList.remove('hidden'); })
