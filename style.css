@@ -1,5 +1,6 @@
 .gradient-text { 
-    background-image: linear-gradient(to right, #fb923c, #f97316); 
+    /* گرادینت اصلی از رنگ‌های پیشنهادی شما انتخاب شده است */
+    background-image: linear-gradient(to right, #7FFFD4, #66CDAA); 
     -webkit-background-clip: text; 
     background-clip: text; 
     color: transparent; 
@@ -55,7 +56,8 @@ body {
 }
 
 .markdown-content a { 
-    color: #fb923c; 
+    /* رنگ لینک‌ها برای تطابق با گرادینت جدید تغییر کرد */
+    color: #7FFFD4; 
     text-decoration: underline; 
 }
 
