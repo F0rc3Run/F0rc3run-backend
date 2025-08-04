@@ -16,63 +16,65 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl wget iproute2 net-tools
           
-      - name: Create and configure network interfaces
+      - name: Configure network interfaces
         run: |
-          # Load dummy network module if not loaded
-          sudo modprobe dummy
+          # نمایش اینترفیس‌های موجود
+          ip addr show
           
-          # Create dummy interface
-          sudo ip link add dummy0 type dummy
-          sudo ip link set dummy0 up
+          # اضافه کردن آدرس IPv4 به eth0
+          sudo ip addr add 192.168.1.1/24 dev eth0
           
-          # Add IPv4 address
-          sudo ip addr add 192.168.1.1/24 dev dummy0
+          # اضافه کردن آدرس IPv6 به eth0
+          sudo ip -6 addr add 2001:db8::1/64 dev eth0
           
-          # Add IPv6 address
-          sudo ip -6 addr add 2001:db8::1/64 dev dummy0
+          # تنظیم مسیر پیش‌فرض برای IPv4
+          sudo ip route add default via 192.168.1.254 dev eth0 metric 100
           
-          # Verify interfaces are up
-          ip addr show dummy0
+          # تنظیم مسیر پیش‌فرض برای IPv6
+          sudo ip -6 route add default via 2001:db8::fffe dev eth0 metric 100
+          
+          # بررسی مجدد اینترفیس‌ها
+          ip addr show eth0
+          ip route show
+          ip -6 route show
           
       - name: Download warp script
         run: |
           curl -o warp-go.sh https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh
           chmod +x warp-go.sh
           
-      - name: Run warp scan with simulated network
+      - name: Run warp scan
         run: |
-          echo "Starting WARP scan..."
-          echo "Current network interfaces:"
+          echo "شروع اسکن WARP..."
+          echo "اینترفیس‌های شبکه فعلی:"
           ip addr show
           
-          # Try running the script with more verbose output
-          sudo ./warp-go.sh scan > warp_results.txt 2>&1 || echo "Scan completed with some errors"
-          echo "WARP scan finished"
+          # اجرای اسکریپت با خروجی دقیق‌تر
+          sudo ./warp-go.sh scan > warp_results.txt 2>&1 || echo "اسکن با خطا انجام شد"
+          echo "اسکن WARP پایان یافت"
         continue-on-error: true
         env:
-          # Force the script to detect interfaces
-          WARP_FORCE_IPV4: "192.168.1.1"
-          WARP_FORCE_IPV6: "2001:db8::1"
+          # تنظیم متغیرهای محیطی برای فریب اسکریپت
+          WARP_IFACE: "eth0"
           
       - name: Process results
         run: |
-          echo "Processing results..."
+          echo "پردازش نتایج..."
           
-          # Check if we got any results
-          echo "=== Full warp_results.txt ==="
+          # نمایش کامل نتایج برای دیباگ
+          echo "=== محتوای کامل warp_results.txt ==="
           cat warp_results.txt
           
-          # Extract valid endpoints if any exist
+          # استخراج اندپوینت‌های معتبر
           if grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' warp_results.txt; then
             grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' warp_results.txt | head -20 > best_endpoints.txt
           else
-            echo "No valid endpoints found" > best_endpoints.txt
+            echo "هیچ اندپوینت معتبری یافت نشد" > best_endpoints.txt
           fi
           
-          # Create JSON file
+          # ایجاد فایل JSON
           echo "[" > endpoints.json
-          if [ -s best_endpoints.txt ] && ! grep -q "No valid endpoints found" best_endpoints.txt; then
-            # Process endpoints and add to JSON
+          if [ -s best_endpoints.txt ] && ! grep -q "هیچ اندپوینت معتبری یافت نشد" best_endpoints.txt; then
             counter=0
             while IFS= read -r line; do
               if [ $counter -gt 0 ]; then
@@ -86,7 +88,7 @@ jobs:
             done < best_endpoints.txt
           fi
           echo "]" >> endpoints.json
-          echo "Results processing completed"
+          echo "پردازش نتایج پایان یافت"
           
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -104,9 +106,9 @@ jobs:
           git config --global user.email 'actions@github.com'
           git add best_endpoints.txt endpoints.json
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "هیچ تغییری برای commit وجود ندارد"
           else
-            git commit -m "Update warp endpoints [$(date '+%Y-%m-%d %H:%M')]"
+            git commit -m "به‌روزرسانی اندپوینت‌های WARP [$(date '+%Y-%m-%d %H:%M')]"
             git push
           fi
         continue-on-error: true
@@ -114,15 +116,19 @@ jobs:
       - name: Debug info
         if: always()
         run: |
-          echo "=== Debug Information ==="
-          echo "Current directory: $(pwd)"
-          echo "Files in directory:"
+          echo "=== اطلاعات دیباگ ==="
+          echo "دایرکتوری فعلی: $(pwd)"
+          echo "فایل‌های موجود:"
           ls -la
-          echo "=== Network interfaces ==="
+          echo "=== اینترفیس‌های شبکه ==="
           ip addr show
-          echo "=== warp_results.txt ==="
-          cat warp_results.txt || echo "warp_results.txt not found"
-          echo "=== best_endpoints.txt ==="
-          cat best_endpoints.txt || echo "best_endpoints.txt not found"
-          echo "=== endpoints.json ==="
-          cat endpoints.json || echo "endpoints.json not found"
+          echo "=== مسیرهای IPv4 ==="
+          ip route show
+          echo "=== مسیرهای IPv6 ==="
+          ip -6 route show
+          echo "=== محتوای warp_results.txt ==="
+          cat warp_results.txt || echo "فایل warp_results.txt یافت نشد"
+          echo "=== محتوای best_endpoints.txt ==="
+          cat best_endpoints.txt || echo "فایل best_endpoints.txt یافت نشد"
+          echo "=== محتوای endpoints.json ==="
+          cat endpoints.json || echo "فایل endpoints.json یافت نشد"
