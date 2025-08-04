@@ -11,21 +11,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download Dependencies
+      - name: Install Dependencies and Scanner
         run: |
-          echo "Downloading sing-box client and WARP scanner..."
-          # دانلود sing-box
+          echo "Downloading sing-box client..."
           wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
           tar -xzf sing-box.tar.gz
           cp sing-box-1.12.0-linux-amd64/sing-box .
           chmod +x sing-box
           
-          # دانلود اسکنر
-          wget -O bpb-scanner.tar.gz https://github.com/bia-pain-bache/BPB-Warp-Scanner/releases/download/v1.1.1/BPB-Warp-Scanner-linux-amd64.tar.gz
-          tar -xzf bpb-scanner.tar.gz
-          
-          # **اصلاح شد:** مسیر صحیح فایل اجرایی را مشخص می‌کنیم
-          chmod +x BPB-Warp-Scanner-linux-amd64/BPB-Warp-Scanner-linux-amd64
+          echo "Installing BPB-Warp-Scanner using the official installer..."
+          # **THE FIX:** Using the official installer script
+          bash <(curl -fsSL https://raw.githubusercontent.com/bia-pain-bache/BPB-Warp-Scanner/main/install.sh)
           
       - name: Find and Connect to a Working Iran Proxy
         id: proxy_connect
@@ -53,12 +49,7 @@ jobs:
             cat > config.json <<EOF
             {
               "inbounds": [{"type": "socks", "listen": "127.0.0.1", "listen_port": 1080}],
-              "outbounds": [{
-                "type": "vless",
-                "server": "$server",
-                "server_port": $server_port,
-                "uuid": "$uuid"
-              }]
+              "outbounds": [{"type": "vless", "server": "$server", "server_port": $server_port, "uuid": "$uuid"}]
             }
             EOF
             
@@ -97,8 +88,8 @@ jobs:
         if: steps.proxy_connect.outputs.proxy_found == 'true'
         run: |
           echo "Starting the scan through the proxy..."
-          # **اصلاح شد:** اجرای اسکنر از داخل پوشه خودش
-          ./BPB-Warp-Scanner-linux-amd64/BPB-Warp-Scanner-linux-amd64
+          # **THE FIX:** Run the scanner directly by name, as the installer puts it in the system PATH
+          BPB-Warp-Scanner-linux-amd64
           
           echo "Scan finished. Top 10 results:"
           head -n 11 result.csv
