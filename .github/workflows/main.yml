@@ -1,125 +1,115 @@
-name: Warp Endpoint Generator
+name: Find Clean WARP Endpoints via Dynamic Iran Proxy
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
-  schedule:
-    - cron: '0 */6 * * *'
 
 jobs:
-  generate-endpoint:
+  scan-endpoints:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    
-    - name: Setup environment and dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget curl jq net-tools
-        
-    - name: Generate sing-box config from WARP.conf
-      id: prepare_config
-      run: |
-        if [ ! -f "WARP.conf" ]; then
-          echo "❌ Error: WARP.conf file not found in the repository."
-          exit 1
-        fi
-        
-        echo "Found WARP.conf. Extracting details with robust method..."
-        
-        # **THE FINAL FIX:** Using grep with PCRE to reliably extract only the Base64 key.
-        PRIVATE_KEY=$(grep -oP 'PrivateKey\s*=\s*\K.*' WARP.conf)
-        PEER_PUBLIC_KEY=$(grep -oP 'PublicKey\s*=\s*\K.*' WARP.conf)
-        ADDRESS_RAW=$(grep -oP 'Address\s*=\s*\K.*' WARP.conf)
-        ENDPOINT=$(grep -oP 'Endpoint\s*=\s*\K.*' WARP.conf)
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        IPV4_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f1 | xargs)
-        IPV6_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f2 | xargs)
-        
-        cat > singbox.json <<EOF
-        {
-          "inbounds": [
+      - name: Download Dependencies
+        run: |
+          echo "Downloading sing-box client and WARP scanner..."
+          # دانلود sing-box
+          wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
+          tar -xzf sing-box.tar.gz
+          cp sing-box-1.12.0-linux-amd64/sing-box .
+          chmod +x sing-box
+          
+          # دانلود اسکنر
+          wget -O warp-scanner.zip https://github.com/irani/WARP-Endpoint-Scanner/releases/latest/download/WARP-Endpoint-Scanner-linux-amd64.zip
+          unzip warp-scanner.zip
+          chmod +x WARP-Endpoint-Scanner
+          
+      - name: Find and Connect to a Working Iran Proxy
+        id: proxy_connect
+        run: |
+          echo "Fetching proxy list from URL..."
+          curl -s -o ir_proxies.txt https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/IR.txt
+          
+          while IFS= read -r proxy_uri; do
+            if [[ -z "$proxy_uri" ]]; then continue; fi
+
+            echo "--- Testing proxy: $proxy_uri ---"
+            
+            # --- Parse VLESS URI ---
+            # This part is complex and handles simple VLESS URIs
+            # Note: It may not support all VLESS parameters
+            address_part=$(echo "$proxy_uri" | cut -d'@' -f2 | cut -d'?' -f1)
+            uuid=$(echo "$proxy_uri" | cut -d'/' -f3 | cut -d'@' -f1)
+            server=$(echo "$address_part" | cut -d':' -f1)
+            server_port=$(echo "$address_part" | cut -d':' -f2)
+
+            if [[ -z "$uuid" || -z "$server" || -z "$server_port" ]]; then
+              echo "Could not parse URI. Skipping."
+              continue
+            fi
+            
+            # --- Create sing-box config for the current proxy ---
+            cat > config.json <<EOF
             {
-              "type": "socks",
-              "tag": "socks-in",
-              "listen": "0.0.0.0",
-              "listen_port": 1080
+              "inbounds": [{"type": "socks", "listen": "127.0.0.1", "listen_port": 1080}],
+              "outbounds": [{
+                "type": "vless",
+                "server": "$server",
+                "server_port": $server_port,
+                "uuid": "$uuid"
+              }]
             }
-          ],
-          "outbounds": [
-            {
-              "type": "wireguard",
-              "tag": "wg-out",
-              "server": "${ENDPOINT%%:*}",
-              "server_port": ${ENDPOINT##*:},
-              "local_address": [
-                "${IPV4_ADDR}/32",
-                "${IPV6_ADDR}/128"
-              ],
-              "private_key": "${PRIVATE_KEY}",
-              "peer_public_key": "${PEER_PUBLIC_KEY}",
-              "mtu": 1280
-            }
-          ],
-          "route": {
-            "rules": [
-              {
-                "inbound": ["socks-in"],
-                "outbound": "wg-out"
-              }
-            ]
-          }
-        }
-        EOF
-        
-        echo "✅ Successfully generated clean singbox.json"
-        echo "config_ready=true" >> $GITHUB_OUTPUT
+            EOF
+            
+            # --- Run and Test ---
+            sudo ./sing-box run -c config.json > singbox.log 2>&1 &
+            SINGBOX_PID=$!
+            sleep 8 # Wait for connection
+            
+            echo "Verifying connection..."
+            response=$(curl --socks5 127.0.0.1:1080 -s --max-time 10 http://ip-api.com/json)
+            kill $SINGBOX_PID
+            
+            country=$(echo "$response" | jq -r .country)
+            if [ "$country" == "Iran" ]; then
+              echo "✅ SUCCESS: Found a working Iran proxy: $server"
+              echo "proxy_found=true" >> $GITHUB_OUTPUT
+              
+              # Set up environment for subsequent steps
+              PROXY_URL="socks5://127.0.0.1:1080"
+              echo "https://_proxy=$PROXY_URL" >> $GITHUB_ENV
+              echo "http_proxy=$PROXY_URL" >> $GITHUB_ENV
+              echo "HTTPS_PROXY=$PROXY_URL" >> $GITHUB_ENV
+              echo "HTTP_PROXY=$PROXY_URL" >> $GITHUB_ENV
+              
+              # Relaunch the working proxy to keep it running for the next steps
+              sudo ./sing-box run -c config.json > singbox.log 2>&1 &
+              exit 0 # Exit the script successfully to proceed to the next step
+            else
+              echo "❌ FAILED: Proxy did not connect or is not in Iran. Trying next..."
+              echo "Response: $response"
+            fi
+            
+          done < ir_proxies.txt
 
-    - name: Run Sing-box Proxy
-      if: steps.prepare_config.outputs.config_ready == 'true'
-      id: warp
-      run: |
-        wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
-        tar -xzf sing-box.tar.gz
-        cp sing-box-1.12.0-linux-amd64/sing-box .
-        chmod +x sing-box
-        
-        echo "Starting sing-box proxy..."
-        sudo ENABLE_DEPRECATED_WIREGUARD_OUTBOUND=true ./sing-box run -c singbox.json > singbox.log 2>&1 &
-        sleep 10
-        
-        echo "--- Sing-box Log ---"
-        cat singbox.log
-        
-        if sudo netstat -tlnp | grep -q "1080"; then
-          ENDPOINT="socks5://127.0.0.1:1080"
-          echo "✅ Endpoint found: $ENDPOINT"
-          echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
-        else
-          echo "❌ Failed to start sing-box proxy. Check the log above."
+          echo "::error::No working Iran proxy found in the list."
           exit 1
-        fi
+          
+      - name: Run WARP IP Scanner
+        if: steps.proxy_connect.outputs.proxy_found == 'true'
+        run: |
+          echo "Starting the scan through the Iran proxy..."
+          ./WARP-Endpoint-Scanner -o result.csv
+          
+          echo "Scan finished. Top 10 results:"
+          head -n 11 result.csv
 
-    - name: Create GitHub Release
-      if: success() && steps.warp.outputs.endpoint != ''
-      uses: ncipollo/release-action@v1
-      with:
-        tag: endpoint-${{ github.run_number }}
-        name: Warp Endpoint - ${{ github.run_number }}
-        body: |
-          **SOCKS5 Endpoint:** `${{ steps.warp.outputs.endpoint }}`
-          **Generated at:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-        token: ${{ secrets.GITHUB_TOKEN }}
-        allowUpdates: true
-        
-    - name: Final Status
-      if: always()
-      run: |
-        if [ "${{ steps.warp.outputs.endpoint }}" != "" ]; then
-          echo "✅ Success! Endpoint: ${{ steps.warp.outputs.endpoint }}"
-        else
-          echo "❌ Failed to generate endpoint."
-        fi
+      - name: Upload Results as Artifact
+        if: always() # Always run this step to get logs even if the scan fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: warp-scan-results
+          path: |
+            result.csv
+            singbox.log
