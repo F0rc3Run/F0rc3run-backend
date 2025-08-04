@@ -29,16 +29,17 @@ jobs:
           exit 1
         fi
         
+        # Rename the file to the default name that warp-go expects
+        mv WARP.conf warp.conf
+        echo "Renamed WARP.conf to warp.conf for auto-detection."
+        
         # Download and extract warp-go
         wget -O warp-go.tar.gz https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_amd64.tar.gz
         tar -xzf warp-go.tar.gz
         chmod +x warp-go
         
-        echo "Successfully found WARP.conf."
-        
-        # Generate the sing-box config file using the existing account config
-        # The '-config' flag specifies the path to your config file
-        sudo ./warp-go -config WARP.conf -export-singbox singbox.json
+        # Generate the sing-box config. It will now automatically find and use warp.conf
+        sudo ./warp-go -export-singbox singbox.json
         
         if [ -f "singbox.json" ]; then
           echo "Sing-box config generated successfully."
@@ -46,6 +47,7 @@ jobs:
         else
           echo "Failed to generate sing-box config."
           echo "config_ready=false" >> $GITHUB_OUTPUT
+          exit 1 # Exit if config generation fails
         fi
 
     - name: Run Sing-box Proxy
