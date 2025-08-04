@@ -8,7 +8,7 @@ on:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 30  # افزایش زمان تایم‌اوت
+    timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -17,29 +17,40 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y curl wget iproute2 net-tools
-        continue-on-error: true  # ادامه حتی در صورت خطا
+        continue-on-error: true
 
       - name: Download warp script
         run: |
           curl -o warp-go.sh https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh
           chmod +x warp-go.sh
 
-      - name: Run warp scan
+      - name: Run warp scan with root privileges
         run: |
           echo "Starting WARP scan..."
-          ./warp-go.sh scan > warp_results.txt 2>&1 || echo "Scan completed with some errors"
+          sudo ./warp-go.sh scan > warp_results.txt 2>&1 || echo "Scan completed with some errors"
           echo "WARP scan finished"
         continue-on-error: true
+
+      - name: Check if scan completed
+        run: |
+          if [ ! -s warp_results.txt ]; then
+            echo "Scan failed, creating empty results"
+            echo "No results available" > warp_results.txt
+          fi
 
       - name: Process results
         run: |
           echo "Processing results..."
           # استخراج اندپوینت‌های سالم
-          grep -E '^[0-9]' warp_results.txt | head -20 > best_endpoints.txt || echo "No endpoints found"
+          if grep -qE '^[0-9]' warp_results.txt; then
+            grep -E '^[0-9]' warp_results.txt | head -20 > best_endpoints.txt
+          else
+            echo "No valid endpoints found" > best_endpoints.txt
+          fi
           
           # ایجاد فایل JSON برای استفاده‌های بعدی
           echo "[" > endpoints.json
-          if [ -s best_endpoints.txt ]; then
+          if [ -s best_endpoints.txt ] && ! grep -q "No valid endpoints found" best_endpoints.txt; then
             grep -E '^[0-9]' best_endpoints.txt | while read line; do
               ip=$(echo $line | awk '{print $1}')
               port=$(echo $line | awk '{print $2}')
@@ -65,8 +76,12 @@ jobs:
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
           git add best_endpoints.txt endpoints.json
-          git commit -m "Update warp endpoints [$(date '+%Y-%m-%d %H:%M')]" || echo "No changes to commit"
-          git push || echo "Push failed"
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update warp endpoints [$(date '+%Y-%m-%d %H:%M')]"
+            git push
+          fi
         continue-on-error: true
 
       - name: Debug info
