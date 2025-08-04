@@ -30,19 +30,25 @@ jobs:
         
         echo "Found WARP.conf. Extracting and formatting details..."
         
-        # Extract connection details
         PRIVATE_KEY=$(grep 'PrivateKey' WARP.conf | cut -d'=' -f2 | xargs)
         PEER_PUBLIC_KEY=$(grep 'PublicKey' WARP.conf | cut -d'=' -f2 | xargs)
         ADDRESS_RAW=$(grep 'Address' WARP.conf | cut -d'=' -f2 | xargs)
         ENDPOINT=$(grep 'Endpoint' WARP.conf | cut -d'=' -f2 | xargs)
         
-        # **THE FIX:** Split the comma-separated addresses and add the required subnet masks
         IPV4_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f1 | xargs)
         IPV6_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f2 | xargs)
         
-        # Generate the final sing-box.json file with the correct format
+        # **THE FIX:** The SOCKS server is now in its own "inbounds" section.
         cat > singbox.json <<EOF
         {
+          "inbounds": [
+            {
+              "type": "socks",
+              "tag": "socks-in",
+              "listen": "0.0.0.0",
+              "listen_port": 1080
+            }
+          ],
           "outbounds": [
             {
               "type": "wireguard",
@@ -56,12 +62,6 @@ jobs:
               "private_key": "${PRIVATE_KEY}",
               "peer_public_key": "${PEER_PUBLIC_KEY}",
               "mtu": 1280
-            },
-            {
-              "type": "socks",
-              "tag": "socks-in",
-              "listen": "0.0.0.0",
-              "listen_port": 1080
             }
           ],
           "route": {
