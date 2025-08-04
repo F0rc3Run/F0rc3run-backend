@@ -20,10 +20,12 @@ jobs:
           cp sing-box-1.12.0-linux-amd64/sing-box .
           chmod +x sing-box
           
-          # دانلود اسکنر جدید که شما معرفی کردید
+          # دانلود اسکنر
           wget -O bpb-scanner.tar.gz https://github.com/bia-pain-bache/BPB-Warp-Scanner/releases/download/v1.1.1/BPB-Warp-Scanner-linux-amd64.tar.gz
           tar -xzf bpb-scanner.tar.gz
-          chmod +x BPB-Warp-Scanner-linux-amd64
+          
+          # **اصلاح شد:** مسیر صحیح فایل اجرایی را مشخص می‌کنیم
+          chmod +x BPB-Warp-Scanner-linux-amd64/BPB-Warp-Scanner-linux-amd64
           
       - name: Find and Connect to a Working Iran Proxy
         id: proxy_connect
@@ -95,11 +97,10 @@ jobs:
         if: steps.proxy_connect.outputs.proxy_found == 'true'
         run: |
           echo "Starting the scan through the proxy..."
-          # اجرای اسکنر جدید
-          ./BPB-Warp-Scanner-linux-amd64
+          # **اصلاح شد:** اجرای اسکنر از داخل پوشه خودش
+          ./BPB-Warp-Scanner-linux-amd64/BPB-Warp-Scanner-linux-amd64
           
           echo "Scan finished. Top 10 results:"
-          # این اسکنر نتایج را در result.csv ذخیره می‌کند
           head -n 11 result.csv
 
       - name: Upload Results as Artifact
