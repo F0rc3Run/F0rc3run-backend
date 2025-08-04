@@ -28,16 +28,17 @@ jobs:
           exit 1
         fi
         
-        echo "Found WARP.conf. Extracting details for modern format..."
-        PRIVATE_KEY=$(awk -F' *= *' '/PrivateKey/ {print $2}' WARP.conf)
-        PEER_PUBLIC_KEY=$(awk -F' *= *' '/PublicKey/ {print $2}' WARP.conf)
-        ADDRESS_RAW=$(awk -F' *= *' '/Address/ {print $2}' WARP.conf)
-        ENDPOINT=$(awk -F' *= *' '/Endpoint/ {print $2}' WARP.conf)
+        echo "Found WARP.conf. Cleaning and extracting details..."
+        
+        # **راه حل نهایی:** استفاده از `tr` برای حذف تمام کاراکترهای نامرئی و فاصله‌ها از کلیدها
+        PRIVATE_KEY=$(awk -F' *= *' '/PrivateKey/ {print $2}' WARP.conf | tr -d '\r\n[:space:]')
+        PEER_PUBLIC_KEY=$(awk -F' *= *' '/PublicKey/ {print $2}' WARP.conf | tr -d '\r\n[:space:]')
+        ADDRESS_RAW=$(awk -F' *= *' '/Address/ {print $2}' WARP.conf | tr -d '\r\n[:space:]')
+        ENDPOINT=$(awk -F' *= *' '/Endpoint/ {print $2}' WARP.conf | tr -d '\r\n[:space:]')
 
         IPV4_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f1 | xargs)
         IPV6_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f2 | xargs)
         
-        # **THE FINAL FIX:** Generating the modern sing-box config using the "endpoints" and "outbounds" structure.
         cat > singbox.json <<EOF
         {
           "inbounds": [
@@ -74,7 +75,7 @@ jobs:
         }
         EOF
         
-        echo "✅ Successfully generated singbox.json using the modern endpoint format."
+        echo "✅ Successfully generated clean singbox.json"
         echo "config_ready=true" >> $GITHUB_OUTPUT
 
     - name: Run Sing-box Proxy
@@ -87,8 +88,7 @@ jobs:
         chmod +x sing-box
         
         echo "Starting sing-box proxy..."
-        # No special environment variable is needed now.
-        sudo ./sing-box run -c singbox.json > singbox.log 2>&1 &
+        sudo ENABLE_DEPRECATED_WIREGUARD_OUTBOUND=true ./sing-box run -c singbox.json > singbox.log 2>&1 &
         sleep 10
         
         echo "--- Sing-box Log ---"
