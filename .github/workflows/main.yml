@@ -13,7 +13,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     - name: Setup environment
       run: |
@@ -167,7 +167,7 @@ jobs:
         cat endpoint_report.json | jq .
     
     - name: Upload all artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: warp-artifacts-${{ github.run_number }}
@@ -180,12 +180,10 @@ jobs:
     
     - name: Create GitHub Release with endpoint
       if: steps.warp.outputs.endpoint != ''
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: ncipollo/release-action@v1
       with:
-        tag_name: endpoint-${{ github.run_number }}
-        release_name: Warp Endpoint - ${{ github.run_number }}
+        tag: endpoint-${{ github.run_number }}
+        name: Warp Endpoint - ${{ github.run_number }}
         body: |
           ## Warp-Go Endpoint Information
           
@@ -205,6 +203,7 @@ jobs:
           [View Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
         draft: false
         prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Update README with latest endpoint
       if: steps.warp.outputs.endpoint != ''
@@ -251,6 +250,38 @@ jobs:
         git add ENDPOINTS.md
         git commit -m "Update endpoint - Run #${{ github.run_number }}" || echo "No changes to commit"
         git push || echo "Push failed"
+    
+    - name: Create issue if failed
+      if: steps.warp.outputs.endpoint == '' && failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const issueTitle = `Warp Endpoint Generation Failed - Run #${{ github.run_number }}`;
+          const issueBody = `
+          ## ❌ Failed to Generate Warp Endpoint
+          
+          **Run ID:** ${{ github.run_id }}
+          **Time:** ${new Date().toISOString()}
+          
+          ### Debug Information:
+          - Check the [workflow logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          - Download artifacts for detailed logs
+          
+          ### Possible Issues:
+          - warp-go script may have changed
+          - Network connectivity issues
+          - GitHub Actions runner limitations
+          
+          Please investigate and fix the issue.
+          `;
+          
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: issueTitle,
+            body: issueBody,
+            labels: ['bug', 'warp-endpoint', 'automated']
+          });
     
     - name: Send notification
       if: always()
