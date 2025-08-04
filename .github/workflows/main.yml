@@ -28,8 +28,7 @@ jobs:
           exit 1
         fi
         
-        # **THE FIX:** Using a more robust 'awk' command to extract keys cleanly.
-        echo "Found WARP.conf. Extracting details with robust method..."
+        echo "Found WARP.conf. Extracting details..."
         PRIVATE_KEY=$(awk -F' *= *' '/PrivateKey/ {print $2}' WARP.conf)
         PEER_PUBLIC_KEY=$(awk -F' *= *' '/PublicKey/ {print $2}' WARP.conf)
         ADDRESS_RAW=$(awk -F' *= *' '/Address/ {print $2}' WARP.conf)
@@ -38,6 +37,7 @@ jobs:
         IPV4_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f1 | xargs)
         IPV6_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f2 | xargs)
         
+        # **THE FIX:** Generating the new, recommended sing-box config format.
         cat > singbox.json <<EOF
         {
           "inbounds": [
@@ -51,7 +51,7 @@ jobs:
           "outbounds": [
             {
               "type": "wireguard",
-              "tag": "wireguard-out",
+              "tag": "wg-out",
               "server": "${ENDPOINT%%:*}",
               "server_port": ${ENDPOINT##*:},
               "local_address": [
@@ -67,14 +67,14 @@ jobs:
             "rules": [
               {
                 "inbound": ["socks-in"],
-                "outbound": "wireguard-out"
+                "outbound": "wg-out"
               }
             ]
           }
         }
         EOF
         
-        echo "✅ Successfully generated singbox.json"
+        echo "✅ Successfully generated modern singbox.json"
         echo "config_ready=true" >> $GITHUB_OUTPUT
 
     - name: Run Sing-box Proxy
@@ -87,7 +87,8 @@ jobs:
         chmod +x sing-box
         
         echo "Starting sing-box proxy..."
-        sudo ENABLE_DEPRECATED_WIREGUARD_OUTBOUND=true ./sing-box run -c singbox.json > singbox.log 2>&1 &
+        # The environment variable is no longer needed with the new config format
+        sudo ./sing-box run -c singbox.json > singbox.log 2>&1 &
         sleep 10
         
         echo "--- Sing-box Log ---"
