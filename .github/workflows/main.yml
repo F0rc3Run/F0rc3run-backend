@@ -38,7 +38,6 @@ jobs:
         IPV4_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f1 | xargs)
         IPV6_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f2 | xargs)
         
-        # **THE FIX:** The SOCKS server is now in its own "inbounds" section.
         cat > singbox.json <<EOF
         {
           "inbounds": [
@@ -87,8 +86,9 @@ jobs:
         cp sing-box-1.12.0-linux-amd64/sing-box .
         chmod +x sing-box
         
-        echo "Starting sing-box proxy..."
-        sudo ./sing-box run -c singbox.json > singbox.log 2>&1 &
+        echo "Starting sing-box proxy with deprecated feature enabled..."
+        # **THE FIX:** Add the environment variable right before the sudo command.
+        sudo ENABLE_DEPRECATED_WIREGUARD_OUTBOUND=true ./sing-box run -c singbox.json > singbox.log 2>&1 &
         sleep 10
         
         echo "--- Sing-box Log ---"
@@ -99,7 +99,7 @@ jobs:
           echo "✅ Endpoint found: $ENDPOINT"
           echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
         else
-          echo "❌ Failed to start sing-box proxy."
+          echo "❌ Failed to start sing-box proxy. Check the log above."
           exit 1
         fi
 
