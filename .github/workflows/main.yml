@@ -62,10 +62,19 @@ jobs:
           # ایجاد دایرکتوری برای فایل‌های باینری
           sudo mkdir -p /tmp/warp-binaries
           
-          # دانلود فایل‌های باینری در فضای نام اصلی
+          # دانلود فایل‌های باینری با روش جایگزین
           echo "دانلود فایل‌های باینری WARP..."
-          wget -O /tmp/warp-binaries/warp-go https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_amd64.tar.gz
-          sudo chmod +x /tmp/warp-binaries/warp-go
+          cd /tmp/warp-binaries
+          
+          # دانلود با curl و تنظیم مجوزها
+          curl -L -o 
+          chmod +x warp-go https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_arm64.tar.gz?ref_type=heads&inline=false
+          
+          # بررسی فایل دانلود شده
+          ls -la warp-go
+          
+          # بازگشت به دایرکتوری اصلی
+          cd -
           
           # کپی فایل‌های باینری به فضای نام مجازی
           sudo mkdir -p /tmp/warp-ns
