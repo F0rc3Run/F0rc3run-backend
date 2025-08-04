@@ -17,42 +17,25 @@ jobs:
     
     - name: Setup environment
       run: |
-        # ایجاد دایرکتوری کاری
         mkdir -p warp-workspace
         cd warp-workspace
-        
-        # نصب ابزارهای مورد نیاز
         sudo apt-get update
         sudo apt-get install -y wget curl jq net-tools
     
     - name: Check and download warp-go files
       working-directory: warp-workspace
       run: |
-        echo "=== Checking file availability ==="
-        
-        # بررسی وجود فایل‌ها در ریپوزیتوری
-        echo "Checking F0rc3Run repository..."
-        curl -s -o /dev/null -w "%{http_code}" https://github.com/F0rc3Run/F0rc3run-backend/raw/refs/heads/main/warp-go_1.0.8_linux_amd64.tar.gz || echo "File not found in F0rc3Run repo"
-        
-        # دانلود از منبع اصلی GitLab
         echo "=== Downloading from original source ==="
         wget -O warp-go_1.0.8_linux_amd64.tar.gz https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_amd64.tar.gz
         
-        # اگر فایل اسکریپت در ریپوزیتوری شما است
         if [ -f "../warp-go.sh" ]; then
           cp ../warp-go.sh .
         else
-          # دانلود اسکریپت از منبع اصلی یا ایجاد اسکریپت ساده
           cat > warp-go.sh << 'EOF'
         #!/bin/bash
-        # Simple warp-go runner script
-        
-        # Extract and run warp-go
         if [ -f "warp-go_1.0.8_linux_amd64.tar.gz" ]; then
           tar -xzf warp-go_1.0.8_linux_amd64.tar.gz
           chmod +x warp-go
-          
-          # Run warp-go with socks5 proxy
           ./warp-go --socks5 0.0.0.0:40000
         else
           echo "Error: warp-go archive not found"
@@ -61,14 +44,10 @@ jobs:
         EOF
         fi
         
-        # تنظیم دسترسی‌ها
         chmod +x warp-go.sh
-        
-        # استخراج فایل
         tar -xzf warp-go_1.0.8_linux_amd64.tar.gz
         chmod +x warp-go
         
-        # لیست فایل‌ها
         echo "=== Files in workspace ==="
         ls -la
     
@@ -78,9 +57,6 @@ jobs:
         echo "=== warp-go version and help ==="
         ./warp-go --version 2>&1 || true
         ./warp-go --help 2>&1 || true
-        
-        echo "=== warp-go.sh content ==="
-        cat warp-go.sh || true
     
     - name: Run warp-go and capture endpoint
       id: warp
@@ -88,50 +64,38 @@ jobs:
       run: |
         echo "=== Starting warp-go ==="
         
-        # روش 1: اجرای مستقیم warp-go
-        echo "Method 1: Direct execution"
-        timeout 60s ./warp-go --socks5 0.0.0.0:40000 > direct_output.log 2>&1 &
+        # اجرای warp-go با دسترسی sudo برای مدیریت شبکه
+        echo "Method 1: Direct execution with sudo"
+        timeout 60s sudo ./warp-go --socks5 0.0.0.0:40000 > direct_output.log 2>&1 &
         WARP_PID=$!
         
-        # صبر برای راه‌اندازی
         sleep 15
         
-        # بررسی وضعیت
-        ps aux | grep warp-go || true
-        
-        # بررسی پورت
         echo "=== Checking ports ==="
         sudo netstat -tlnp | grep -E "40000|warp" || true
         
-        # اگر پورت 40000 باز است
+        ENDPOINT=""
         if sudo netstat -tlnp | grep -q "40000"; then
           ENDPOINT="socks5://127.0.0.1:40000"
           echo "Found endpoint: $ENDPOINT"
           echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
         fi
         
-        # نمایش لاگ‌ها
         echo "=== Direct output log ==="
         cat direct_output.log || true
         
-        # متوقف کردن
         kill $WARP_PID 2>/dev/null || true
         
-        # روش 2: اجرای اسکریپت
         if [ -z "$ENDPOINT" ]; then
-          echo "=== Method 2: Script execution ==="
-          timeout 60s bash warp-go.sh > script_output.log 2>&1 &
+          echo "=== Method 2: Script execution with sudo ==="
+          timeout 60s sudo bash warp-go.sh > script_output.log 2>&1 &
           SCRIPT_PID=$!
           
           sleep 15
           
-          # بررسی مجدد پورت‌ها
           sudo netstat -tlnp | grep -E "1080|8080|40000" || true
-          
-          # جستجو در خروجی
           cat script_output.log || true
           
-          # استخراج endpoint
           ENDPOINT=$(grep -o "socks5://[^ ]*\|http://[^ ]*" script_output.log | head -1 || echo "")
           if [ -n "$ENDPOINT" ]; then
             echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
@@ -140,19 +104,6 @@ jobs:
           kill $SCRIPT_PID 2>/dev/null || true
         fi
         
-        # اگر هنوز endpoint پیدا نشده
-        if [ -z "$ENDPOINT" ]; then
-          # پورت‌های رایج را چک کن
-          for PORT in 40000 1080 8080 9050; do
-            if sudo netstat -tlnp | grep -q ":$PORT"; then
-              ENDPOINT="socks5://127.0.0.1:$PORT"
-              echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
-              break
-            fi
-          done
-        fi
-        
-        # cleanup
         pkill -f warp-go 2>/dev/null || true
     
     - name: Test endpoint if found
@@ -161,36 +112,30 @@ jobs:
       run: |
         echo "=== Testing endpoint: ${{ steps.warp.outputs.endpoint }} ==="
         
-        # شروع مجدد warp-go برای تست
-        ./warp-go --socks5 0.0.0.0:40000 > test_output.log 2>&1 &
+        # اجرای مجدد warp-go با sudo برای تست
+        sudo ./warp-go --socks5 0.0.0.0:40000 > test_output.log 2>&1 &
         WARP_PID=$!
         sleep 10
         
-        # تست با curl
         curl -x ${{ steps.warp.outputs.endpoint }} -m 10 https://api.ipify.org?format=json || true
         echo ""
-        
-        # تست دیگر
         curl -x ${{ steps.warp.outputs.endpoint }} -m 10 https://httpbin.org/ip || true
         
         kill $WARP_PID 2>/dev/null || true
     
     - name: Generate endpoint report
+      if: always()
       working-directory: warp-workspace
       run: |
-        # ایجاد گزارش نهایی
         cat > endpoint_report.json << EOF
         {
           "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
           "run_id": "${{ github.run_id }}",
           "run_number": "${{ github.run_number }}",
           "endpoint": "${{ steps.warp.outputs.endpoint }}",
-          "status": "${{ steps.warp.outputs.endpoint != '' && 'success' || 'failed' }}",
-          "github_actor": "${{ github.actor }}",
-          "github_sha": "${{ github.sha }}"
+          "status": "${{ steps.warp.outputs.endpoint != '' && 'success' || 'failed' }}"
         }
         EOF
-        
         echo "=== Endpoint Report ==="
         cat endpoint_report.json | jq .
     
@@ -201,9 +146,7 @@ jobs:
         name: warp-artifacts-${{ github.run_number }}
         path: |
           warp-workspace/*.log
-          warp-workspace/*.conf
           warp-workspace/*.json
-          warp-workspace/endpoint_report.json
     
     - name: Create GitHub Release with endpoint
       if: steps.warp.outputs.endpoint != ''
@@ -212,31 +155,9 @@ jobs:
         tag: endpoint-${{ github.run_number }}
         name: Warp Endpoint - ${{ github.run_number }}
         body: |
-          ## Warp-Go Endpoint Information
-          
           **Endpoint:** `${{ steps.warp.outputs.endpoint }}`
-          
           **Generated at:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
           **Run ID:** ${{ github.run_id }}
-          **Commit:** ${{ github.sha }}
-          
-          ### How to use:
-          ```bash
-          # For SOCKS5 proxy
-          export ALL_PROXY=${{ steps.warp.outputs.endpoint }}
-          curl -x ${{ steps.warp.outputs.endpoint }} https://api.ipify.org
-          ```
-          
-          ### Test the endpoint:
-          ```bash
-          # Test with curl
-          curl -x ${{ steps.warp.outputs.endpoint }} https://httpbin.org/ip
-          
-          # Test with wget
-          wget -e use_proxy=yes -e http_proxy=${{ steps.warp.outputs.endpoint }} -O- https://api.ipify.org
-          ```
-          
-          [View Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
         draft: false
         prerelease: false
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -245,58 +166,18 @@ jobs:
     - name: Update ENDPOINTS.md
       if: steps.warp.outputs.endpoint != ''
       run: |
-        # ایجاد یا آپدیت فایل ENDPOINTS.md
         cat > ENDPOINTS.md << EOF
-        # Latest Warp-Go Endpoints
+        # Latest Warp-Go Endpoint
         
-        ## Current Active Endpoint
         \`\`\`
         ${{ steps.warp.outputs.endpoint }}
         \`\`\`
         
         **Last Updated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-        **Status:** ✅ Active
-        **GitHub Run:** [#${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-        
-        ## Quick Test
-        \`\`\`bash
-        # Test the proxy
-        curl -x ${{ steps.warp.outputs.endpoint }} https://api.ipify.org
-        \`\`\`
-        
-        ## Usage Examples
-        
-        ### Using with curl:
-        \`\`\`bash
-        curl -x ${{ steps.warp.outputs.endpoint }} https://example.com
-        \`\`\`
-        
-        ### Using with Python:
-        \`\`\`python
-        import requests
-        
-        proxies = {
-            'http': '${{ steps.warp.outputs.endpoint }}',
-            'https': '${{ steps.warp.outputs.endpoint }}'
-        }
-        
-        response = requests.get('https://api.ipify.org', proxies=proxies)
-        print(response.text)
-        \`\`\`
-        
-        ### Using with Git:
-        \`\`\`bash
-        git config --global http.proxy ${{ steps.warp.outputs.endpoint }}
-        git config --global https.proxy ${{ steps.warp.outputs.endpoint }}
-        \`\`\`
-        
-        ---
-        *This file is automatically updated by GitHub Actions*
         EOF
         
-        # کامیت و پوش تغییرات
-        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add ENDPOINTS.md
         git commit -m "Update endpoint - Run #${{ github.run_number }}" || echo "No changes to commit"
         git push || echo "Push failed"
@@ -307,9 +188,6 @@ jobs:
         echo "=== Workflow Summary ==="
         if [ "${{ steps.warp.outputs.endpoint }}" != "" ]; then
           echo "✅ Successfully generated endpoint: ${{ steps.warp.outputs.endpoint }}"
-          echo "📋 Check ENDPOINTS.md for usage instructions"
-          echo "📦 Check Release page for more details"
         else
           echo "❌ Failed to generate endpoint"
-          echo "📎 Check artifacts for debugging logs"
         fi
