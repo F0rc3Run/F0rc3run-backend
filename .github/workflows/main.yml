@@ -1,10 +1,8 @@
 name: WARP Endpoint Scanner
-
 on:
   schedule:
     - cron: '0 3 * * *'
   workflow_dispatch:
-
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -12,57 +10,84 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+        
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y curl wget iproute2 net-tools
-
-      - name: Create virtual network interfaces
+          
+      - name: Create and configure network interfaces
         run: |
-          # ایجاد اینترفیس‌های مجازی IPv4 و IPv6
+          # Load dummy network module if not loaded
+          sudo modprobe dummy
+          
+          # Create dummy interface
           sudo ip link add dummy0 type dummy
-          sudo ip addr add 192.168.1.1/24 dev dummy0
           sudo ip link set dummy0 up
           
+          # Add IPv4 address
+          sudo ip addr add 192.168.1.1/24 dev dummy0
+          
+          # Add IPv6 address
           sudo ip -6 addr add 2001:db8::1/64 dev dummy0
-          sudo ip link set dummy0 up
-
+          
+          # Verify interfaces are up
+          ip addr show dummy0
+          
       - name: Download warp script
         run: |
           curl -o warp-go.sh https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh
           chmod +x warp-go.sh
-
+          
       - name: Run warp scan with simulated network
         run: |
           echo "Starting WARP scan..."
+          echo "Current network interfaces:"
+          ip addr show
+          
+          # Try running the script with more verbose output
           sudo ./warp-go.sh scan > warp_results.txt 2>&1 || echo "Scan completed with some errors"
           echo "WARP scan finished"
         continue-on-error: true
-
+        env:
+          # Force the script to detect interfaces
+          WARP_FORCE_IPV4: "192.168.1.1"
+          WARP_FORCE_IPV6: "2001:db8::1"
+          
       - name: Process results
         run: |
           echo "Processing results..."
-          # استخراج اندپوینت‌های سالم
-          if grep -qE '^[0-9]' warp_results.txt; then
-            grep -E '^[0-9]' warp_results.txt | head -20 > best_endpoints.txt
+          
+          # Check if we got any results
+          echo "=== Full warp_results.txt ==="
+          cat warp_results.txt
+          
+          # Extract valid endpoints if any exist
+          if grep -qE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' warp_results.txt; then
+            grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' warp_results.txt | head -20 > best_endpoints.txt
           else
             echo "No valid endpoints found" > best_endpoints.txt
           fi
           
-          # ایجاد فایل JSON برای استفاده‌های بعدی
+          # Create JSON file
           echo "[" > endpoints.json
           if [ -s best_endpoints.txt ] && ! grep -q "No valid endpoints found" best_endpoints.txt; then
-            grep -E '^[0-9]' best_endpoints.txt | while read line; do
+            # Process endpoints and add to JSON
+            counter=0
+            while IFS= read -r line; do
+              if [ $counter -gt 0 ]; then
+                echo "," >> endpoints.json
+              fi
               ip=$(echo $line | awk '{print $1}')
               port=$(echo $line | awk '{print $2}')
               ping=$(echo $line | awk '{print $3}')
-              echo "  {\"ip\": \"$ip\", \"port\": \"$port\", \"ping\": \"$ping\"}," >> endpoints.json
-            done
+              echo "  {\"ip\": \"$ip\", \"port\": \"$port\", \"ping\": \"$ping\"}" >> endpoints.json
+              counter=$((counter+1))
+            done < best_endpoints.txt
           fi
           echo "]" >> endpoints.json
           echo "Results processing completed"
-
+          
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -72,7 +97,7 @@ jobs:
             best_endpoints.txt
             endpoints.json
         continue-on-error: true
-
+        
       - name: Commit results
         run: |
           git config --global user.name 'GitHub Actions'
@@ -85,7 +110,7 @@ jobs:
             git push
           fi
         continue-on-error: true
-
+        
       - name: Debug info
         if: always()
         run: |
@@ -95,9 +120,9 @@ jobs:
           ls -la
           echo "=== Network interfaces ==="
           ip addr show
-          echo "=== warp_results.txt (first 10 lines) ==="
-          head -n 10 warp_results.txt || echo "warp_results.txt not found"
-          echo "=== best_endpoints.txt (first 10 lines) ==="
-          head -n 10 best_endpoints.txt || echo "best_endpoints.txt not found"
-          echo "=== endpoints.json (first 10 lines) ==="
-          head -n 10 endpoints.json || echo "endpoints.json not found"
+          echo "=== warp_results.txt ==="
+          cat warp_results.txt || echo "warp_results.txt not found"
+          echo "=== best_endpoints.txt ==="
+          cat best_endpoints.txt || echo "best_endpoints.txt not found"
+          echo "=== endpoints.json ==="
+          cat endpoints.json || echo "endpoints.json not found"
