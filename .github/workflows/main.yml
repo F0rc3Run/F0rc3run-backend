@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'  # هر 6 ساعت یکبار
+    - cron: '0 */6 * * *'
 
 jobs:
   generate-endpoint:
@@ -15,173 +15,100 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
     
-    - name: Setup environment
+    - name: Setup environment and install dependencies
       run: |
-        mkdir -p warp-workspace
-        cd warp-workspace
         sudo apt-get update
         sudo apt-get install -y wget curl jq net-tools
-    
-    - name: Check and download warp-go files
-      working-directory: warp-workspace
+        
+    - name: Download and prepare warp-go
+      id: prepare_warp
       run: |
-        echo "=== Downloading from original source ==="
+        # Download and extract warp-go
         wget -O warp-go_1.0.8_linux_amd64.tar.gz https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_amd64.tar.gz
-        
-        if [ -f "../warp-go.sh" ]; then
-          cp ../warp-go.sh .
-        else
-          cat > warp-go.sh << 'EOF'
-        #!/bin/bash
-        if [ -f "warp-go_1.0.8_linux_amd64.tar.gz" ]; then
-          tar -xzf warp-go_1.0.8_linux_amd64.tar.gz
-          chmod +x warp-go
-          ./warp-go --socks5 0.0.0.0:40000
-        else
-          echo "Error: warp-go archive not found"
-          exit 1
-        fi
-        EOF
-        fi
-        
-        chmod +x warp-go.sh
         tar -xzf warp-go_1.0.8_linux_amd64.tar.gz
         chmod +x warp-go
         
-        echo "=== Files in workspace ==="
-        ls -la
-    
-    - name: Analyze warp-go
-      working-directory: warp-workspace
-      run: |
-        echo "=== warp-go version and help ==="
-        ./warp-go --version 2>&1 || true
-        ./warp-go --help 2>&1 || true
-    
-    - name: Run warp-go and capture endpoint
+        # Register a new WARP device. Sudo is needed for this.
+        echo "Registering WARP device..."
+        if sudo ./warp-go -register; then
+          echo "WARP device registered successfully."
+          # Export the sing-box config file
+          sudo ./warp-go -export-singbox singbox.json
+          echo "singbox_config_generated=true" >> $GITHUB_OUTPUT
+          ls -l
+        else
+          echo "WARP device registration failed."
+          echo "singbox_config_generated=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Download and run sing-box
+      if: steps.prepare_warp.outputs.singbox_config_generated == 'true'
       id: warp
-      working-directory: warp-workspace
       run: |
-        echo "=== Starting warp-go ==="
+        # Download, extract, and prepare sing-box
+        wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
+        tar -xzf sing-box.tar.gz
+        # The extracted folder is named sing-box-1.9.3-linux-amd64
+        cp sing-box-1.9.3-linux-amd64/sing-box .
+        chmod +x sing-box
         
-        # اجرای warp-go با دسترسی sudo برای مدیریت شبکه
-        echo "Method 1: Direct execution with sudo"
-        timeout 60s sudo ./warp-go --socks5 0.0.0.0:40000 > direct_output.log 2>&1 &
-        WARP_PID=$!
+        # Run sing-box in the background using the config from warp-go
+        echo "Starting sing-box proxy..."
+        sudo ./sing-box run -c singbox.json > singbox.log 2>&1 &
         
-        sleep 15
-        
-        echo "=== Checking ports ==="
-        sudo netstat -tlnp | grep -E "40000|warp" || true
-        
-        ENDPOINT=""
-        if sudo netstat -tlnp | grep -q "40000"; then
-          ENDPOINT="socks5://127.0.0.1:40000"
-          echo "Found endpoint: $ENDPOINT"
-          echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
-        fi
-        
-        echo "=== Direct output log ==="
-        cat direct_output.log || true
-        
-        kill $WARP_PID 2>/dev/null || true
-        
-        if [ -z "$ENDPOINT" ]; then
-          echo "=== Method 2: Script execution with sudo ==="
-          timeout 60s sudo bash warp-go.sh > script_output.log 2>&1 &
-          SCRIPT_PID=$!
-          
-          sleep 15
-          
-          sudo netstat -tlnp | grep -E "1080|8080|40000" || true
-          cat script_output.log || true
-          
-          ENDPOINT=$(grep -o "socks5://[^ ]*\|http://[^ ]*" script_output.log | head -1 || echo "")
-          if [ -n "$ENDPOINT" ]; then
-            echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
-          fi
-          
-          kill $SCRIPT_PID 2>/dev/null || true
-        fi
-        
-        pkill -f warp-go 2>/dev/null || true
-    
-    - name: Test endpoint if found
-      if: steps.warp.outputs.endpoint != ''
-      working-directory: warp-workspace
-      run: |
-        echo "=== Testing endpoint: ${{ steps.warp.outputs.endpoint }} ==="
-        
-        # اجرای مجدد warp-go با sudo برای تست
-        sudo ./warp-go --socks5 0.0.0.0:40000 > test_output.log 2>&1 &
-        WARP_PID=$!
+        # Wait for the proxy to start
         sleep 10
         
-        curl -x ${{ steps.warp.outputs.endpoint }} -m 10 https://api.ipify.org?format=json || true
-        echo ""
-        curl -x ${{ steps.warp.outputs.endpoint }} -m 10 https://httpbin.org/ip || true
+        echo "--- Sing-box Log ---"
+        cat singbox.log
         
-        kill $WARP_PID 2>/dev/null || true
-    
-    - name: Generate endpoint report
-      if: always()
-      working-directory: warp-workspace
+        # The default port for sing-box SOCKS is 1080
+        if sudo netstat -tlnp | grep -q "1080"; then
+          ENDPOINT="socks5://127.0.0.1:1080"
+          echo "✅ Endpoint found: $ENDPOINT"
+          echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
+        else
+          echo "❌ Failed to start sing-box proxy on port 1080."
+          echo "endpoint=" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Test endpoint if found
+      if: steps.warp.outputs.endpoint != ''
       run: |
-        cat > endpoint_report.json << EOF
-        {
-          "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-          "run_id": "${{ github.run_id }}",
-          "run_number": "${{ github.run_number }}",
-          "endpoint": "${{ steps.warp.outputs.endpoint }}",
-          "status": "${{ steps.warp.outputs.endpoint != '' && 'success' || 'failed' }}"
-        }
-        EOF
-        echo "=== Endpoint Report ==="
-        cat endpoint_report.json | jq .
-    
-    - name: Upload all artifacts
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: warp-artifacts-${{ github.run_number }}
-        path: |
-          warp-workspace/*.log
-          warp-workspace/*.json
-    
-    - name: Create GitHub Release with endpoint
+        echo "=== Testing endpoint: ${{ steps.warp.outputs.endpoint }} ==="
+        # Test with curl
+        curl -x ${{ steps.warp.outputs.endpoint }} -m 10 https://www.cloudflare.com/cdn-cgi/trace || echo "Test failed but continuing."
+        
+    - name: Create GitHub Release
       if: steps.warp.outputs.endpoint != ''
       uses: ncipollo/release-action@v1
       with:
         tag: endpoint-${{ github.run_number }}
         name: Warp Endpoint - ${{ github.run_number }}
         body: |
-          **Endpoint:** `${{ steps.warp.outputs.endpoint }}`
+          **SOCKS5 Endpoint:** `${{ steps.warp.outputs.endpoint }}`
           **Generated at:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          **Run ID:** ${{ github.run_id }}
-        draft: false
-        prerelease: false
         token: ${{ secrets.GITHUB_TOKEN }}
         allowUpdates: true
-    
-    - name: Update ENDPOINTS.md
+        
+    - name: Update ENDPOINTS.md file
       if: steps.warp.outputs.endpoint != ''
       run: |
-        cat > ENDPOINTS.md << EOF
-        # Latest Warp-Go Endpoint
+        echo "# Latest Warp-Go Endpoint" > ENDPOINTS.md
+        echo "" >> ENDPOINTS.md
+        echo '```' >> ENDPOINTS.md
+        echo "${{ steps.warp.outputs.endpoint }}" >> ENDPOINTS.md
+        echo '```' >> ENDPOINTS.md
+        echo "" >> ENDPOINTS.md
+        echo "**Last Updated:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> ENDPOINTS.md
         
-        \`\`\`
-        ${{ steps.warp.outputs.endpoint }}
-        \`\`\`
-        
-        **Last Updated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-        EOF
-        
+        # Commit and push the updated file
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add ENDPOINTS.md
         git commit -m "Update endpoint - Run #${{ github.run_number }}" || echo "No changes to commit"
-        git push || echo "Push failed"
-    
+        git push || echo "Push failed, but that's okay."
+
     - name: Final status
       if: always()
       run: |
@@ -189,5 +116,5 @@ jobs:
         if [ "${{ steps.warp.outputs.endpoint }}" != "" ]; then
           echo "✅ Successfully generated endpoint: ${{ steps.warp.outputs.endpoint }}"
         else
-          echo "❌ Failed to generate endpoint"
+          echo "❌ Failed to generate endpoint. Check the logs for errors."
         fi
