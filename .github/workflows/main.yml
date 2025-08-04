@@ -1,18 +1,19 @@
-name: Find Clean WARP Endpoints via Dynamic Iran Proxy
+name: Scan WARP via Iran Proxy and Deploy Results
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
 
 jobs:
-  scan-endpoints:
+  scan-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # --- بخش اول: نصب ابزارها و اتصال به پراکسی ایران ---
 
       - name: Install Dependencies and Scanner
         run: |
+          sudo apt-get update && sudo apt-get install -y wget curl jq
           echo "Downloading sing-box client..."
           wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
           tar -xzf sing-box.tar.gz
@@ -20,9 +21,8 @@ jobs:
           chmod +x sing-box
           
           echo "Installing BPB-Warp-Scanner using the official installer..."
-          # **THE FIX:** Using the official installer script
           bash <(curl -fsSL https://raw.githubusercontent.com/bia-pain-bache/BPB-Warp-Scanner/main/install.sh)
-          
+
       - name: Find and Connect to a Working Iran Proxy
         id: proxy_connect
         run: |
@@ -31,74 +31,98 @@ jobs:
           
           while IFS= read -r proxy_uri; do
             if [[ -z "$proxy_uri" ]]; then continue; fi
-
             echo "--- Testing proxy: $proxy_uri ---"
             
-            # --- Parse VLESS URI ---
             address_part=$(echo "$proxy_uri" | cut -d'@' -f2 | cut -d'?' -f1)
             uuid=$(echo "$proxy_uri" | cut -d'/' -f3 | cut -d'@' -f1)
             server=$(echo "$address_part" | cut -d':' -f1)
             server_port=$(echo "$address_part" | cut -d':' -f2)
 
-            if [[ -z "$uuid" || -z "$server" || -z "$server_port" ]]; then
-              echo "Could not parse URI. Skipping."
-              continue
-            fi
+            if [[ -z "$uuid" || -z "$server" || -z "$server_port" ]]; then continue; fi
             
-            # --- Create sing-box config for the current proxy ---
             cat > config.json <<EOF
-            {
-              "inbounds": [{"type": "socks", "listen": "127.0.0.1", "listen_port": 1080}],
-              "outbounds": [{"type": "vless", "server": "$server", "server_port": $server_port, "uuid": "$uuid"}]
-            }
+            {"inbounds": [{"type": "socks", "listen": "127.0.0.1", "listen_port": 1080}], "outbounds": [{"type": "vless", "server": "$server", "server_port": $server_port, "uuid": "$uuid"}]}
             EOF
             
-            # --- Run and Test ---
             sudo ./sing-box run -c config.json > singbox.log 2>&1 &
             SINGBOX_PID=$!
             sleep 8
             
-            echo "Verifying connection..."
             response=$(curl --socks5 127.0.0.1:1080 -s --max-time 10 http://ip-api.com/json)
             kill $SINGBOX_PID
             
             country=$(echo "$response" | jq -r .country)
             if [ "$country" == "Iran" ]; then
               echo "✅ SUCCESS: Found a working Iran proxy: $server"
-              echo "proxy_found=true" >> $GITHUB_OUTPUT
-              
               PROXY_URL="socks5://127.0.0.1:1080"
               echo "https://_proxy=$PROXY_URL" >> $GITHUB_ENV
               echo "http_proxy=$PROXY_URL" >> $GITHUB_ENV
               echo "HTTPS_PROXY=$PROXY_URL" >> $GITHUB_ENV
               echo "HTTP_PROXY=$PROXY_URL" >> $GITHUB_ENV
-              
               sudo ./sing-box run -c config.json > singbox.log 2>&1 &
               exit 0
             else
-              echo "❌ FAILED: Proxy did not connect or is not in Iran. Trying next..."
+              echo "❌ FAILED: Proxy is not in Iran. Trying next..."
             fi
-            
           done < ir_proxies.txt
-
-          echo "::error::No working Iran proxy found in the list."
+          echo "::error::No working Iran proxy found."
           exit 1
           
-      - name: Run WARP IP Scanner
-        if: steps.proxy_connect.outputs.proxy_found == 'true'
-        run: |
-          echo "Starting the scan through the proxy..."
-          # **THE FIX:** Run the scanner directly by name, as the installer puts it in the system PATH
-          BPB-Warp-Scanner-linux-amd64
-          
-          echo "Scan finished. Top 10 results:"
-          head -n 11 result.csv
+      # --- بخش دوم: اجرای اسکنر و پردازش نتایج ---
 
-      - name: Upload Results as Artifact
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Run Scanner
+        run: |
+          echo "Starting the scan through the Iran proxy..."
+          # اجرای اسکنر با گزینه‌های پیش‌فرض (این اسکنر به صورت تعاملی طراحی شده)
+          # با استفاده از printf گزینه‌ها را به صورت خودکار وارد می‌کنیم
+          # 2=SOCKS5, 1=IPv4, 1=Threads, 1=Scan, 20=TopEndpoints
+          printf "2\n1\n1\n1\n20" | BPB-Warp-Scanner-linux-amd64 ignored_output_name
+          echo "Scan finished."
+
+      - name: Convert Top 20 CSV results to JSON
+        run: |
+          python3 -c "
+          import csv, json
+          data = {'ipv4': [], 'ipv6': []}
+          try:
+              with open('result.csv', 'r') as f:
+                  reader = csv.DictReader(f)
+                  for row in reader:
+                      endpoint = row.get('Endpoint', '').strip()
+                      if not endpoint: continue
+                      if '[' in endpoint and ']' in endpoint:
+                          data['ipv6'].append(endpoint)
+                      else:
+                          data['ipv4'].append(endpoint)
+              with open('results.json', 'w') as f:
+                  json.dump(data, f, indent=2)
+              print('Successfully converted endpoints to JSON.')
+          except FileNotFoundError:
+              print('Error: result.csv not found.')
+              exit(1)
+          "
+
+      # --- بخش سوم: انتقال فایل به ریپازیتوری عمومی ---
+
+      - name: Checkout public repository
+        uses: actions/checkout@v4
         with:
-          name: warp-scan-results
-          path: |
-            result.csv
-            singbox.log
+          repository: F0rc3Run/free-warp-endpoints # ریپازیتوری عمومی شما
+          token: ${{ secrets.PAT }} # سکرتی که ساختید
+          path: 'public-repo'
+
+      - name: Move result file to public repo
+        run: mv results.json public-repo/results.json
+
+      - name: Commit and Push to public repository
+        run: |
+          cd public-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n $(git status -s) ]]; then
+            git add results.json
+            git commit -m "Automated: Update top 20 endpoints"
+            git push
+          else
+            echo "No changes to commit."
+          fi
