@@ -1,4 +1,4 @@
-name: Scan WARP via Iran Proxy and Deploy Results
+name: Find Clean WARP Endpoints via Dynamic Iran Proxy
 
 on:
   workflow_dispatch:
@@ -9,8 +9,6 @@ jobs:
   scan-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # --- بخش اول: نصب ابزارها، کامپایل اسکنر و اتصال به پراکسی ایران ---
-
       - name: Checkout Main Repo
         uses: actions/checkout@v4
 
@@ -21,17 +19,14 @@ jobs:
 
       - name: Install Dependencies & Build Scanner
         run: |
-          # نصب ابزارهای مورد نیاز
           sudo apt-get update && sudo apt-get install -y wget curl jq
           
-          # دانلود کلاینت sing-box
           echo "Downloading sing-box client..."
           wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
           tar -xzf sing-box.tar.gz
           cp sing-box-1.12.0-linux-amd64/sing-box .
           chmod +x sing-box
           
-          # دانلود و کامپایل اسکنر از سورس کد (طبق الگوی شما)
           echo "Cloning and building the scanner from source..."
           git clone https://github.com/bia-pain-bache/BPB-Warp-Scanner.git scanner-source
           cd scanner-source
@@ -43,27 +38,82 @@ jobs:
       - name: Find and Connect to a Working Iran Proxy
         id: proxy_connect
         run: |
-          # (این بخش بدون تغییر باقی می‌ماند)
           echo "Fetching proxy list from URL..."
           curl -s -o ir_proxies.txt https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/IR.txt
           
           while IFS= read -r proxy_uri; do
-            if [[ -z "$proxy_uri" ]]; then continue; fi
-            echo "--- Testing proxy: $proxy_uri ---"
-            
-            address_part=$(echo "$proxy_uri" | cut -d'@' -f2 | cut -d'?' -f1)
-            uuid=$(echo "$proxy_uri" | cut -d'/' -f3 | cut -d'@' -f1)
-            server=$(echo "$address_part" | cut -d':' -f1)
-            server_port=$(echo "$address_part" | cut -d':' -f2)
+            # Trim whitespace
+            proxy_uri=$(echo "$proxy_uri" | xargs)
 
-            if [[ -z "$uuid" || -z "$server" || -z "$server_port" ]]; then continue; fi
+            # --- **اصلاح شد:** تشخیص نوع پراکسی و نادیده گرفتن خطوط نامعتبر ---
+            if [[ "$proxy_uri" == vless://* ]]; then
+              protocol="vless"
+            elif [[ "$proxy_uri" == ss://* ]]; then
+              protocol="ss"
+            elif [[ "$proxy_uri" == vmess://* ]]; then
+              protocol="vmess"
+            else
+              echo "Skipping invalid/comment line: $proxy_uri"
+              continue
+            fi
+
+            echo "--- Testing $protocol proxy: $proxy_uri ---"
             
-            echo "{\"inbounds\":[{\"type\":\"socks\",\"listen\":\"127.0.0.1\",\"listen_port\":1080}],\"outbounds\":[{\"type\":\"vless\",\"server\":\"$server\",\"server_port\":$server_port,\"uuid\":\"$uuid\"}]}" > config.json
-            
+            # --- ساخت کانفیگ بر اساس نوع پروتکل ---
+            config_generated=false
+            if [ "$protocol" == "vless" ]; then
+              address_part=$(echo "$proxy_uri" | cut -d'@' -f2 | cut -d'?' -f1)
+              uuid=$(echo "$proxy_uri" | cut -d'/' -f3 | cut -d'@' -f1)
+              server=$(echo "$address_part" | cut -d':' -f1)
+              server_port=$(echo "$address_part" | cut -d':' -f2)
+              if [[ -n "$uuid" && -n "$server" && -n "$server_port" ]]; then
+                echo "{\"inbounds\":[{\"type\":\"socks\",\"listen\":\"127.0.0.1\",\"listen_port\":1080}],\"outbounds\":[{\"type\":\"vless\",\"server\":\"$server\",\"server_port\":$server_port,\"uuid\":\"$uuid\"}]}" > config.json
+                config_generated=true
+              fi
+            elif [ "$protocol" == "ss" ]; then
+              #
+              # This part is simplified and may need adjustments for complex SS URIs
+              #
+              uri_body=$(echo "$proxy_uri" | sed 's/ss:\/\///' | cut -d'#' -f1)
+              if [[ "$uri_body" == *"@"* ]]; then # Not Base64 encoded
+                credentials=$(echo "$uri_body" | cut -d'@' -f1)
+                server_info=$(echo "$uri_body" | cut -d'@' -f2)
+                method=$(echo "$credentials" | cut -d':' -f1)
+                password=$(echo "$credentials" | cut -d':' -f2)
+                server=$(echo "$server_info" | cut -d':' -f1)
+                server_port=$(echo "$server_info" | cut -d':' -f2)
+              else # Base64 encoded
+                decoded=$(echo "$uri_body" | base64 -d)
+                method=$(echo "$decoded" | cut -d':' -f1)
+                password=$(echo "$decoded" | cut -d':' -f2 | cut -d'@' -f1)
+                server=$(echo "$decoded" | cut -d'@' -f2 | cut -d':' -f1)
+                server_port=$(echo "$decoded" | cut -d':' -f2)
+              fi
+              if [[ -n "$method" && -n "$password" && -n "$server" && -n "$server_port" ]]; then
+                echo "{\"inbounds\":[{\"type\":\"socks\",\"listen\":\"127.0.0.1\",\"listen_port\":1080}],\"outbounds\":[{\"type\":\"shadowsocks\",\"server\":\"$server\",\"server_port\":$server_port,\"method\":\"$method\",\"password\":\"$password\"}]}" > config.json
+                config_generated=true
+              fi
+            elif [ "$protocol" == "vmess" ]; then
+              decoded_json=$(echo "$proxy_uri" | sed 's/vmess:\/\///' | base64 -d)
+              server=$(echo "$decoded_json" | jq -r .add)
+              server_port=$(echo "$decoded_json" | jq -r .port)
+              uuid=$(echo "$decoded_json" | jq -r .id)
+              alter_id=$(echo "$decoded_json" | jq -r .aid)
+              if [[ -n "$uuid" && -n "$server" && -n "$server_port" ]]; then
+                echo "{\"inbounds\":[{\"type\":\"socks\",\"listen\":\"127.0.0.1\",\"listen_port\":1080}],\"outbounds\":[{\"type\":\"vmess\",\"server\":\"$server\",\"server_port\":$server_port,\"uuid\":\"$uuid\",\"alter_id\":$alter_id}]}" > config.json
+                config_generated=true
+              fi
+            fi
+
+            if ! $config_generated; then
+              echo "Could not parse URI. Skipping."
+              continue
+            fi
+
+            # --- تست اتصال ---
             sudo ./sing-box run -c config.json > singbox.log 2>&1 &
             SINGBOX_PID=$!
             sleep 8
-            
             response=$(curl --socks5 127.0.0.1:1080 -s --max-time 10 http://ip-api.com/json)
             kill $SINGBOX_PID
             
@@ -73,18 +123,15 @@ jobs:
               sudo ./sing-box run -c config.json > singbox.log 2>&1 &
               exit 0
             else
-              echo "❌ FAILED: Proxy is not in Iran. Trying next..."
+              echo "❌ FAILED: Proxy did not connect or is not in Iran. Trying next..."
             fi
           done < ir_proxies.txt
           echo "::error::No working Iran proxy found."
           exit 1
           
-      # --- بخش دوم: اجرای اسکنر و پردازش نتایج ---
-
       - name: Run Scanner
         run: |
           echo "Starting the scan through the Iran proxy..."
-          # اجرای اسکنر کامپایل‌شده با دستور printf (طبق الگوی شما)
           printf "2\n1\n1\n1\n20" | ./scanner
           echo "Scan finished."
 
@@ -111,8 +158,6 @@ jobs:
               exit(1)
           "
       
-      # --- بخش سوم: انتقال فایل به ریپازیتوری عمومی ---
-
       - name: Checkout public repository
         uses: actions/checkout@v4
         with:
