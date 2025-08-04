@@ -41,7 +41,7 @@ jobs:
           done
 
       - name: Upload results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: warp-scan-${{ matrix.region }}
           path: |
@@ -56,3 +56,15 @@ jobs:
           git add *.txt *.md
           git commit -m "Update warp scan results [$(date '+%Y-%m-%d %H:%M')]" || exit 0
           git push
+
+  merge:
+    needs: scan
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Merge artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: combined-warp-results
+          pattern: warp-scan-*
+          delete-merged: true
