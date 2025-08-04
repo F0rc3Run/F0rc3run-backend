@@ -64,7 +64,7 @@ jobs:
           
           # دانلود فایل‌های باینری در فضای نام اصلی
           echo "دانلود فایل‌های باینری WARP..."
-          wget -O /tmp/warp-binaries/warp-go https://github.com/fscarmen/warp-go/releases/download/v1.2.0/warp-go-linux-amd64
+          wget -O /tmp/warp-binaries/warp-go https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_amd64.tar.gz
           sudo chmod +x /tmp/warp-binaries/warp-go
           
           # کپی فایل‌های باینری به فضای نام مجازی
