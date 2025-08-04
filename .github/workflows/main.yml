@@ -16,46 +16,56 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl wget iproute2 net-tools
           
-      - name: Configure network interfaces
+      - name: Create virtual network namespace
         run: |
-          # نمایش اینترفیس‌های موجود
-          ip addr show
+          # ایجاد یک فضای نام شبکه مجازی
+          sudo ip netns add warpns
           
-          # اضافه کردن آدرس IPv4 به eth0
-          sudo ip addr add 192.168.1.1/24 dev eth0
+          # ایجاد یک جفت اینترفیس مجازی
+          sudo ip link add veth0 type veth peer name veth1
           
-          # اضافه کردن آدرس IPv6 به eth0
-          sudo ip -6 addr add 2001:db8::1/64 dev eth0
+          # انتقال یک اینترفیس به فضای نام مجازی
+          sudo ip link set veth1 netns warpns
           
-          # تنظیم مسیر پیش‌فرض برای IPv4
-          sudo ip route add default via 192.168.1.254 dev eth0 metric 100
+          # پیکربندی اینترفیس در فضای نام اصلی
+          sudo ip addr add 192.168.1.1/24 dev veth0
+          sudo ip link set veth0 up
           
-          # تنظیم مسیر پیش‌فرض برای IPv6
-          sudo ip -6 route add default via 2001:db8::fffe dev eth0 metric 100
+          # پیکربندی اینترفیس در فضای نام مجازی
+          sudo ip netns exec warpns ip addr add 192.168.1.2/24 dev veth1
+          sudo ip netns exec warpns ip link set veth1 up
+          sudo ip netns exec warpns ip link set lo up
           
-          # بررسی مجدد اینترفیس‌ها
-          ip addr show eth0
-          ip route show
-          ip -6 route show
+          # تنظیم مسیرها
+          sudo ip netns exec warpns ip route add default via 192.168.1.1
+          
+          # فعال کردن forwarding
+          sudo sysctl -w net.ipv4.ip_forward=1
+          
+          # تنظیم NAT برای دسترسی به اینترنت
+          sudo iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j MASQUERADE
+          
+          # نمایش وضعیت شبکه
+          echo "=== وضعیت شبکه در فضای نام اصلی ==="
+          ip addr show veth0
+          echo "=== وضعیت شبکه در فضای نام مجازی ==="
+          sudo ip netns exec warpns ip addr show
+          echo "=== مسیرها در فضای نام مجازی ==="
+          sudo ip netns exec warpns ip route show
           
       - name: Download warp script
         run: |
           curl -o warp-go.sh https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh
           chmod +x warp-go.sh
           
-      - name: Run warp scan
+      - name: Run warp scan in virtual namespace
         run: |
           echo "شروع اسکن WARP..."
-          echo "اینترفیس‌های شبکه فعلی:"
-          ip addr show
           
-          # اجرای اسکریپت با خروجی دقیق‌تر
-          sudo ./warp-go.sh scan > warp_results.txt 2>&1 || echo "اسکن با خطا انجام شد"
+          # اجرای اسکریپت در فضای نام مجازی
+          sudo ip netns exec warpns ./warp-go.sh scan > warp_results.txt 2>&1 || echo "اسکن با خطا انجام شد"
           echo "اسکن WARP پایان یافت"
         continue-on-error: true
-        env:
-          # تنظیم متغیرهای محیطی برای فریب اسکریپت
-          WARP_IFACE: "eth0"
           
       - name: Process results
         run: |
@@ -122,13 +132,24 @@ jobs:
           ls -la
           echo "=== اینترفیس‌های شبکه ==="
           ip addr show
-          echo "=== مسیرهای IPv4 ==="
-          ip route show
-          echo "=== مسیرهای IPv6 ==="
-          ip -6 route show
+          echo "=== فضاهای نام شبکه ==="
+          ip netns list
           echo "=== محتوای warp_results.txt ==="
           cat warp_results.txt || echo "فایل warp_results.txt یافت نشد"
           echo "=== محتوای best_endpoints.txt ==="
           cat best_endpoints.txt || echo "فایل best_endpoints.txt یافت نشد"
           echo "=== محتوای endpoints.json ==="
           cat endpoints.json || echo "فایل endpoints.json یافت نشد"
+          
+      - name: Cleanup
+        if: always()
+        run: |
+          # حذف فضای نام مجازی و اینترفیس‌ها
+          sudo ip link del veth0
+          sudo ip netns del warpns
+          
+          # غیرفعال کردن forwarding
+          sudo sysctl -w net.ipv4.ip_forward=0
+          
+          # حذف قوانین NAT
+          sudo iptables -t nat -D POSTROUTING -s 192.168.1.0/24 -o eth0 -j MASQUERADE
