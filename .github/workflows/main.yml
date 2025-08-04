@@ -1,4 +1,4 @@
-name: Scan WARP via Iran Proxy and Deploy Results
+name: Find Clean WARP Endpoints via Dynamic Iran Proxy
 
 on:
   workflow_dispatch:
@@ -20,11 +20,22 @@ jobs:
           cp sing-box-1.12.0-linux-amd64/sing-box .
           chmod +x sing-box
           
-          echo "Downloading and extracting the scanner manually..."
-          # **اصلاح شد:** نصب دستی اسکنر به جای استفاده از اسکریپت نصب
+          echo "Downloading and extracting the scanner..."
           wget -O bpb-scanner.tar.gz https://github.com/bia-pain-bache/BPB-Warp-Scanner/releases/download/v1.1.1/BPB-Warp-Scanner-linux-amd64.tar.gz
           tar -xzf bpb-scanner.tar.gz
-          chmod +x BPB-Warp-Scanner-linux-amd64/BPB-Warp-Scanner-linux-amd64
+          
+          echo "--- Finding the scanner executable ---"
+          # **اصلاح شد:** به صورت خودکار فایل اجرایی را پیدا کرده و آن را قابل اجرا می‌کنیم
+          SCANNER_EXECUTABLE=$(find . -type f -name "BPB-Warp-Scanner*" -print)
+          if [[ -z "$SCANNER_EXECUTABLE" ]]; then
+            echo "::error::Scanner executable not found after extraction."
+            ls -lR # نمایش تمام فایل‌های استخراج شده برای دیباگ
+            exit 1
+          fi
+          chmod +x "$SCANNER_EXECUTABLE"
+          echo "Found scanner at: $SCANNER_EXECUTABLE"
+          # مسیر فایل اجرایی را برای مرحله بعد ذخیره می‌کنیم
+          echo "SCANNER_PATH=$SCANNER_EXECUTABLE" >> $GITHUB_ENV
 
       - name: Find and Connect to a Working Iran Proxy
         id: proxy_connect
@@ -71,8 +82,8 @@ jobs:
       - name: Run Scanner
         run: |
           echo "Starting the scan through the Iran proxy..."
-          # **اصلاح شد:** اجرای اسکنر با مسیر کامل فایل و با فلگ‌های مستقیم
-          ./BPB-Warp-Scanner-linux-amd64/BPB-Warp-Scanner-linux-amd64 -proxy socks5://127.0.0.1:1080 -o result.csv -limit 20
+          # **اصلاح شد:** اجرای اسکنر با استفاده از مسیری که به صورت خودکار پیدا کردیم
+          ${{ env.SCANNER_PATH }} -proxy socks5://127.0.0.1:1080 -o result.csv -limit 20
           echo "Scan finished."
 
       - name: Convert Top 20 CSV results to JSON
