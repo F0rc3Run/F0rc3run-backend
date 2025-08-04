@@ -1,4 +1,4 @@
-name: Find Clean WARP Endpoints via Dynamic Iran Proxy
+name: Scan WARP via Iran Proxy and Deploy Results
 
 on:
   workflow_dispatch:
@@ -9,23 +9,41 @@ jobs:
   scan-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # --- Part 1: Install Tools and Connect to Iran Proxy ---
+      # --- بخش اول: نصب ابزارها، کامپایل اسکنر و اتصال به پراکسی ایران ---
 
-      - name: Install Dependencies and Scanner
+      - name: Checkout Main Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Go Environment
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Install Dependencies & Build Scanner
         run: |
+          # نصب ابزارهای مورد نیاز
           sudo apt-get update && sudo apt-get install -y wget curl jq
+          
+          # دانلود کلاینت sing-box
           echo "Downloading sing-box client..."
           wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
           tar -xzf sing-box.tar.gz
           cp sing-box-1.12.0-linux-amd64/sing-box .
           chmod +x sing-box
           
-          echo "Installing BPB-Warp-Scanner using the official installer..."
-          bash <(curl -fsSL https://raw.githubusercontent.com/bia-pain-bache/BPB-Warp-Scanner/main/install.sh)
+          # دانلود و کامپایل اسکنر از سورس کد (طبق الگوی شما)
+          echo "Cloning and building the scanner from source..."
+          git clone https://github.com/bia-pain-bache/BPB-Warp-Scanner.git scanner-source
+          cd scanner-source
+          go build -o ../scanner .
+          cd ..
+          chmod +x scanner
+          echo "Scanner built successfully."
 
       - name: Find and Connect to a Working Iran Proxy
         id: proxy_connect
         run: |
+          # (این بخش بدون تغییر باقی می‌ماند)
           echo "Fetching proxy list from URL..."
           curl -s -o ir_proxies.txt https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/IR.txt
           
@@ -40,7 +58,6 @@ jobs:
 
             if [[ -z "$uuid" || -z "$server" || -z "$server_port" ]]; then continue; fi
             
-            # **THE FIX:** Replaced the multi-line 'cat <<EOF' with a single, robust 'echo' command to prevent YAML/shell syntax conflicts.
             echo "{\"inbounds\":[{\"type\":\"socks\",\"listen\":\"127.0.0.1\",\"listen_port\":1080}],\"outbounds\":[{\"type\":\"vless\",\"server\":\"$server\",\"server_port\":$server_port,\"uuid\":\"$uuid\"}]}" > config.json
             
             sudo ./sing-box run -c config.json > singbox.log 2>&1 &
@@ -53,7 +70,6 @@ jobs:
             country=$(echo "$response" | jq -r .country)
             if [ "$country" == "Iran" ]; then
               echo "✅ SUCCESS: Found a working Iran proxy: $server"
-              # Keep the working proxy running in the background for the next steps
               sudo ./sing-box run -c config.json > singbox.log 2>&1 &
               exit 0
             else
@@ -63,12 +79,13 @@ jobs:
           echo "::error::No working Iran proxy found."
           exit 1
           
-      # --- Part 2: Run Scanner and Process Results ---
+      # --- بخش دوم: اجرای اسکنر و پردازش نتایج ---
 
       - name: Run Scanner
         run: |
           echo "Starting the scan through the Iran proxy..."
-          BPB-Warp-Scanner-linux-amd64 -proxy socks5://127.0.0.1:1080 -o result.csv -limit 20
+          # اجرای اسکنر کامپایل‌شده با دستور printf (طبق الگوی شما)
+          printf "2\n1\n1\n1\n20" | ./scanner
           echo "Scan finished."
 
       - name: Convert Top 20 CSV results to JSON
@@ -94,7 +111,7 @@ jobs:
               exit(1)
           "
       
-      # --- Part 3: Deploy File to Public Repository ---
+      # --- بخش سوم: انتقال فایل به ریپازیتوری عمومی ---
 
       - name: Checkout public repository
         uses: actions/checkout@v4
