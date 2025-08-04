@@ -1,4 +1,4 @@
-name: Warp-Go Endpoint Generator
+name: Warp Endpoint Generator
 
 on:
   push:
@@ -20,56 +20,80 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y wget curl jq net-tools
         
-    - name: Prepare WARP and Sing-box Config
-      id: prepare_warp
+    - name: Generate sing-box config from WARP.conf
+      id: prepare_config
       run: |
-        # Check if WARP.conf exists in the repository
+        # Ensure the WARP.conf file exists
         if [ ! -f "WARP.conf" ]; then
           echo "❌ Error: WARP.conf file not found in the repository."
           exit 1
         fi
         
-        # Rename the file to the default name that warp-go expects
-        mv WARP.conf warp.conf
-        echo "Renamed WARP.conf to warp.conf for auto-detection."
+        echo "Found WARP.conf. Extracting details..."
         
-        # Download and extract warp-go
-        wget -O warp-go.tar.gz https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_amd64.tar.gz
-        tar -xzf warp-go.tar.gz
-        chmod +x warp-go
+        # Extract connection details from WARP.conf using standard tools
+        PRIVATE_KEY=$(grep 'PrivateKey' WARP.conf | cut -d'=' -f2 | xargs)
+        PEER_PUBLIC_KEY=$(grep 'PublicKey' WARP.conf | cut -d'=' -f2 | xargs)
+        ADDRESS=$(grep 'Address' WARP.conf | cut -d'=' -f2 | xargs)
+        ENDPOINT=$(grep 'Endpoint' WARP.conf | cut -d'=' -f2 | xargs)
         
-        # Generate the sing-box config. It will now automatically find and use warp.conf
-        sudo ./warp-go -export-singbox singbox.json
+        # Generate the sing-box.json file dynamically
+        cat > singbox.json <<EOF
+        {
+          "outbounds": [
+            {
+              "type": "wireguard",
+              "tag": "wireguard-out",
+              "server": "${ENDPOINT%%:*}",
+              "server_port": ${ENDPOINT##*:},
+              "local_address": ["${ADDRESS}"],
+              "private_key": "${PRIVATE_KEY}",
+              "peer_public_key": "${PEER_PUBLIC_KEY}",
+              "mtu": 1280
+            },
+            {
+              "type": "socks",
+              "tag": "socks-in",
+              "listen": "0.0.0.0",
+              "listen_port": 1080
+            }
+          ],
+          "route": {
+            "rules": [
+              {
+                "inbound": ["socks-in"],
+                "outbound": "wireguard-out"
+              }
+            ]
+          }
+        }
+        EOF
         
         if [ -f "singbox.json" ]; then
-          echo "Sing-box config generated successfully."
+          echo "✅ Successfully generated singbox.json"
           echo "config_ready=true" >> $GITHUB_OUTPUT
         else
-          echo "Failed to generate sing-box config."
-          echo "config_ready=false" >> $GITHUB_OUTPUT
-          exit 1 # Exit if config generation fails
+          echo "❌ Failed to generate singbox.json"
+          exit 1
         fi
 
     - name: Run Sing-box Proxy
-      if: steps.prepare_warp.outputs.config_ready == 'true'
+      if: steps.prepare_config.outputs.config_ready == 'true'
       id: warp
       run: |
-        # Download, extract, and prepare the correct version of sing-box
+        # Download, extract, and prepare sing-box
         wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
         tar -xzf sing-box.tar.gz
-        # The extracted folder name now matches the version
         cp sing-box-1.12.0-linux-amd64/sing-box .
         chmod +x sing-box
         
-        # Run sing-box in the background
         echo "Starting sing-box proxy..."
         sudo ./sing-box run -c singbox.json > singbox.log 2>&1 &
-        sleep 10 # Wait for it to start
+        sleep 10
         
         echo "--- Sing-box Log ---"
         cat singbox.log
         
-        # Check if the proxy is running on the default SOCKS port 1080
         if sudo netstat -tlnp | grep -q "1080"; then
           ENDPOINT="socks5://127.0.0.1:1080"
           echo "✅ Endpoint found: $ENDPOINT"
@@ -94,7 +118,7 @@ jobs:
       if: always()
       run: |
         if [ "${{ steps.warp.outputs.endpoint }}" != "" ]; then
-          echo "✅ Successfully generated endpoint: ${{ steps.warp.outputs.endpoint }}"
+          echo "✅ Success! Endpoint: ${{ steps.warp.outputs.endpoint }}"
         else
-          echo "❌ Failed to generate endpoint. Check logs."
+          echo "❌ Failed to generate endpoint."
         fi
