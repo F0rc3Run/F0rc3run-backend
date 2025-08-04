@@ -1,4 +1,4 @@
-name: Advanced WARP Scanner
+name: WARP Endpoint Scanner
 
 on:
   schedule:
@@ -8,63 +8,77 @@ on:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        region: ['iran', 'turkey', 'uae']
+    timeout-minutes: 30  # افزایش زمان تایم‌اوت
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y curl wget iproute2 net-tools
+        continue-on-error: true  # ادامه حتی در صورت خطا
+
+      - name: Download warp script
+        run: |
           curl -o warp-go.sh https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh
           chmod +x warp-go.sh
 
-      - name: Scan for ${{ matrix.region }}
+      - name: Run warp scan
         run: |
-          ./warp-go.sh scan -r ${{ matrix.region }} > warp_${{ matrix.region }}.txt
-          grep -E '^[0-9]' warp_${{ matrix.region }}.txt | head -10 > best_${{ matrix.region }}.txt
+          echo "Starting WARP scan..."
+          ./warp-go.sh scan > warp_results.txt 2>&1 || echo "Scan completed with some errors"
+          echo "WARP scan finished"
+        continue-on-error: true
 
-      - name: Generate report
+      - name: Process results
         run: |
-          echo "# WARP Endpoint Scan Report" > report.md
-          echo "Generated on: $(date)" >> report.md
-          echo "" >> report.md
+          echo "Processing results..."
+          # استخراج اندپوینت‌های سالم
+          grep -E '^[0-9]' warp_results.txt | head -20 > best_endpoints.txt || echo "No endpoints found"
           
-          for region in iran turkey uae; do
-            echo "## Top endpoints for $region" >> report.md
-            echo "\`\`\`" >> report.md
-            cat best_$region.txt >> report.md
-            echo "\`\`\`" >> report.md
-          done
+          # ایجاد فایل JSON برای استفاده‌های بعدی
+          echo "[" > endpoints.json
+          if [ -s best_endpoints.txt ]; then
+            grep -E '^[0-9]' best_endpoints.txt | while read line; do
+              ip=$(echo $line | awk '{print $1}')
+              port=$(echo $line | awk '{print $2}')
+              ping=$(echo $line | awk '{print $3}')
+              echo "  {\"ip\": \"$ip\", \"port\": \"$port\", \"ping\": \"$ping\"}," >> endpoints.json
+            done
+          fi
+          echo "]" >> endpoints.json
+          echo "Results processing completed"
 
-      - name: Upload results
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: warp-scan-${{ matrix.region }}
+          name: warp-scan-results
           path: |
-            warp_${{ matrix.region }}.txt
-            best_${{ matrix.region }}.txt
+            warp_results.txt
+            best_endpoints.txt
+            endpoints.json
+        continue-on-error: true
 
-      - name: Commit all results
-        if: matrix.region == 'iran'
+      - name: Commit results
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-          git add *.txt *.md
-          git commit -m "Update warp scan results [$(date '+%Y-%m-%d %H:%M')]" || exit 0
-          git push
+          git add best_endpoints.txt endpoints.json
+          git commit -m "Update warp endpoints [$(date '+%Y-%m-%d %H:%M')]" || echo "No changes to commit"
+          git push || echo "Push failed"
+        continue-on-error: true
 
-  merge:
-    needs: scan
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Merge artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: combined-warp-results
-          pattern: warp-scan-*
-          delete-merged: true
+      - name: Debug info
+        if: always()
+        run: |
+          echo "=== Debug Information ==="
+          echo "Current directory: $(pwd)"
+          echo "Files in directory:"
+          ls -la
+          echo "=== warp_results.txt (first 10 lines) ==="
+          head -n 10 warp_results.txt || echo "warp_results.txt not found"
+          echo "=== best_endpoints.txt (first 10 lines) ==="
+          head -n 10 best_endpoints.txt || echo "best_endpoints.txt not found"
+          echo "=== endpoints.json (first 10 lines) ==="
+          head -n 10 endpoints.json || echo "endpoints.json not found"
