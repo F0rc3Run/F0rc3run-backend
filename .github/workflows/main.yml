@@ -15,72 +15,69 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
     
-    - name: Setup environment and install dependencies
+    - name: Setup environment and dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y wget curl jq net-tools
         
-    - name: Download and prepare warp-go
+    - name: Prepare WARP and Sing-box Config
       id: prepare_warp
       run: |
+        # Check if WARP.conf exists in the repository
+        if [ ! -f "WARP.conf" ]; then
+          echo "❌ Error: WARP.conf file not found in the repository."
+          exit 1
+        fi
+        
         # Download and extract warp-go
-        wget -O warp-go_1.0.8_linux_amd64.tar.gz https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_amd64.tar.gz
-        tar -xzf warp-go_1.0.8_linux_amd64.tar.gz
+        wget -O warp-go.tar.gz https://gitlab.com/fscarmen/warp/-/raw/main/warp-go/warp-go_1.0.8_linux_amd64.tar.gz
+        tar -xzf warp-go.tar.gz
         chmod +x warp-go
         
-        # Register a new WARP device. Sudo is needed for this.
-        echo "Registering WARP device..."
-        if sudo ./warp-go -register; then
-          echo "WARP device registered successfully."
-          # Export the sing-box config file
-          sudo ./warp-go -export-singbox singbox.json
-          echo "singbox_config_generated=true" >> $GITHUB_OUTPUT
-          ls -l
+        echo "Successfully found WARP.conf."
+        
+        # Generate the sing-box config file using the existing account config
+        # The '-config' flag specifies the path to your config file
+        sudo ./warp-go -config WARP.conf -export-singbox singbox.json
+        
+        if [ -f "singbox.json" ]; then
+          echo "Sing-box config generated successfully."
+          echo "config_ready=true" >> $GITHUB_OUTPUT
         else
-          echo "WARP device registration failed."
-          echo "singbox_config_generated=false" >> $GITHUB_OUTPUT
+          echo "Failed to generate sing-box config."
+          echo "config_ready=false" >> $GITHUB_OUTPUT
         fi
 
-    - name: Download and run sing-box
-      if: steps.prepare_warp.outputs.singbox_config_generated == 'true'
+    - name: Run Sing-box Proxy
+      if: steps.prepare_warp.outputs.config_ready == 'true'
       id: warp
       run: |
-        # Download, extract, and prepare sing-box
+        # Download, extract, and prepare the correct version of sing-box
         wget -O sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/v1.12.0/sing-box-1.12.0-linux-amd64.tar.gz"
         tar -xzf sing-box.tar.gz
-        # The extracted folder is named sing-box-1.9.3-linux-amd64
-        cp sing-box-1.9.3-linux-amd64/sing-box .
+        # The extracted folder name now matches the version
+        cp sing-box-1.12.0-linux-amd64/sing-box .
         chmod +x sing-box
         
-        # Run sing-box in the background using the config from warp-go
+        # Run sing-box in the background
         echo "Starting sing-box proxy..."
         sudo ./sing-box run -c singbox.json > singbox.log 2>&1 &
-        
-        # Wait for the proxy to start
-        sleep 10
+        sleep 10 # Wait for it to start
         
         echo "--- Sing-box Log ---"
         cat singbox.log
         
-        # The default port for sing-box SOCKS is 1080
+        # Check if the proxy is running on the default SOCKS port 1080
         if sudo netstat -tlnp | grep -q "1080"; then
           ENDPOINT="socks5://127.0.0.1:1080"
           echo "✅ Endpoint found: $ENDPOINT"
           echo "endpoint=$ENDPOINT" >> $GITHUB_OUTPUT
         else
-          echo "❌ Failed to start sing-box proxy on port 1080."
-          echo "endpoint=" >> $GITHUB_OUTPUT
+          echo "❌ Failed to start sing-box proxy."
         fi
 
-    - name: Test endpoint if found
-      if: steps.warp.outputs.endpoint != ''
-      run: |
-        echo "=== Testing endpoint: ${{ steps.warp.outputs.endpoint }} ==="
-        # Test with curl
-        curl -x ${{ steps.warp.outputs.endpoint }} -m 10 https://www.cloudflare.com/cdn-cgi/trace || echo "Test failed but continuing."
-        
     - name: Create GitHub Release
-      if: steps.warp.outputs.endpoint != ''
+      if: success() && steps.warp.outputs.endpoint != ''
       uses: ncipollo/release-action@v1
       with:
         tag: endpoint-${{ github.run_number }}
@@ -91,30 +88,11 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         allowUpdates: true
         
-    - name: Update ENDPOINTS.md file
-      if: steps.warp.outputs.endpoint != ''
-      run: |
-        echo "# Latest Warp-Go Endpoint" > ENDPOINTS.md
-        echo "" >> ENDPOINTS.md
-        echo '```' >> ENDPOINTS.md
-        echo "${{ steps.warp.outputs.endpoint }}" >> ENDPOINTS.md
-        echo '```' >> ENDPOINTS.md
-        echo "" >> ENDPOINTS.md
-        echo "**Last Updated:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> ENDPOINTS.md
-        
-        # Commit and push the updated file
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add ENDPOINTS.md
-        git commit -m "Update endpoint - Run #${{ github.run_number }}" || echo "No changes to commit"
-        git push || echo "Push failed, but that's okay."
-
-    - name: Final status
+    - name: Final Status
       if: always()
       run: |
-        echo "=== Workflow Summary ==="
         if [ "${{ steps.warp.outputs.endpoint }}" != "" ]; then
           echo "✅ Successfully generated endpoint: ${{ steps.warp.outputs.endpoint }}"
         else
-          echo "❌ Failed to generate endpoint. Check the logs for errors."
+          echo "❌ Failed to generate endpoint. Check logs."
         fi
