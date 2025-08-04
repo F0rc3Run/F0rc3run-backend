@@ -17,26 +17,28 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y curl wget iproute2 net-tools
-        continue-on-error: true
+
+      - name: Create virtual network interfaces
+        run: |
+          # ایجاد اینترفیس‌های مجازی IPv4 و IPv6
+          sudo ip link add dummy0 type dummy
+          sudo ip addr add 192.168.1.1/24 dev dummy0
+          sudo ip link set dummy0 up
+          
+          sudo ip -6 addr add 2001:db8::1/64 dev dummy0
+          sudo ip link set dummy0 up
 
       - name: Download warp script
         run: |
           curl -o warp-go.sh https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh
           chmod +x warp-go.sh
 
-      - name: Run warp scan with root privileges
+      - name: Run warp scan with simulated network
         run: |
           echo "Starting WARP scan..."
           sudo ./warp-go.sh scan > warp_results.txt 2>&1 || echo "Scan completed with some errors"
           echo "WARP scan finished"
         continue-on-error: true
-
-      - name: Check if scan completed
-        run: |
-          if [ ! -s warp_results.txt ]; then
-            echo "Scan failed, creating empty results"
-            echo "No results available" > warp_results.txt
-          fi
 
       - name: Process results
         run: |
@@ -91,6 +93,8 @@ jobs:
           echo "Current directory: $(pwd)"
           echo "Files in directory:"
           ls -la
+          echo "=== Network interfaces ==="
+          ip addr show
           echo "=== warp_results.txt (first 10 lines) ==="
           head -n 10 warp_results.txt || echo "warp_results.txt not found"
           echo "=== best_endpoints.txt (first 10 lines) ==="
