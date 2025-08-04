@@ -40,10 +40,8 @@ jobs:
 
             if [[ -z "$uuid" || -z "$server" || -z "$server_port" ]]; then continue; fi
             
-            # Create the sing-box config using a heredoc
-            cat > config.json <<EOF
-{"inbounds": [{"type": "socks", "listen": "127.0.0.1", "listen_port": 1080}], "outbounds": [{"type": "vless", "server": "$server", "server_port": $server_port, "uuid": "$uuid"}]}
-EOF
+            # **THE FIX:** Replaced the multi-line 'cat <<EOF' with a single, robust 'echo' command to prevent YAML/shell syntax conflicts.
+            echo "{\"inbounds\":[{\"type\":\"socks\",\"listen\":\"127.0.0.1\",\"listen_port\":1080}],\"outbounds\":[{\"type\":\"vless\",\"server\":\"$server\",\"server_port\":$server_port,\"uuid\":\"$uuid\"}]}" > config.json
             
             sudo ./sing-box run -c config.json > singbox.log 2>&1 &
             SINGBOX_PID=$!
