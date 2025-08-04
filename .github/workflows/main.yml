@@ -28,13 +28,13 @@ jobs:
           exit 1
         fi
         
-        echo "Found WARP.conf. Extracting and formatting details..."
-        
-        PRIVATE_KEY=$(grep 'PrivateKey' WARP.conf | cut -d'=' -f2 | xargs)
-        PEER_PUBLIC_KEY=$(grep 'PublicKey' WARP.conf | cut -d'=' -f2 | xargs)
-        ADDRESS_RAW=$(grep 'Address' WARP.conf | cut -d'=' -f2 | xargs)
-        ENDPOINT=$(grep 'Endpoint' WARP.conf | cut -d'=' -f2 | xargs)
-        
+        # **THE FIX:** Using a more robust 'awk' command to extract keys cleanly.
+        echo "Found WARP.conf. Extracting details with robust method..."
+        PRIVATE_KEY=$(awk -F' *= *' '/PrivateKey/ {print $2}' WARP.conf)
+        PEER_PUBLIC_KEY=$(awk -F' *= *' '/PublicKey/ {print $2}' WARP.conf)
+        ADDRESS_RAW=$(awk -F' *= *' '/Address/ {print $2}' WARP.conf)
+        ENDPOINT=$(awk -F' *= *' '/Endpoint/ {print $2}' WARP.conf)
+
         IPV4_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f1 | xargs)
         IPV6_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f2 | xargs)
         
@@ -86,8 +86,7 @@ jobs:
         cp sing-box-1.12.0-linux-amd64/sing-box .
         chmod +x sing-box
         
-        echo "Starting sing-box proxy with deprecated feature enabled..."
-        # **THE FIX:** Add the environment variable right before the sudo command.
+        echo "Starting sing-box proxy..."
         sudo ENABLE_DEPRECATED_WIREGUARD_OUTBOUND=true ./sing-box run -c singbox.json > singbox.log 2>&1 &
         sleep 10
         
