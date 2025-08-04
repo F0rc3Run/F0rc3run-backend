@@ -1,0 +1,58 @@
+name: Advanced WARP Scanner
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        region: ['iran', 'turkey', 'uae']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl wget iproute2 net-tools
+          curl -o warp-go.sh https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh
+          chmod +x warp-go.sh
+
+      - name: Scan for ${{ matrix.region }}
+        run: |
+          ./warp-go.sh scan -r ${{ matrix.region }} > warp_${{ matrix.region }}.txt
+          grep -E '^[0-9]' warp_${{ matrix.region }}.txt | head -10 > best_${{ matrix.region }}.txt
+
+      - name: Generate report
+        run: |
+          echo "# WARP Endpoint Scan Report" > report.md
+          echo "Generated on: $(date)" >> report.md
+          echo "" >> report.md
+          
+          for region in iran turkey uae; do
+            echo "## Top endpoints for $region" >> report.md
+            echo "\`\`\`" >> report.md
+            cat best_$region.txt >> report.md
+            echo "\`\`\`" >> report.md
+          done
+
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: warp-scan-${{ matrix.region }}
+          path: |
+            warp_${{ matrix.region }}.txt
+            best_${{ matrix.region }}.txt
+
+      - name: Commit all results
+        if: matrix.region == 'iran'
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add *.txt *.md
+          git commit -m "Update warp scan results [$(date '+%Y-%m-%d %H:%M')]" || exit 0
+          git push
