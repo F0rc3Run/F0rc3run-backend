@@ -1,7 +1,9 @@
-name: Find Clean WARP Endpoints via Dynamic Iran Proxy
+name: Scan WARP via Iran Proxy and Deploy Results
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
 
 jobs:
   scan-and-deploy:
@@ -67,8 +69,7 @@ jobs:
       - name: Run Scanner
         run: |
           echo "Starting the scan through the Iran proxy..."
-          # **اصلاح شد:** اجرای اسکنر با فلگ‌های مستقیم به جای ورودی تعاملی
-          # این دستور به اسکنر می‌گوید که از پراکسی ساکس استفاده کرده و نتایج را در فایل ذخیره کند
+          # اجرای اسکنر با فلگ‌های مستقیم به جای ورودی تعاملی
           BPB-Warp-Scanner-linux-amd64 -proxy socks5://127.0.0.1:1080 -o result.csv -limit 20
           echo "Scan finished."
 
