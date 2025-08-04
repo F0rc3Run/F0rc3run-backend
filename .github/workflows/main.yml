@@ -28,7 +28,7 @@ jobs:
           exit 1
         fi
         
-        echo "Found WARP.conf. Extracting details..."
+        echo "Found WARP.conf. Extracting details for modern format..."
         PRIVATE_KEY=$(awk -F' *= *' '/PrivateKey/ {print $2}' WARP.conf)
         PEER_PUBLIC_KEY=$(awk -F' *= *' '/PublicKey/ {print $2}' WARP.conf)
         ADDRESS_RAW=$(awk -F' *= *' '/Address/ {print $2}' WARP.conf)
@@ -37,7 +37,7 @@ jobs:
         IPV4_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f1 | xargs)
         IPV6_ADDR=$(echo "$ADDRESS_RAW" | cut -d',' -f2 | xargs)
         
-        # **THE FIX:** Generating the new, recommended sing-box config format.
+        # **THE FINAL FIX:** Generating the modern sing-box config using the "endpoints" and "outbounds" structure.
         cat > singbox.json <<EOF
         {
           "inbounds": [
@@ -74,7 +74,7 @@ jobs:
         }
         EOF
         
-        echo "✅ Successfully generated modern singbox.json"
+        echo "✅ Successfully generated singbox.json using the modern endpoint format."
         echo "config_ready=true" >> $GITHUB_OUTPUT
 
     - name: Run Sing-box Proxy
@@ -87,7 +87,7 @@ jobs:
         chmod +x sing-box
         
         echo "Starting sing-box proxy..."
-        # The environment variable is no longer needed with the new config format
+        # No special environment variable is needed now.
         sudo ./sing-box run -c singbox.json > singbox.log 2>&1 &
         sleep 10
         
