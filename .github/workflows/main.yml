@@ -69,8 +69,9 @@ jobs:
       - name: Run Scanner
         run: |
           echo "Starting the scan through the Iran proxy..."
-          # اجرای اسکنر با فلگ‌های مستقیم به جای ورودی تعاملی
-          BPB-Warp-Scanner-linux-amd64 -proxy socks5://127.0.0.1:1080 -o result.csv -limit 20
+          # **تغییر کرد:** اجرای اسکنر با دستور printf طبق درخواست شما
+          printf "2\n1\n1\n1\n20" | BPB-Warp-Scanner-linux-amd64
+          
           echo "Scan finished."
 
       - name: Convert Top 20 CSV results to JSON
