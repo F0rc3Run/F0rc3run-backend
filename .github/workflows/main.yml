@@ -53,10 +53,34 @@ jobs:
           echo "=== مسیرها در فضای نام مجازی ==="
           sudo ip netns exec warpns ip route show
           
-      - name: Download warp script
+      - name: Download warp script and prepare binaries
         run: |
+          # دانلود اسکریپت
           curl -o warp-go.sh https://gitlab.com/fscarmen/warp/-/raw/main/warp-go.sh
           chmod +x warp-go.sh
+          
+          # ایجاد دایرکتوری برای فایل‌های باینری
+          sudo mkdir -p /tmp/warp-binaries
+          
+          # دانلود فایل‌های باینری در فضای نام اصلی
+          echo "دانلود فایل‌های باینری WARP..."
+          wget -O /tmp/warp-binaries/warp-go https://github.com/fscarmen/warp-go/releases/download/v1.2.0/warp-go-linux-amd64
+          sudo chmod +x /tmp/warp-binaries/warp-go
+          
+          # کپی فایل‌های باینری به فضای نام مجازی
+          sudo mkdir -p /tmp/warp-ns
+          sudo cp /tmp/warp-binaries/warp-go /tmp/warp-ns/
+          
+          # ایجاد لینک به فایل باینری در فضای نام مجازی
+          sudo ip netns exec warpns mkdir -p /tmp
+          sudo ip netns exec warpns cp /tmp/warp-ns/warp-go /tmp/
+          sudo ip netns exec warpns chmod +x /tmp/warp-go
+          
+          # بررسی فایل‌ها
+          echo "=== بررسی فایل‌های باینری ==="
+          ls -la /tmp/warp-binaries/
+          echo "=== بررسی فایل‌ها در فضای نام مجازی ==="
+          sudo ip netns exec warpns ls -la /tmp/warp-go
           
       - name: Run warp scan in virtual namespace
         run: |
@@ -66,6 +90,9 @@ jobs:
           sudo ip netns exec warpns ./warp-go.sh scan > warp_results.txt 2>&1 || echo "اسکن با خطا انجام شد"
           echo "اسکن WARP پایان یافت"
         continue-on-error: true
+        env:
+          # تنظیم مسیر فایل باینری
+          WARP_GO_PATH: "/tmp/warp-go"
           
       - name: Process results
         run: |
@@ -134,6 +161,8 @@ jobs:
           ip addr show
           echo "=== فضاهای نام شبکه ==="
           ip netns list
+          echo "=== فایل‌های باینری ==="
+          ls -la /tmp/warp* 2>/dev/null || echo "فایل‌های باینری یافت نشد"
           echo "=== محتوای warp_results.txt ==="
           cat warp_results.txt || echo "فایل warp_results.txt یافت نشد"
           echo "=== محتوای best_endpoints.txt ==="
@@ -145,11 +174,14 @@ jobs:
         if: always()
         run: |
           # حذف فضای نام مجازی و اینترفیس‌ها
-          sudo ip link del veth0
-          sudo ip netns del warpns
+          sudo ip link del veth0 2>/dev/null || true
+          sudo ip netns del warpns 2>/dev/null || true
           
           # غیرفعال کردن forwarding
           sudo sysctl -w net.ipv4.ip_forward=0
           
           # حذف قوانین NAT
-          sudo iptables -t nat -D POSTROUTING -s 192.168.1.0/24 -o eth0 -j MASQUERADE
+          sudo iptables -t nat -D POSTROUTING -s 192.168.1.0/24 -o eth0 -j MASQUERADE 2>/dev/null || true
+          
+          # حذف فایل‌های موقت
+          sudo rm -rf /tmp/warp* 2>/dev/null || true
