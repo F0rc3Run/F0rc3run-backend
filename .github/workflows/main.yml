@@ -1,4 +1,4 @@
-name: Scan WARP via Iran Proxy and Deploy Results
+name: Find Clean WARP Endpoints via Dynamic Iran Proxy
 
 on:
   workflow_dispatch:
@@ -9,8 +9,6 @@ jobs:
   scan-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # --- Part 1: Setup Environment ---
-
       - name: Checkout Main Repo
         uses: actions/checkout@v4
 
@@ -27,7 +25,6 @@ jobs:
           tar -xzf sing-box.tar.gz
           cp sing-box-1.12.0-linux-amd64/sing-box .
           chmod +x sing-box
-          
           echo "Cloning and building the scanner from source..."
           git clone https://github.com/bia-pain-bache/BPB-Warp-Scanner.git scanner-source
           cd scanner-source
@@ -36,70 +33,76 @@ jobs:
           chmod +x scanner
           echo "Scanner built successfully."
 
-      # --- Part 2: Find, Connect, and Test Iran Proxy using Python ---
-
       - name: Find and Connect to a Working Iran Proxy
         id: proxy_connect
         run: |
           python3 -c "
-          import os
-          import json
-          import subprocess
-          import time
-          import urllib.parse
-          import base64
+          import os, sys, json, subprocess, time, urllib.parse, base64
 
           def create_vless_config(uri):
-              parsed_uri = urllib.parse.urlparse(uri)
-              params = urllib.parse.parse_qs(parsed_uri.query)
-              
-              config = {
-                  'type': 'vless',
-                  'server': parsed_uri.hostname,
-                  'server_port': parsed_uri.port,
-                  'uuid': parsed_uri.username
-              }
-              
-              if params.get('security') == ['tls']:
-                  config['tls'] = {'enabled': True, 'server_name': params.get('sni', [parsed_uri.hostname])[0]}
-              if params.get('type') == ['ws']:
-                  config['transport'] = {'type': 'ws', 'path': params.get('path', ['/'])[0], 'headers': {'Host': params.get('host', [parsed_uri.hostname])[0]}}
-
-              return config
+              try:
+                  parsed = urllib.parse.urlparse(uri)
+                  params = urllib.parse.parse_qs(parsed.query)
+                  config = {
+                      'type': 'vless',
+                      'server': parsed.hostname,
+                      'server_port': parsed.port,
+                      'uuid': parsed.username
+                  }
+                  # Add more parameters like tls, ws, etc. if needed
+                  print(f'  -> Parsed VLESS: server={config[\"server\"]}:{config[\"server_port\"]}, uuid={config[\"uuid\"]}')
+                  return config
+              except Exception as e:
+                  print(f'  -> VLESS Parse Error: {e}')
+                  return None
 
           def create_ss_config(uri):
-              uri_body = uri.replace('ss://', '').split('#')[0]
-              if '@' not in uri_body:
-                  try:
-                      uri_body = base64.b64decode(uri_body + '===').decode('utf-8')
-                  except:
-                      return None
-              
-              creds_part, server_part = uri_body.split('@')
-              method, password = creds_part.split(':')
-              server, server_port = server_part.split(':')
+              try:
+                  uri_body = uri.replace('ss://', '').split('#')[0]
+                  if '@' not in uri_body:
+                      # Handle Base64 encoded part
+                      padding = len(uri_body) % 4
+                      if padding != 0:
+                          uri_body += '=' * (4 - padding)
+                      decoded = base64.b64decode(uri_body).decode('utf-8')
+                      creds_part, server_part = decoded.split('@')
+                  else:
+                      creds_part, server_part = uri_body.split('@')
 
-              return {
-                  'type': 'shadowsocks',
-                  'server': server,
-                  'server_port': int(server_port),
-                  'method': method,
-                  'password': password
-              }
+                  method, password = creds_part.split(':', 1)
+                  server, server_port = server_part.split(':')
+                  config = {
+                      'type': 'shadowsocks',
+                      'server': server,
+                      'server_port': int(server_port),
+                      'method': method,
+                      'password': password
+                  }
+                  print(f'  -> Parsed SS: server={config[\"server\"]}:{config[\"server_port\"]}, method={config[\"method\"]}')
+                  return config
+              except Exception as e:
+                  print(f'  -> SS Parse Error: {e}')
+                  return None
 
           def create_vmess_config(uri):
               try:
-                  decoded_json = json.loads(base64.b64decode(uri.replace('vmess://', '') + '===').decode('utf-8'))
-              except:
+                  b64_body = uri.replace('vmess://', '')
+                  padding = len(b64_body) % 4
+                  if padding != 0:
+                      b64_body += '=' * (4 - padding)
+                  decoded_json = json.loads(base64.b64decode(b64_body).decode('utf-8'))
+                  config = {
+                      'type': 'vmess',
+                      'server': decoded_json.get('add'),
+                      'server_port': int(decoded_json.get('port')),
+                      'uuid': decoded_json.get('id'),
+                      'alter_id': int(decoded_json.get('aid', 0))
+                  }
+                  print(f'  -> Parsed VMess: server={config[\"server\"]}:{config[\"server_port\"]}, uuid={config[\"uuid\"]}')
+                  return config
+              except Exception as e:
+                  print(f'  -> VMess Parse Error: {e}')
                   return None
-              
-              return {
-                  'type': 'vmess',
-                  'server': decoded_json.get('add'),
-                  'server_port': int(decoded_json.get('port')),
-                  'uuid': decoded_json.get('id'),
-                  'alter_id': int(decoded_json.get('aid', 0))
-              }
 
           print('Fetching proxy list from URL...')
           subprocess.run(['curl', '-s', '-o', 'ir_proxies.txt', 'https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/IR.txt'])
@@ -112,17 +115,14 @@ jobs:
 
                   outbound_config = None
                   if proxy_uri.startswith('vless://'):
-                      print(f'--- Testing VLESS proxy: {proxy_uri} ---')
                       outbound_config = create_vless_config(proxy_uri)
                   elif proxy_uri.startswith('ss://'):
-                      print(f'--- Testing Shadowsocks proxy: {proxy_uri} ---')
                       outbound_config = create_ss_config(proxy_uri)
                   elif proxy_uri.startswith('vmess://'):
-                      print(f'--- Testing VMess proxy: {proxy_uri} ---')
                       outbound_config = create_vmess_config(proxy_uri)
                   
                   if not outbound_config:
-                      print('Could not parse URI. Skipping.')
+                      print('Could not generate config. Skipping.')
                       continue
 
                   config = {
@@ -137,30 +137,32 @@ jobs:
                   time.sleep(8)
 
                   try:
-                      result = subprocess.run(['curl', '--socks5', '127.0.0.1:1080', '-s', '--max-time', '10', 'http://ip-api.com/json'], capture_output=True, text=True)
-                      response = json.loads(result.stdout)
-                      country = response.get('country')
-                      if country == 'Iran':
-                          print(f'✅ SUCCESS: Found a working Iran proxy: {outbound_config.get(\"server\")}')
-                          # We don't kill the process, let it run for the next steps
-                          exit(0)
+                      result = subprocess.run(
+                          ['curl', '--socks5', '127.0.0.1:1080', '-s', '--max-time', '10', 'http://ip-api.com/json'],
+                          capture_output=True, text=True, timeout=15
+                      )
+                      if result.returncode == 0 and result.stdout:
+                          response = json.loads(result.stdout)
+                          country = response.get('country')
+                          if country == 'Iran':
+                              print(f'✅ SUCCESS: Found a working Iran proxy: {outbound_config.get(\"server\")}')
+                              # Let the process run in the background
+                              sys.exit(0)
+                          else:
+                              print(f'❌ FAILED: Proxy connected from {country}. Trying next...')
                       else:
-                          print(f'❌ FAILED: Proxy connected from {country}. Trying next...')
-                  except (json.JSONDecodeError, subprocess.TimeoutExpired):
-                      print('❌ FAILED: Proxy did not connect. Trying next...')
+                          print(f'❌ FAILED: Curl command failed. Error: {result.stderr.strip()}')
+                  except Exception as e:
+                      print(f'❌ FAILED: Test connection threw an exception: {e}')
                   
                   process.kill()
 
-          print('::error::No working Iran proxy found.')
-          exit(1)
+          print('::error::No working Iran proxy found in the list.')
+          sys.exit(1)
           "
-      # --- Part 3: Run Scanner and Deploy ---
-
       - name: Run Scanner
         run: |
           echo "Starting the scan through the Iran proxy..."
-          # Note: The proxy is already running from the previous step
-          # This command uses the SOCKS5 proxy set up by sing-box on port 1080
           printf "2\n1\n1\n1\n20" | ./scanner
           echo "Scan finished."
 
@@ -186,7 +188,6 @@ jobs:
               print('Error: result.csv not found.')
               exit(1)
           "
-      
       - name: Checkout public repository
         uses: actions/checkout@v4
         with:
