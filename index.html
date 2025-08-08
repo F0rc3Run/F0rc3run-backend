@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Warp Endpoint Tester</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0f172a; color: #f1f5f9; text-align: center; }
+    table { width: 90%; margin: 20px auto; border-collapse: collapse; }
+    th, td { padding: 10px; border-bottom: 1px solid #334155; }
+    .fast { color: #22c55e; }
+    .medium { color: #eab308; }
+    .slow, .fail { color: #ef4444; }
+    button { padding: 8px 16px; background: #3b82f6; color: white; border: none; cursor: pointer; }
+    button:hover { background: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>Warp Endpoint Tester</h1>
+  <button id="startBtn">شروع تست</button>
+  <table id="results">
+    <thead>
+      <tr><th>Endpoint</th><th>Latency</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function fetchEndpoints() {
+      const url = "https://raw.githubusercontent.com/F0rc3Run/free-warp-endpoints/refs/heads/main/docs/results.json";
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.ipv4; // فقط IPv4
+    }
+
+    async function testEndpoint(ep) {
+      const target = `https://${ep}`;
+      const start = performance.now();
+      try {
+        await fetch(target, { mode: 'no-cors', cache: 'no-store' });
+        const end = performance.now();
+        return Math.round(end - start);
+      } catch {
+        return null;
+      }
+    }
+
+    document.getElementById("startBtn").addEventListener("click", async () => {
+      const btn = document.getElementById("startBtn");
+      btn.disabled = true;
+      btn.textContent = "در حال تست...";
+      
+      const endpoints = await fetchEndpoints();
+      const results = [];
+
+      for (let ep of endpoints) {
+        const latency = await testEndpoint(ep);
+        results.push({ ep, latency });
+        renderTable(results);
+      }
+
+      results.sort((a, b) => (a.latency || 9999) - (b.latency || 9999));
+      renderTable(results);
+      btn.textContent = "تست دوباره";
+      btn.disabled = false;
+    });
+
+    function renderTable(data) {
+      const tbody = document.querySelector("#results tbody");
+      tbody.innerHTML = "";
+      data.forEach(r => {
+        const row = document.createElement("tr");
+        const colorClass = !r.latency ? 'fail' :
+                           r.latency < 150 ? 'fast' :
+                           r.latency < 400 ? 'medium' : 'slow';
+        row.innerHTML = `<td>${r.ep}</td><td class="${colorClass}">${r.latency ? r.latency + " ms" : "Fail"}</td>`;
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>
