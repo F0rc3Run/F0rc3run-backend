@@ -22,7 +22,7 @@
   </table>
 <script>
 async function fetchEndpoints() {
-  const url = "https://raw.githubusercontent.com/F0rc3Run/free-warp-endpoints/refs/heads/main/docs/results.json";
+  const url = "https://raw.githubusercontent.com/F0rc3Run/F0rc3run-backend/refs/heads/main/endpoints.json";
   const res = await fetch(url);
   const data = await res.json();
   return data.ipv4;
