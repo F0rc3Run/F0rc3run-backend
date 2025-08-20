@@ -10,29 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # مرحله ۱: کلون کردن ریپازیتوری خصوصی
+      
       - name: Checkout private repo
         run: |
           git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/all-sub-scrapper.git private_repo
 
-      # مرحله ۲: نصب و راه‌اندازی پایتون
+      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # مرحله ۳: نصب کتابخانه‌های مورد نیاز
+      
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r private_repo/requirements.txt
 
-      # مرحله ۴: اجرای اسکریپت اصلی در مسیر ریپازیتوری خصوصی
+      
       - name: Run the main Python script
         working-directory: private_repo
         run: python main.py
 
-      # مرحله ۵: کامیت و پوش کردن فایل‌های خروجی به ریپازیتوری عمومی
+      
       - name: Deploy to Public Repo
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
