@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # کلون ریپوی خصوصی
+      
       - name: Clone private repo
         run: |
           git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/sstp-scraper.git
@@ -19,19 +19,19 @@ jobs:
           python sstp_scraper.py
           cd ..
 
-      # کلون ریپوی عمومی مقصد (ریپو B)
+      
       - name: Clone target public repo
         run: |
           git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/F0rc3Run.git target_repo
 
-      # کپی خروجی به ریپوی مقصد
+      
       - name: Copy output to target repo
         run: |
           DESTINATION_FOLDER="sstp-configs"
           mkdir -p target_repo/$DESTINATION_FOLDER
           cp sstp-scraper/output/sstp_with_country.txt target_repo/$DESTINATION_FOLDER/
 
-      # کامیت و پوش تغییرات به ریپوی مقصد
+      
       - name: Commit and Push to target repo
         run: |
           cd target_repo
