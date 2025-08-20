@@ -1,56 +1,59 @@
-name: Run Private Scripts and Deploy Output
+name: Run Private Scripts and Deploy to Public Repo
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # هر 6 ساعت یک بار
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
-  run-and-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # 1. Checkout ریپازیتوری عمومی (خود workflow)
-      - name: Checkout public repo
+      # ۱. کلون ریپازیتوری خصوصی در مسیر private_repo
+      - name: Checkout Private Repo
         uses: actions/checkout@v4
+        with:
+          repository: F0rc3Run/all-sub-scrapper
+          token: ${{ secrets.PAT }}
+          path: private_repo
 
-      # 2. کلون ریپازیتوری خصوصی
-      - name: Checkout private repo
-        run: |
-          git clone https://x-access-token:${{ secrets.PRIVATE_REPO_PAT }}@github.com/F0rc3Run/all-sub-scrapper.git private_repo
-
-      # 3. نصب پایتون
-      - name: Setup Python
+      # ۲. نصب پایتون
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 4. نصب وابستگی‌ها
+      # ۳. نصب dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r private_repo/requirements.txt
 
-      # 5. اجرای اسکریپت اصلی
-      - name: Run main script
+      # ۴. اجرای اسکریپت اصلی
+      - name: Run Main Script
         run: python private_repo/main.py
 
-      # 6. کپی خروجی به پوشه مورد نظر در ریپازیتوری عمومی
-      - name: Copy output to public repo
+      # ۵. کلون ریپازیتوری عمومی مقصد
+      - name: Clone Public Repo
         run: |
-          DEST_FOLDER="splitted-by-protocol"
-          mkdir -p $DEST_FOLDER
-          cp -r private_repo/output/* $DEST_FOLDER/
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/F0rc3Run.git public_repo
 
-      # 7. کامیت و پوش تغییرات
-      - name: Commit and push changes
+      # ۶. کپی خروجی به مسیر مشخص
+      - name: Copy Output
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add $DEST_FOLDER/
+          mkdir -p public_repo/splitted-by-protocol
+          cp -r private_repo/output/* public_repo/splitted-by-protocol/
+
+      # ۷. Push تغییرات
+      - name: Commit and Push
+        run: |
+          cd public_repo
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add splitted-by-protocol/
           if git diff --staged --quiet; then
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "bot: update output from private repo"
-          git push
+          git commit -m "bot: auto-update configs in 'splitted-by-protocol'"
+          git push https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/F0rc3Run.git HEAD:main
