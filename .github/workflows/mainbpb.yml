@@ -1,0 +1,164 @@
+name: Scan with BPB-Warp-Scanner, Deploy to Public
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  scan-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # --- بخش اول: اجرای اسکنر و تولید فایل ---
+
+      - name: Checkout BPB-Warp-Scanner Source Code
+        uses: actions/checkout@v4
+        with:
+          repository: 'bia-pain-bache/BPB-Warp-Scanner'
+          path: 'scanner-source'
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      
+      - name: Build the Go application
+        run: |
+          cd scanner-source
+          go build -o ../scanner .
+
+      - name: Download and Set up Xray Core
+        run: |
+          wget https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          mkdir core
+          unzip Xray-linux-64.zip -d core
+
+      # --- استفاده از Tor ---
+      - name: Setup Tor Proxy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tor
+          
+          # پیکربندی Tor
+          echo "SocksPort 9050" | sudo tee -a /etc/tor/torrc
+          echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
+          
+          # شروع سرویس Tor
+          sudo systemctl start tor
+          sleep 10
+          
+          # بررسی وضعیت
+          sudo systemctl status tor
+
+      - name: Check Tor Connection
+        run: |
+          echo "=== بررسی اتصال به Tor ==="
+          
+          # تابع برای دریافت اطلاعات IP
+          get_ip_info() {
+              local proxy="$1"
+              local ip=""
+              local country=""
+              
+              # تلاش با سرویس‌های مختلف
+              # 1. ip-api.com
+              response=$(curl -s $proxy "http://ip-api.com/json" 2>/dev/null || echo "{}")
+              if echo "$response" | grep -q '"status":"success"'; then
+                  ip=$(echo "$response" | python3 -c "import sys,json; print(json.load(sys.stdin).get('query',''))" 2>/dev/null)
+                  country=$(echo "$response" | python3 -c "import sys,json; d=json.load(sys.stdin); print(f\"{d.get('countryCode','')} ({d.get('country','')})\");" 2>/dev/null)
+              fi
+              
+              # 2. اگر موفق نشد، از ipify + ip-api استفاده کن
+              if [ -z "$ip" ]; then
+                  ip=$(curl -s $proxy "https://api.ipify.org" 2>/dev/null || echo "")
+                  if [ -n "$ip" ]; then
+                      country_response=$(curl -s "http://ip-api.com/json/$ip" 2>/dev/null || echo "{}")
+                      country=$(echo "$country_response" | python3 -c "import sys,json; d=json.load(sys.stdin); print(f\"{d.get('countryCode','N/A')} ({d.get('country','N/A')})\");" 2>/dev/null || echo "N/A")
+                  fi
+              fi
+              
+              # 3. اگر هنوز موفق نشد
+              if [ -z "$ip" ]; then
+                  ip="دریافت نشد"
+                  country="نامشخص"
+              fi
+              
+              echo "$ip - $country"
+          }
+          
+          echo "IP قبل از Tor:"
+          get_ip_info ""
+          
+          echo ""
+          echo "IP بعد از اتصال به Tor:"
+          get_ip_info "--socks5 127.0.0.1:9050"
+          
+          # بررسی نهایی
+          echo ""
+          TOR_CHECK=$(curl -s --socks5 127.0.0.1:9050 https://check.torproject.org/api/ip 2>/dev/null || echo "{}")
+          if echo "$TOR_CHECK" | grep -q '"IsTor":true'; then
+              echo "✓ اتصال به شبکه Tor تأیید شد"
+          else
+              echo "⚠ وضعیت اتصال به Tor نامشخص"
+          fi
+
+      - name: Run Scanner with Tor
+        run: |
+          export ALL_PROXY=socks5://127.0.0.1:9050
+          export HTTP_PROXY=socks5://127.0.0.1:9050
+          export HTTPS_PROXY=socks5://127.0.0.1:9050
+          printf "2\n1\n2\n1\n20" | ./scanner ignored_output_name
+
+      - name: Convert Top 20 CSV results to JSON
+        run: |
+          python3 -c "
+          import csv, json
+          input_csv_file = 'result.csv'
+          output_json_file = 'results.json'
+          data = {'ipv4': [], 'ipv6': []}
+          limit = 20
+          count = 0
+          try:
+              with open(input_csv_file, 'r') as csvfile:
+                  reader = csv.DictReader(csvfile)
+                  for row in reader:
+                      if count >= limit: break
+                      endpoint = row.get('Endpoint', '').strip()
+                      if not endpoint: continue
+                      if '[' in endpoint and ']' in endpoint:
+                          data['ipv6'].append(endpoint)
+                      else:
+                          data['ipv4'].append(endpoint)
+                      count += 1
+              with open(output_json_file, 'w') as jsonfile:
+                  json.dump(data, jsonfile, indent=2)
+              print(f'Successfully converted top {count} endpoints.')
+          except FileNotFoundError:
+              print(f'Error: {input_csv_file} not found.')
+              exit(1)
+          "
+
+      # --- بخش دوم: انتقال فایل به ریپازیتوری عمومی ---
+
+      - name: Checkout public repository
+        uses: actions/checkout@v4
+        with:
+          repository: F0rc3Run/free-warp-endpoints
+          token: ${{ secrets.PAT }}
+          path: 'public-repo'
+
+      - name: Move result file to public repo docs
+        run: mv results.json public-repo/docs/results.json
+
+      - name: Commit and Push to public repository
+        run: |
+          cd public-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n $(git status -s) ]]; then
+            git add docs/results.json
+            git commit -m "Automated: Update top 20 endpoints"
+            git push
+          else
+            echo "No changes to commit."
+          fi
