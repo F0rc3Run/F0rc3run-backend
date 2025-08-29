@@ -11,7 +11,7 @@ jobs:
   check-and-publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # <-- THIS IS THE FIX
+      contents: write
 
     steps:
       - name: 📥 Checkout Private Checker Repo
@@ -46,7 +46,17 @@ jobs:
         working-directory: ./xray-checker
         run: python main.py
 
+      - name: 📝 Check for Results
+        id: check_results
+        run: |
+          if [ -d "xray-checker/output" ] && [ -n "$(ls -A xray-checker/output)" ]; then
+            echo "results_exist=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "results_exist=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: 📥 Checkout Public Repo for updating
+        if: steps.check_results.outputs.results_exist == 'true'
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/F0rc3Run
@@ -54,9 +64,11 @@ jobs:
           path: public-repo
 
       - name: 📂 Sync results to public repo checkout
-        run: rsync -av --delete-after xray-checker/output/ public-repo/
+        if: steps.check_results.outputs.results_exist == 'true'
+        run: rsync -av xray-checker/output/ public-repo/
 
       - name: ✨ Commit and Push changes
+        if: steps.check_results.outputs.results_exist == 'true'
         run: |
           cd public-repo
           git config user.name "GitHub Actions"
