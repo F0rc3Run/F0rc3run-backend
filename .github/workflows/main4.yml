@@ -1,0 +1,68 @@
+name: Check Proxies and Update Results
+
+on:
+  schedule:
+    # اجرای خودکار هر 6 ساعت
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    # امکان اجرای دستی
+
+jobs:
+  check-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Private Checker Repo
+        uses: actions/checkout@v4
+        with:
+          repository: F0rc3Run/xray-checker
+          token: ${{ secrets.PAT }}
+          path: xray-checker
+
+      - name: 🔽 Download and Setup Xray
+        working-directory: ./xray-checker
+        run: |
+          echo "Downloading latest Xray-core..."
+          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          echo "Unzipping xray binary..."
+          unzip -o xray.zip xray
+          echo "Setting execute permissions..."
+          chmod +x xray
+          echo "Cleaning up..."
+          rm xray.zip
+          echo "Xray setup complete."
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install Dependencies
+        run: pip install -r xray-checker/requirements.txt
+
+      - name: 🚀 Run Checker and Generate Outputs
+        working-directory: ./xray-checker
+        run: python main.py
+
+      - name: 📥 Checkout Public Repo for updating
+        uses: actions/checkout@v4
+        with:
+          repository: F0rc3Run/F0rc3Run
+          token: ${{ secrets.PAT }}
+          path: public-repo
+
+      - name: 📂 Sync results to public repo checkout
+        run: rsync -av --delete-after xray-checker/output/ public-repo/
+
+      - name: ✨ Commit and Push changes
+        run: |
+          cd public-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          if [[ -n $(git status -s) ]]; then
+            echo "Changes detected. Committing and pushing..."
+            git add .
+            git commit -m "Update proxy servers"
+            git push
+          else
+            echo "No changes to commit."
+          fi
