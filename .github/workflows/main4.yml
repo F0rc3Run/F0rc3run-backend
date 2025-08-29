@@ -67,7 +67,7 @@ jobs:
         if: steps.check_results.outputs.results_exist == 'true'
         run: rsync -av xray-checker/output/ public-repo/
 
-      - name: ✨ Commit and Push changes
+      - name: ✨ Commit and Push changes to Best-Results folder
         if: steps.check_results.outputs.results_exist == 'true'
         run: |
           cd public-repo
