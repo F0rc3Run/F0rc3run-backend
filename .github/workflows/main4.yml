@@ -2,14 +2,17 @@ name: Check Proxies and Update Results
 
 on:
   schedule:
-    # اجرای خودکار هر 6 ساعت
+    # Runs automatically every 6 hours
     - cron: '0 */6 * * *'
   workflow_dispatch:
-    # امکان اجرای دستی
+    # Allows manual execution
 
 jobs:
   check-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # <-- THIS IS THE FIX
+
     steps:
       - name: 📥 Checkout Private Checker Repo
         uses: actions/checkout@v4
