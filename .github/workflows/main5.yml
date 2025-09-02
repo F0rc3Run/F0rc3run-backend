@@ -2,6 +2,8 @@ name: Test and Publish Proxies
 
 on:
   workflow_dispatch:
+  # schedule:
+  #   - cron: '0 */4 * * *' # هر ۴ ساعت یک‌بار اجرا شود
 
 jobs:
   check-and-publish:
@@ -21,22 +23,38 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          # کش کردن پکیج‌های پایتون برای افزایش سرعت
+          cache: 'pip'
+          cache-dependency-path: 'private/requirements.txt'
+
+      # کش کردن فایل‌های Xray برای جلوگیری از دانلود مجدد
+      - name:  caching Xray
+        id: cache-xray
+        uses: actions/cache@v4
+        with:
+          path: private/xray
+          key: ${{ runner.os }}-xray
 
       - name: ⚙️ Setup Environment
-        # Run setup commands from the root, using explicit paths
         run: |
           echo "Installing Python dependencies..."
           pip install -r private/requirements.txt
           
-          echo "Downloading and setting up Xray-core..."
-          wget -q -O private/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip -o private/xray.zip -d private/xray
+          # فقط در صورتی که Xray کش نشده باشد، آن را دانلود کن
+          if steps.cache-xray.outputs.cache-hit != 'true'
+          then
+            echo "Downloading and setting up Xray-core..."
+            wget -q -O private/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+            unzip -o private/xray.zip -d private/xray
+            rm -f private/xray.zip
+          else
+            echo "Xray restored from cache."
+          fi
+          # اطمینان از اجرایی بودن فایل
           chmod +x private/xray/xray
-          rm -f private/xray.zip
           echo "Setup complete."
 
       - name: 🚀 Run Combined Checker
-        # Define an environment variable pointing to the private directory
         env:
           SCRIPT_WORKDIR: ${{ github.workspace }}/private
         run: python3 ${{ env.SCRIPT_WORKDIR }}/main_combined.py
