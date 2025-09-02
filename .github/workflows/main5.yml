@@ -1,49 +1,55 @@
-name: test alpha FVS
+name: Test and Publish Proxies
 
 on:
- # schedule:
-   # - cron: '0 */6 * * *'   # هر ۶ ساعت
+  # schedule:
+  #   - cron: '0 */6 * * *' # هر ۶ ساعت
   workflow_dispatch:
 
 jobs:
   check-and-publish:
     runs-on: ubuntu-latest
+    
+    # پوشه کاری پیش‌فرض برای تمام دستورات run در این job
+    defaults:
+      run:
+        working-directory: ./private
+        
     permissions:
       contents: write
 
     steps:
-      - name: 📥 Checkout Private Repo (vpn-config)
+      - name: 📥 Checkout Scripts & Configs
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/vpn-config
           token: ${{ secrets.PAT }}
           path: private
 
-      - name: 🔽 Download and Setup Xray
-        working-directory: ./private
-        run: |
-          echo "Downloading latest Xray-core..."
-          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip -o xray.zip -d xray
-          chmod +x xray/xray || true
-          rm -f xray.zip || true
-          echo "Xray setup complete."
-
       - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: 📦 Install Dependencies
+      - name: ⚙️ Setup Environment
+        # این مرحله به صورت پیش‌فرض در پوشه private اجرا می‌شود
         run: |
-          pip install -r private/requirements.txt || echo "No requirements.txt"
+          echo "Installing Python dependencies..."
+          pip install -r requirements.txt
+          
+          echo "Downloading and setting up Xray-core..."
+          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          unzip -o xray.zip -d xray
+          chmod +x xray/xray
+          rm -f xray.zip
+          echo "Setup complete."
 
       - name: 🚀 Run Combined Checker
-        working-directory: ./private
+        # این مرحله نیز در پوشه private اجرا می‌شود
         run: python3 main_combined.py
 
       - name: 📝 Check for Results
         id: check_results
+        working-directory: ${{ github.workspace }} # بازگشت به پوشه ریشه برای دسترسی به همه چیز
         run: |
           if [ -d "private/output" ] && [ -n "$(ls -A private/output)" ]; then
             echo "results_exist=true" >> "$GITHUB_OUTPUT"
@@ -59,18 +65,19 @@ jobs:
           token: ${{ secrets.PAT }}
           path: public
 
-      - name: 📂 Sync results to FVL-S
+      - name: 📂 Sync Results to FVL-S
         if: steps.check_results.outputs.results_exist == 'true'
+        working-directory: ${{ github.workspace }} # اجرا از پوشه ریشه
         run: |
           mkdir -p public/FVL-S
           rsync -av --delete private/output/ public/FVL-S/output/
           rsync -av --delete private/sub/ public/FVL-S/sub/
           cp private/summary.md public/FVL-S/ || true
 
-      - name: ✨ Commit and Push changes
+      - name: ✨ Commit and Push Changes
         if: steps.check_results.outputs.results_exist == 'true'
+        working-directory: ./public # تغییر پوشه کاری به public برای اجرای دستورات git
         run: |
-          cd public
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           if [[ -n $(git status -s) ]]; then
