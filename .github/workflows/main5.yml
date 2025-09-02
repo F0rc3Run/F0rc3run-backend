@@ -3,7 +3,7 @@ name: Test and Publish Proxies
 on:
   workflow_dispatch:
   # schedule:
-  #   - cron: '0 */4 * * *' # هر ۴ ساعت یک‌بار اجرا شود
+  #   - cron: '0 */4 * * *'
 
 jobs:
   check-and-publish:
@@ -23,34 +23,31 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          # کش کردن پکیج‌های پایتون برای افزایش سرعت
           cache: 'pip'
           cache-dependency-path: 'private/requirements.txt'
 
-      # کش کردن فایل‌های Xray برای جلوگیری از دانلود مجدد
-      - name:  caching Xray
+      - name: 📦 Install Python Dependencies
+        run: pip install -r private/requirements.txt
+
+      - name:  Caching Xray
         id: cache-xray
         uses: actions/cache@v4
         with:
           path: private/xray
-          key: ${{ runner.os }}-xray
+          key: ${{ runner.os }}-xray-v1
 
-      - name: ⚙️ Setup Environment
+      - name: 🔽 Download Xray (if not cached)
+        # این شرط توسط خود GitHub Actions بررسی می‌شود
+        if: steps.cache-xray.outputs.cache-hit != 'true'
         run: |
-          echo "Installing Python dependencies..."
-          pip install -r private/requirements.txt
-          
-          # فقط در صورتی که Xray کش نشده باشد، آن را دانلود کن
-          if steps.cache-xray.outputs.cache-hit != 'true'
-          then
-            echo "Downloading and setting up Xray-core..."
-            wget -q -O private/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-            unzip -o private/xray.zip -d private/xray
-            rm -f private/xray.zip
-          else
-            echo "Xray restored from cache."
-          fi
-          # اطمینان از اجرایی بودن فایل
+          echo "Downloading and setting up Xray-core..."
+          wget -q -O private/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          unzip -o private/xray.zip -d private/xray
+          rm -f private/xray.zip
+      
+      - name: ✅ Prepare Environment
+        run: |
+          # این دستور همیشه اجرا می‌شود تا فایل چه از کش آمده باشد و چه دانلود شده باشد، قابل اجرا شود
           chmod +x private/xray/xray
           echo "Setup complete."
 
