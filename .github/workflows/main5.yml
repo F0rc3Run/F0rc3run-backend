@@ -1,0 +1,87 @@
+name: and Update Results
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # هر ۶ ساعت یکبار اجرا می‌شود
+  workflow_dispatch:        # قابلیت اجرای دستی
+
+jobs:
+  check-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # دسترسی برای نوشتن و کامیت کردن نتایج
+
+    steps:
+      # مرحله ۱: دانلود ریپازیتوری خصوصی شما
+      - name: 📥 Checkout Private Repo
+        uses: actions/checkout@v4
+        with:
+          repository: F0rc3Run/vpn-config
+          token: ${{ secrets.PAT }}
+          path: checker-repo
+
+      # مرحله ۲: دانلود و آماده‌سازی فایل اجرایی Xray
+      - name: 🔽 Download and Setup Xray
+        working-directory: ./checker-repo
+        run: |
+          echo "Downloading latest Xray-core..."
+          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          unzip -o xray.zip xray
+          chmod +x xray
+          rm xray.zip
+          echo "Xray setup complete."
+
+      # مرحله ۳: آماده‌سازی محیط پایتون
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # مرحله ۴: نصب کتابخانه‌های مورد نیاز پایتون
+      - name: 📦 Install Dependencies
+        run: pip install -r checker-repo/requirements.txt
+
+      # مرحله ۵: اجرای اسکریپت اصلی برای تست پراکسی‌ها
+      - name: 🚀 Run Checker and Generate Outputs
+        working-directory: ./checker-repo
+        run: python main.py
+
+      # مرحله ۶: بررسی وجود نتایج قبل از ادامه کار
+      - name: 📝 Check for Results
+        id: check_results
+        run: |
+          if [ -d "checker-repo/output" ] && [ -n "$(ls -A checker-repo/output)" ]; then
+            echo "results_exist=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "results_exist=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # مرحله ۷: دانلود ریپازیتوری عمومی برای به‌روزرسانی نتایج
+      - name: 📥 Checkout Public Repo for updating
+        if: steps.check_results.outputs.results_exist == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: F0rc3Run/F0rc3run-backend
+          token: ${{ secrets.PAT }}
+          path: public-repo
+
+      # مرحله ۸: کپی کردن نتایج (با اصلاح برای جلوگیری از حذف پوشه .git)
+      - name: 📂 Sync results to public repo checkout
+        if: steps.check_results.outputs.results_exist == 'true'
+        run: rsync -av --exclude '.git' checker-repo/output/ public-repo/
+
+      # مرحله ۹: کامیت و پوش کردن تغییرات در ریپازیتوری عمومی
+      - name: ✨ Commit and Push changes
+        if: steps.check_results.outputs.results_exist == 'true'
+        run: |
+          cd public-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          if [[ -n $(git status -s) ]]; then
+            echo "Changes detected. Committing and pushing..."
+            git add .
+            git commit -m "Update proxy servers"
+            git push
+          else
+            echo "No changes to commit."
+          fi
