@@ -40,11 +40,9 @@ jobs:
       
       - name: Install Xray Core
         run: |
-          # ابتدا اسکریپت را در فایلی به نام install.sh دانلود کن
-          curl -L -o install.sh https://github.com/XTLS/Xray-core/raw/main/install/install-release.sh
-          # به فایل دانلود شده دسترسی اجرایی بده
+          # با افزودن --fail، اگر دانلود ناموفق باشد، کل گام متوقف می‌شود
+          curl -L --fail -o install.sh https://github.com/XTLS/Xray-core/raw/main/install/install-release.sh
           chmod +x install.sh
-          # اسکریپت را با پارامتر install اجرا کن
           ./install.sh install
 
       - name: Prepare Script Files
