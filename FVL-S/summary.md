@@ -1,12 +1,8 @@
 # Run Summary
 
-```
+```json
 {
-  "run_time": "2025-09-01T20:38:21.305869",
-  "total_servers": 21,
-  "protocols": {
-    "vmess": 12,
-    "vless": 9
-  }
+  "run_time": "2025-09-03T01:52:38.358124+00:00",
+  "total_successful_after_filters": 183
 }
 ```
