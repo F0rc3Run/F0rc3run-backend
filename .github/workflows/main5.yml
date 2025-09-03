@@ -39,7 +39,13 @@ jobs:
         run: pip install -r private_repo/requirements.txt
       
       - name: Install Xray Core
-        run: bash -c "$(curl -L https://github.com/XTLS/Xray-core/raw/main/install/install-release.sh)" @ install
+        run: |
+          # ابتدا اسکریپت را در فایلی به نام install.sh دانلود کن
+          curl -L -o install.sh https://github.com/XTLS/Xray-core/raw/main/install/install-release.sh
+          # به فایل دانلود شده دسترسی اجرایی بده
+          chmod +x install.sh
+          # اسکریپت را با پارامتر install اجرا کن
+          ./install.sh install
 
       - name: Prepare Script Files
         run: cp -r private_repo/* .
