@@ -1,9 +1,9 @@
-name: Test and Publish Proxies
+name: test alpha
 
 on:
   workflow_dispatch:
   # schedule:
-  #   - cron: '0 */4 * * *'
+  #   - cron: '0 */6 * * *'
 
 jobs:
   check-and-publish:
@@ -12,10 +12,10 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 Checkout Scripts & Configs
+      - name: 📥 Checkout Scripts & Configs Repo
         uses: actions/checkout@v4
         with:
-          repository: F0rc3Run/vpn-config
+          repository: F0rc3Run/vpn-config # ریپازیتوری حاوی اسکریپت‌ها
           token: ${{ secrets.PAT }}
           path: private
 
@@ -29,7 +29,7 @@ jobs:
       - name: 📦 Install Python Dependencies
         run: pip install -r private/requirements.txt
 
-      - name:  Caching Xray
+      - name: Caching Xray
         id: cache-xray
         uses: actions/cache@v4
         with:
@@ -37,7 +37,6 @@ jobs:
           key: ${{ runner.os }}-xray-v1
 
       - name: 🔽 Download Xray (if not cached)
-        # این شرط توسط خود GitHub Actions بررسی می‌شود
         if: steps.cache-xray.outputs.cache-hit != 'true'
         run: |
           echo "Downloading and setting up Xray-core..."
@@ -47,49 +46,53 @@ jobs:
       
       - name: ✅ Prepare Environment
         run: |
-          # این دستور همیشه اجرا می‌شود تا فایل چه از کش آمده باشد و چه دانلود شده باشد، قابل اجرا شود
           chmod +x private/xray/xray
           echo "Setup complete."
 
-      - name: 🚀 Run Combined Checker
+      - name: 🚀 Run Checker
         env:
           SCRIPT_WORKDIR: ${{ github.workspace }}/private
-        run: python3 ${{ env.SCRIPT_WORKDIR }}/main_combined.py
+        run: python3 ${{ env.SCRIPT_WORKDIR }}/main.py
 
       - name: 📝 Check for Results
         id: check_results
         run: |
-          if [ -d "private/output" ] && [ -n "$(ls -A private/output)" ]; then
+          # بررسی وجود فایل خروجی نهایی
+          if [ -f "private/output/all_servers.txt" ] && [ -s "private/output/all_servers.txt" ]; then
             echo "results_exist=true" >> "$GITHUB_OUTPUT"
           else
             echo "results_exist=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: 📥 Checkout Public Repo (backend)
+      - name: 📥 Checkout Public Repo for updating
         if: steps.check_results.outputs.results_exist == 'true'
         uses: actions/checkout@v4
         with:
-          repository: F0rc3Run/F0rc3run-backend
+          repository: F0rc3Run/F0rc3run-backend # ریپازیتوری که نتایج در آن آپدیت می‌شود
           token: ${{ secrets.PAT }}
-          path: public
+          path: public-repo
 
-      - name: 📂 Sync Results to FVL-S
+      - name: 📂 Sync Results to public repo
         if: steps.check_results.outputs.results_exist == 'true'
         run: |
-          mkdir -p public/FVL-S
-          rsync -av --delete private/output/ public/FVL-S/output/
-          rsync -av --delete private/sub/ public/FVL-S/sub/
-          cp private/summary.md public/FVL-S/ || true
+          # ایجاد پوشه در صورت عدم وجود
+          mkdir -p public-repo/FVL-S
+          # کپی کردن فایل نهایی به مسیر مورد نظر
+          cp private/output/all_servers.txt public-repo/FVL-S/all_servers.txt
+          cp private/summary.md public-repo/FVL-S/summary.md || true
 
-      - name: ✨ Commit and Push Changes
+
+      - name: ✨ Commit and Push changes
         if: steps.check_results.outputs.results_exist == 'true'
-        working-directory: ./public
+        working-directory: ./public-repo
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           if [[ -n $(git status -s) ]]; then
             echo "Changes detected. Committing and pushing..."
-            git add FVL-S/*
+            # افزودن فایل‌های تغییر کرده
+            git add FVL-S/all_servers.txt
+            git add FVL-S/summary.md
             git commit -m "Update proxy servers ($(date))"
             git push
           else
