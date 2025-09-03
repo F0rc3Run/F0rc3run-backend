@@ -1,84 +1,68 @@
-name: Check e Results
+name: Generate and Commit V2Ray Configs
 
 on:
-#  schedule:
- #   - cron: '0 */6 * * *'
   workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
 
 jobs:
-  check-and-publish:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: 📥 Checkout Public Backend Repo
+      - name: Checkout Public Repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 📥 Checkout Private vpn-config Repo
+      - name: Checkout Private Repo
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/vpn-config
           token: ${{ secrets.PAT }}
-          path: vpn-config
+          path: 'private_repo'
 
-      - name: 🐍 Set up Python and Cache Dependencies
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: 'pip'
-          cache-dependency-path: 'vpn-config/requirements.txt'
+          python-version: '3.10'
 
-      - name: 📦 Install Dependencies
-        run: pip install -r vpn-config/requirements.txt
-
-      - name: 🔎 Cache Xray binary
-        id: cache-xray
+      - name: Cache Python Dependencies
         uses: actions/cache@v4
         with:
-          path: vpn-config/xray
-          key: ${{ runner.os }}-xray
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('private_repo/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
-      - name: 🔽 Download and Setup Xray
-        if: steps.cache-xray.outputs.cache-hit != 'true'
-        working-directory: ./vpn-config
+      - name: Install Python Dependencies
+        run: pip install -r private_repo/requirements.txt
+
+      - name: Cache Xray Core and Proxies.so
+        uses: actions/cache@v4
+        id: xray-cache
+        with:
+          path: |
+            private_repo/xray
+            private_repo/proxies.so
+          key: ${{ runner.os }}-xray-${{ hashFiles('private_repo/xray', 'private_repo/proxies.so') }}
+      
+      - name: Prepare Script Files
         run: |
-          echo "Xray not found in cache. Downloading..."
-          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip -o xray.zip xray
-          chmod +x xray
-          rm xray.zip
-          echo "Xray setup complete."
+          cp -r private_repo/* .
+          chmod +x ./xray
 
-      - name: 🚀 Run Checker and Generate Outputs
-        working-directory: ./vpn-config
+      - name: Run the Python Script
         run: python main.py
 
-      - name: 📝 Check for Results
-        id: check_results
+      - name: Commit and Push Changes
         run: |
-          if [ -d "vpn-config/output" ] && [ -n "$(ls -A vpn-config/output)" ]; then
-            echo "results_exist=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "results_exist=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: 📂 Sync results to public repo
-        if: steps.check_results.outputs.results_exist == 'true'
-        run: |
-          mkdir -p Best-Results
-          rsync -av --delete vpn-config/output/ Best-Results/
-
-      - name: ✨ Commit and Push changes
-        if: steps.check_results.outputs.results_exist == 'true'
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
-          if [[ -n $(git status -s) ]]; then
-            echo "Changes detected. Committing and pushing..."
-            git add Best-Results/*
-            git commit -m "Update proxy servers"
-            git push
-          else
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions-bot@github.com'
+          git add output/all_servers.txt
+          if git diff --staged --quiet; then
             echo "No changes to commit."
+          else
+            git commit -m "🚀 Update server configurations (${{ github.run_number }})"
+            git push
           fi
