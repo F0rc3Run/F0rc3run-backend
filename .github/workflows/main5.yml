@@ -1,4 +1,4 @@
-name: test alpha
+name: Check e Results
 
 on:
   schedule:
@@ -12,30 +12,43 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 Checkout Private Checker Repo
+      - name: 📥 Checkout Public Backend Repo
+        uses: actions/checkout@v4
+
+      - name: 📥 Checkout Private vpn-config Repo
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/vpn-config
           token: ${{ secrets.PAT }}
           path: vpn-config
 
+      - name: 🐍 Set up Python and Cache Dependencies
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: 'vpn-config/requirements.txt'
+
+      - name: 📦 Install Dependencies
+        run: pip install -r vpn-config/requirements.txt
+
+      - name: 🔎 Cache Xray binary
+        id: cache-xray
+        uses: actions/cache@v4
+        with:
+          path: vpn-config/xray
+          key: ${{ runner.os }}-xray
+
       - name: 🔽 Download and Setup Xray
+        if: steps.cache-xray.outputs.cache-hit != 'true'
         working-directory: ./vpn-config
         run: |
-          echo "Downloading latest Xray-core..."
+          echo "Xray not found in cache. Downloading..."
           wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
           unzip -o xray.zip xray
           chmod +x xray
           rm xray.zip
           echo "Xray setup complete."
-
-      - name: 🐍 Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: 📦 Install Dependencies
-        run: pip install -r vpn-config/requirements.txt
 
       - name: 🚀 Run Checker and Generate Outputs
         working-directory: ./vpn-config
@@ -44,37 +57,27 @@ jobs:
       - name: 📝 Check for Results
         id: check_results
         run: |
-          if [ -f "output/all_servers.txt" ] && [ -s "output/all_servers.txt" ]; then
+          if [ -d "vpn-config/output" ] && [ -n "$(ls -A vpn-config/output)" ]; then
             echo "results_exist=true" >> "$GITHUB_OUTPUT"
           else
             echo "results_exist=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: 📥 Checkout Public Repo for updating
-        if: steps.check_results.outputs.results_exist == 'true'
-        uses: actions/checkout@v4
-        with:
-          repository: F0rc3Run/F0rc3run-backend
-          token: ${{ secrets.PAT }}
-          path: public-repo
-
-      - name: 📂 Sync results to public repo checkout
+      - name: 📂 Sync results to public repo
         if: steps.check_results.outputs.results_exist == 'true'
         run: |
-          mkdir -p public-repo/Best-Results
-          cp output/all_servers.txt public-repo/Best-Results/all_servers.txt
-          cp summary.md public-repo/Best-Results/summary.md || true
+          mkdir -p Best-Results
+          rsync -av --delete vpn-config/output/ Best-Results/
 
       - name: ✨ Commit and Push changes
         if: steps.check_results.outputs.results_exist == 'true'
         run: |
-          cd public-repo
-          git config user.name "GitHub Actions"
+          git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           if [[ -n $(git status -s) ]]; then
             echo "Changes detected. Committing and pushing..."
             git add Best-Results/*
-            git commit -m "Update proxy servers ($(date))"
+            git commit -m "Update proxy servers"
             git push
           else
             echo "No changes to commit."
