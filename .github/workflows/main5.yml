@@ -37,28 +37,38 @@ jobs:
 
       - name: Install Python Dependencies
         run: pip install -r private_repo/requirements.txt
-      
+
       - name: Install Xray Core
         run: |
-          # با افزودن --fail، اگر دانلود ناموفق باشد، کل گام متوقف می‌شود
-          curl -L --fail -o install.sh https://github.com/XTLS/Xray-core/raw/main/install/install-release.sh
-          chmod +x install.sh
-          ./install.sh install
+          set -e
+          XRAY_VERSION=$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases/latest | grep tag_name | cut -d '"' -f4)
+          curl -L -o xray-linux-64.zip https://github.com/XTLS/Xray-core/releases/download/${XRAY_VERSION}/Xray-linux-64.zip
+          unzip xray-linux-64.zip -d xray
+          sudo install -m 755 xray/xray /usr/local/bin/xray
+          xray -version
 
       - name: Prepare Script Files
         run: cp -r private_repo/* .
 
       - name: Run the Python Script
-        run: python main.py
+        run: |
+          python main.py 2>&1 | tee python_log.txt
+
+      - name: Upload Logs (Optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-logs
+          path: python_log.txt
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'actions-bot@github.com'
-          git add output/all_servers.txt
+          git add output/
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
+            git pull --rebase --autostash
             git commit -m "🚀 Update server configurations (${{ github.run_number }})"
             git push
           fi
