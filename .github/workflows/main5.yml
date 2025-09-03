@@ -57,8 +57,7 @@ jobs:
       - name: 📝 Check for Results
         id: check_results
         run: |
-          # بررسی وجود فایل خروجی نهایی
-          if [ -f "private/output/all_servers.txt" ] && [ -s "private/output/all_servers.txt" ]; then
+          if [ -f "output/all_servers.txt" ] && [ -s "output/all_servers.txt" ]; then
             echo "results_exist=true" >> "$GITHUB_OUTPUT"
           else
             echo "results_exist=false" >> "$GITHUB_OUTPUT"
@@ -75,12 +74,9 @@ jobs:
       - name: 📂 Sync Results to public repo
         if: steps.check_results.outputs.results_exist == 'true'
         run: |
-          # ایجاد پوشه در صورت عدم وجود
           mkdir -p public-repo/FVL-S
-          # کپی کردن فایل نهایی به مسیر مورد نظر
-          cp private/output/all_servers.txt public-repo/FVL-S/all_servers.txt
+          cp output/all_servers.txt public-repo/FVL-S/all_servers.txt
           cp private/summary.md public-repo/FVL-S/summary.md || true
-
 
       - name: ✨ Commit and Push changes
         if: steps.check_results.outputs.results_exist == 'true'
@@ -90,7 +86,6 @@ jobs:
           git config user.email "actions@github.com"
           if [[ -n $(git status -s) ]]; then
             echo "Changes detected. Committing and pushing..."
-            # افزودن فایل‌های تغییر کرده
             git add FVL-S/all_servers.txt
             git add FVL-S/summary.md
             git commit -m "Update proxy servers ($(date))"
