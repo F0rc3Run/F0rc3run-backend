@@ -2,6 +2,7 @@ name: Check Proxies and Update Results
 
 on:
   schedule:
+    # هر ۶ ساعت یک‌بار اجرا می‌شود
     - cron: '0 */6 * * *'
   workflow_dispatch:
 
@@ -12,7 +13,7 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 Checkout Private Repo
+      - name: 📥 Checkout Private Repo (Checker)
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/vpn-config
@@ -35,20 +36,22 @@ jobs:
       - name: 📦 Install Dependencies
         run: pip install -r checker-repo/requirements.txt
 
-      - name: 🚀 Run Checker
+      - name: 🚀 Run Checker and Verifier
         working-directory: ./checker-repo
         run: python main.py
 
-      - name: 📝 Check for Results
+      - name: 📝 Check for Results File
         id: check_results
         run: |
-          if [ -d "checker-repo/output" ] && [ -n "$(ls -A checker-repo/output)" ]; then
+          # بررسی می‌کند که آیا فایل خروجی نهایی ایجاد شده است یا خیر
+          if [ -f "checker-repo/output/all_servers.txt" ]; then
             echo "results_exist=true" >> "$GITHUB_OUTPUT"
           else
             echo "results_exist=false" >> "$GITHUB_OUTPUT"
+            echo "Results file not found!"
           fi
 
-      - name: 📥 Checkout Public Repo for updating
+      - name: 📥 Checkout Public Repo (Backend)
         if: steps.check_results.outputs.results_exist == 'true'
         uses: actions/checkout@v4
         with:
@@ -56,22 +59,27 @@ jobs:
           token: ${{ secrets.PAT }}
           path: public-repo
 
-      - name: 📂 Sync results to FVL-S folder
+      - name: 📂 Sync Result File to FVL-S Folder
         if: steps.check_results.outputs.results_exist == 'true'
         run: |
+          # پوشه مقصد را در صورت عدم وجود ایجاد می‌کند
           mkdir -p public-repo/FVL-S
-          rsync -av --delete checker-repo/output/ public-repo/FVL-S/
+          # فایل نتیجه را به مقصد کپی می‌کند
+          cp checker-repo/output/all_servers.txt public-repo/FVL-S/all_servers.txt
 
-      - name: ✨ Commit and Push changes
+      - name: ✨ Commit and Push Changes
         if: steps.check_results.outputs.results_exist == 'true'
         run: |
           cd public-repo
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+          
+          # بررسی می‌کند که آیا تغییری برای کامیت وجود دارد یا خیر
           if [[ -n $(git status -s) ]]; then
             echo "Changes detected. Committing and pushing..."
-            git add FVL-S/
-            git commit -m "Update proxy results in FVL-S"
+            # فقط فایل مشخص شده را اضافه می‌کند
+            git add FVL-S/all_servers.txt
+            git commit -m "Update proxy results"
             git push
           else
             echo "No changes to commit."
