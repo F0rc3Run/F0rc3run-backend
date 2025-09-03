@@ -1,4 +1,4 @@
-name: test v
+name: test alpha
 
 on:
   schedule:
@@ -43,7 +43,6 @@ jobs:
 
       - name: 📝 Check for Results
         id: check_results
-        working-directory: ./vpn-config
         run: |
           if [ -f "output/all_servers.txt" ] && [ -s "output/all_servers.txt" ]; then
             echo "results_exist=true" >> "$GITHUB_OUTPUT"
@@ -63,8 +62,8 @@ jobs:
         if: steps.check_results.outputs.results_exist == 'true'
         run: |
           mkdir -p public-repo/Best-Results
-          cp vpn-config/output/all_servers.txt public-repo/Best-Results/all_servers.txt
-          cp vpn-config/summary.md public-repo/Best-Results/summary.md || true
+          cp output/all_servers.txt public-repo/Best-Results/all_servers.txt
+          cp summary.md public-repo/Best-Results/summary.md || true
 
       - name: ✨ Commit and Push changes
         if: steps.check_results.outputs.results_exist == 'true'
@@ -75,7 +74,7 @@ jobs:
           if [[ -n $(git status -s) ]]; then
             echo "Changes detected. Committing and pushing..."
             git add Best-Results/*
-            git commit -m "Update proxy servers"
+            git commit -m "Update proxy servers ($(date))"
             git push
           else
             echo "No changes to commit."
