@@ -1,9 +1,9 @@
 name: test alpha
 
 on:
+  schedule:
+    - cron: '0 */6 * * *'
   workflow_dispatch:
-  # schedule:
-  #   - cron: '0 */6 * * *'
 
 jobs:
   check-and-publish:
@@ -12,52 +12,39 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 Checkout Scripts & Configs Repo
+      - name: 📥 Checkout Private Checker Repo
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/vpn-config
           token: ${{ secrets.PAT }}
-          path: private
+          path: vpn-config
+
+      - name: 🔽 Download and Setup Xray
+        working-directory: ./vpn-config
+        run: |
+          echo "Downloading latest Xray-core..."
+          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          unzip -o xray.zip xray
+          chmod +x xray
+          rm xray.zip
+          echo "Xray setup complete."
 
       - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'
-          cache-dependency-path: 'private/requirements.txt'
 
-      - name: 📦 Install Python Dependencies
-        run: pip install -r private/requirements.txt
+      - name: 📦 Install Dependencies
+        run: pip install -r vpn-config/requirements.txt
 
-      - name: Caching Xray
-        id: cache-xray
-        uses: actions/cache@v4
-        with:
-          path: private/xray
-          key: ${{ runner.os }}-xray-v1
-
-      - name: 🔽 Download Xray (if not cached)
-        if: steps.cache-xray.outputs.cache-hit != 'true'
-        run: |
-          echo "Downloading and setting up Xray-core..."
-          wget -q -O private/xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip -o private/xray.zip -d private/xray
-          rm -f private/xray.zip
-      
-      - name: ✅ Prepare Environment
-        run: |
-          chmod +x private/xray/xray
-          echo "Setup complete."
-
-      - name: 🚀 Run Checker
-        env:
-          SCRIPT_WORKDIR: ${{ github.workspace }}/private
-        run: python3 ${{ env.SCRIPT_WORKDIR }}/main.py
+      - name: 🚀 Run Checker and Generate Outputs
+        working-directory: ./vpn-config
+        run: python main.py
 
       - name: 📝 Check for Results
         id: check_results
         run: |
-          if [ -f "output/all_servers.txt" ] && [ -s "output/all_servers.txt" ]; then
+          if [ -d "vpn-config/output" ] && [ -n "$(ls -A vpn-config/output)" ]; then
             echo "results_exist=true" >> "$GITHUB_OUTPUT"
           else
             echo "results_exist=false" >> "$GITHUB_OUTPUT"
@@ -71,24 +58,20 @@ jobs:
           token: ${{ secrets.PAT }}
           path: public-repo
 
-      - name: 📂 Sync Results to public repo
+      - name: 📂 Sync results to public repo checkout
         if: steps.check_results.outputs.results_exist == 'true'
-        run: |
-          mkdir -p public-repo/FVL-S
-          cp output/all_servers.txt public-repo/FVL-S/all_servers.txt
-          cp private/summary.md public-repo/FVL-S/summary.md || true
+        run: rsync -av --delete vpn-config/output/ public-repo/Best-Results/
 
       - name: ✨ Commit and Push changes
         if: steps.check_results.outputs.results_exist == 'true'
-        working-directory: ./public-repo
         run: |
+          cd public-repo
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           if [[ -n $(git status -s) ]]; then
             echo "Changes detected. Committing and pushing..."
-            git add FVL-S/all_servers.txt
-            git add FVL-S/summary.md
-            git commit -m "Update proxy servers ($(date))"
+            git add Best-Results/*
+            git commit -m "Update proxy servers"
             git push
           else
             echo "No changes to commit."
