@@ -15,12 +15,12 @@ jobs:
       - name: 📥 Checkout Private Checker Repo
         uses: actions/checkout@v4
         with:
-          repository: F0rc3Run/xray-checker
+          repository: F0rc3Run/vpn-config
           token: ${{ secrets.PAT }}
-          path: xray-checker
+          path: vpn-config
 
       - name: 🔽 Download and Setup Xray
-        working-directory: ./xray-checker
+        working-directory: ./vpn-config
         run: |
           echo "Downloading latest Xray-core..."
           wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
@@ -35,16 +35,16 @@ jobs:
           python-version: '3.12'
 
       - name: 📦 Install Dependencies
-        run: pip install -r xray-checker/requirements.txt
+        run: pip install -r vpn-config/requirements.txt
 
       - name: 🚀 Run Checker and Generate Outputs
-        working-directory: ./xray-checker
+        working-directory: ./vpn-config
         run: python main.py
 
       - name: 📝 Check for Results
         id: check_results
         run: |
-          if [ -d "xray-checker/output" ] && [ -n "$(ls -A xray-checker/output)" ]; then
+          if [ -d "vpn-config/output" ] && [ -n "$(ls -A vpn-config/output)" ]; then
             echo "results_exist=true" >> "$GITHUB_OUTPUT"
           else
             echo "results_exist=false" >> "$GITHUB_OUTPUT"
@@ -54,13 +54,13 @@ jobs:
         if: steps.check_results.outputs.results_exist == 'true'
         uses: actions/checkout@v4
         with:
-          repository: F0rc3Run/F0rc3Run
+          repository: F0rc3Run/F0rc3run-backend
           token: ${{ secrets.PAT }}
           path: public-repo
 
       - name: 📂 Sync results to public repo checkout
         if: steps.check_results.outputs.results_exist == 'true'
-        run: rsync -av --delete xray-checker/output/ public-repo/Best-Results/
+        run: rsync -av --delete vpn-config/output/ public-repo/Best-Results/
 
       - name: ✨ Commit and Push changes
         if: steps.check_results.outputs.results_exist == 'true'
