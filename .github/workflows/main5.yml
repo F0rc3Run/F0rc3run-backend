@@ -37,20 +37,12 @@ jobs:
 
       - name: Install Python Dependencies
         run: pip install -r private_repo/requirements.txt
-
-      - name: Cache Xray Core and Proxies.so
-        uses: actions/cache@v4
-        id: xray-cache
-        with:
-          path: |
-            private_repo/xray
-            private_repo/proxies.so
-          key: ${{ runner.os }}-xray-${{ hashFiles('private_repo/xray', 'private_repo/proxies.so') }}
       
+      - name: Install Xray Core
+        run: bash -c "$(curl -L https://github.com/XTLS/Xray-core/raw/main/install/install-release.sh)" @ install
+
       - name: Prepare Script Files
-        run: |
-          cp -r private_repo/* .
-          chmod +x ./xray
+        run: cp -r private_repo/* .
 
       - name: Run the Python Script
         run: python main.py
