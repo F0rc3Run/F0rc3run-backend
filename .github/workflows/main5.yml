@@ -49,16 +49,20 @@ jobs:
           mv "./go-app/stats.json" "./stats.json"
           mv "./go-app/sub.txt" "./FVL-S/"
 
-      - name: ✨ 7. Commit and Push Results
+      - name: ✨ Commit and Push Changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          OUTPUT_FILE=$(grep 'output:' ./go-app/config.yaml | awk '{print $2}')
-          git add "FVL-S/$OUTPUT_FILE"
-          git add "FVL-S/sub.txt"
-          git add "stats.json"
+          git add README.md
+          git add summary.md
+          
+          # بررسی می‌کند که آیا تغییری برای کامیت وجود دارد یا خیر
           if ! git diff --staged --quiet; then
-            git commit -m "Update proxy list and subscription link"
+            git commit -m "Update README stats and summary"
+            
+            # --- خط جدید: آخرین تغییرات را قبل از پوش، دریافت می‌کند ---
+            git pull --rebase
+            
             git push
           else
             echo "No changes to commit."
