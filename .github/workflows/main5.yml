@@ -2,7 +2,7 @@ name: Check Proxies and Update Stats
 
 on:
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -67,7 +67,7 @@ jobs:
           git add FVL-S/proxies.txt
           git add FVL-S/sub.txt
           git add stats.json
-          
+          git add summary.md
           # Add the new categorized folders
           git add splitted-by-protocol/
           git add splitted-by-country/
