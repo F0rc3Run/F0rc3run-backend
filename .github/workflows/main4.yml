@@ -1,77 +1,44 @@
-name: Check Proxies and Update
+name: Check Links
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */6 * * *'   # هر 6 ساعت یک بار
   workflow_dispatch:
 
 jobs:
-  check-and-publish:
+  check-links:
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: 📥 Checkout Private Checker Repo
+      - name: 🔐 Checkout Private Repo (link-submitter)
         uses: actions/checkout@v4
         with:
-          repository: F0rc3Run/xray-checker
+          repository: F0rc3Run/link-submitter
           token: ${{ secrets.PAT }}
-          path: xray-checker
-
-      - name: 🔽 Download and Setup Xray
-        working-directory: ./xray-checker
-        run: |
-          echo "Downloading latest Xray-core..."
-          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip -o xray.zip xray
-          chmod +x xray
-          rm xray.zip
-          echo "Xray setup complete."
+          path: link-submitter
 
       - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.10'
 
-      - name: 📦 Install Dependencies
-        run: pip install -r xray-checker/requirements.txt
-
-      - name: 🚀 Run Checker and Generate Outputs
-        working-directory: ./xray-checker
-        run: python main.py
-
-      - name: 📝 Check for Results
-        id: check_results
+      - name: 📊 Run Link Checker
         run: |
-          if [ -d "xray-checker/output" ] && [ -n "$(ls -A xray-checker/output)" ]; then
-            echo "results_exist=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "results_exist=false" >> "$GITHUB_OUTPUT"
-          fi
+          pip install requests
+          cd link-submitter
+          python check_links.py
 
-      - name: 📥 Checkout Public Repo for updating
-        if: steps.check_results.outputs.results_exist == 'true'
-        uses: actions/checkout@v4
-        with:
-          repository: F0rc3Run/F0rc3Run
-          token: ${{ secrets.PAT }}
-          path: public-repo
-
-      - name: 📂 Sync results to public repo checkout
-        if: steps.check_results.outputs.results_exist == 'true'
-        run: rsync -av --delete xray-checker/output/ public-repo/Best-Results/
-
-      - name: ✨ Commit and Push changes
-        if: steps.check_results.outputs.results_exist == 'true'
+      - name: ✨ Commit & Push Results
+        working-directory: link-submitter
         run: |
-          cd public-repo
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          if [[ -n $(git status -s) ]]; then
-            echo "Changes detected. Committing and pushing..."
-            git add Best-Results/*
-            git commit -m "Update proxy servers"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          git add alive_links.txt
+          if ! git diff --staged --quiet; then
+            git commit -m "Update alive_links.txt"
             git push
           else
             echo "No changes to commit."
