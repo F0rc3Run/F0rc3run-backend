@@ -1,4 +1,4 @@
-name: Check Proxies and Update Results
+name: Check Proxies and Update
 
 on:
   schedule:
