@@ -1,45 +1,17 @@
-name: Check Links
+name: Trigger Private Workflow
 
 on:
-  schedule:
-    - cron: '0 */6 * * *'   # هر 6 ساعت یک بار
-  workflow_dispatch:
+  workflow_dispatch: # دستی اجرا میشه
 
 jobs:
-  check-links:
+  trigger:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: 🔐 Checkout Private Repo (link-submitter)
-        uses: actions/checkout@v4
-        with:
-          repository: F0rc3Run/link-submitter
-          token: ${{ secrets.PAT }}
-          path: link-submitter
-
-      - name: 🐍 Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: 📊 Run Link Checker
+      - name: 🔔 Trigger Private Repo Workflow
         run: |
-          pip install requests
-          cd link-submitter
-          python check_links.py
-
-      - name: ✨ Commit & Push Results
-        working-directory: link-submitter
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-
-          git add alive_links.txt
-          if ! git diff --staged --quiet; then
-            git commit -m "Update alive_links.txt"
-            git push
-          else
-            echo "No changes to commit."
-          fi
+          curl -X POST \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.PAT }}" \
+            https://api.github.com/repos/F0rc3Run/link-submitter/dispatches \
+            -d '{"event_type": "run-checker"}'
