@@ -1,1 +1,1 @@
-vless://c6a58e27-6c00-4e94-de47-52fbff53d86f@104.18.27.90:80?type=ws&host=fin.channel.digicyber.click&path=%2Folem%2Fws%3Fed%3D1024#https%3A%2F%2Ft.me%2FForceRunVPN-%F0%9F%87%AB%F0%9F%87%AE-Helsinki-763ms-Hetzner%20Online%20GmbH
+vless://c6a58e27-6c00-4e94-de47-52fbff53d86f@104.18.27.90:80?type=ws&host=fin.channel.digicyber.click&path=%2Folem%2Fws%3Fed%3D1024#https%3A%2F%2Ft.me%2FForceRunVPN-%F0%9F%87%AB%F0%9F%87%AE-Helsinki-5157ms-Hetzner%20Online%20GmbH
