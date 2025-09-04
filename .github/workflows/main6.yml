@@ -1,0 +1,56 @@
+name: Check Proxies fr
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 1. Checkout Public Repo (for publishing results)
+        uses: actions/checkout@v4
+
+      - name: 🔐 2. Checkout Private Repo (for source code)
+        uses: actions/checkout@v4
+        with:
+          repository: F0rc3Run/Go-xray-tester
+          token: ${{ secrets.PAT }}
+          path: go-app
+
+      - name: ⚙️ 3. Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.19'
+
+      - name: 🔽 4. Download Xray Core
+        working-directory: ./go-app
+        run: |
+          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          unzip -o xray.zip xray
+          chmod +x xray
+          rm xray.zip
+
+      - name: 🚀 5. Build and Run the Go App
+        working-directory: ./go-app
+        run: |
+          go mod tidy
+          go run .
+
+      - name: 📂 6. Move Result to Public Repo Root
+        run: mv ./go-app/proxies.txt ./proxies.txt
+
+      - name: ✨ 7. Commit and Push Results
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add proxies.txt
+          if ! git diff --staged --quiet; then
+            git commit -m "Update proxy list"
+            git push
+          else
+            echo "No changes to commit."
+          fi
