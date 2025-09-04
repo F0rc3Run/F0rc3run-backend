@@ -1,4 +1,4 @@
-name: Check Proxies and Publish to FVL-S
+name: Check Proxies and Update Stats
 
 on:
   schedule:
@@ -12,10 +12,12 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 1. Checkout Public Repo (for publishing)
+      - name: 📥 1. Checkout Public Repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
 
-      - name: 🔐 2. Checkout Private Repo (for source code)
+      - name: 🔐 2. Checkout Private Repo (for Go source)
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/vpn-config
@@ -35,34 +37,41 @@ jobs:
           chmod +x xray
           rm xray.zip
 
-      - name: 🚀 5. Build and Run the Go App
+      - name: 🚀 5. Run Go App to Generate Results
         working-directory: ./go-app
         run: |
           go mod tidy
           go run .
 
-      - name: 📂 6. Move Results to Public Repo
+      - name: 📂 6. Organize Output Files
         run: |
           mkdir -p FVL-S
-          OUTPUT_FILE=$(grep 'output:' ./go-app/config.yaml | awk '{print $2}')
-          mv "./go-app/$OUTPUT_FILE" "./FVL-S/"
-          mv "./go-app/stats.json" "./stats.json"
-          mv "./go-app/sub.txt" "./FVL-S/"
+          # Move result files from the go-app checkout to the public repo checkout
+          mv ./go-app/proxies.txt ./FVL-S/
+          mv ./go-app/sub.txt ./FVL-S/
+          mv ./go-app/stats.json ./stats.json
 
-      - name: ✨ Commit and Push Changes
+      - name: 🐍 7. Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 📊 8. Run Python Script to Generate Stats
+        run: python generate_stats.py
+
+      - name: ✨ 9. Commit and Push All Changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          # Add all generated and updated files
+          git add FVL-S/proxies.txt
+          git add FVL-S/sub.txt
+          git add stats.json
           git add README.md
           git add summary.md
           
-          # بررسی می‌کند که آیا تغییری برای کامیت وجود دارد یا خیر
           if ! git diff --staged --quiet; then
-            git commit -m "Update README stats and summary"
-            
-            # --- خط جدید: آخرین تغییرات را قبل از پوش، دریافت می‌کند ---
-            git pull --rebase
-            
+            git commit -m "Update proxy list and stats"
             git push
           else
             echo "No changes to commit."
