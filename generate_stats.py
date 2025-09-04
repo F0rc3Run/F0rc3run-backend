@@ -1,77 +1,80 @@
+# generate_stats.py
 import json
-import re
-from datetime import datetime, timezone
+import os
+import urllib.parse
 
 def country_code_to_emoji(code):
+    """Converts a two-letter country code to a flag emoji."""
     if not isinstance(code, str) or len(code) != 2:
         return '🏁'
     return "".join(chr(ord(char.upper()) + 127397) for char in code)
-
-def update_readme(stats_content):
-    readme_path = "README.md"
-    start_marker = ""
-    end_marker = ""
-    try:
-        with open(readme_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        if start_marker not in content or end_marker not in content:
-            print("Error: Markers not found in README.md. Please add them.")
-            return
-        new_content = re.sub(
-            f"{re.escape(start_marker)}.*{re.escape(end_marker)}",
-            f"{start_marker}\n{stats_content}\n{end_marker}",
-            content,
-            flags=re.DOTALL
-        )
-        with open(readme_path, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        print("README.md updated successfully.")
-    except FileNotFoundError:
-        print("Error: README.md not found.")
 
 def main():
     try:
         with open("stats.json", "r", encoding="utf-8") as f:
             results = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        print("Error: stats.json not found or is invalid.")
+        print("Error: stats.json not found or is invalid. Skipping split process.")
         return
 
-    servers_by_country = {}
-    for r in results:
-        country = r.get('Location', {}).get('Country', 'Unknown')
-        if country == 'Unknown':
+    # Create dictionaries to group servers
+    by_protocol = {}
+    by_country = {}
+
+    # Group servers by protocol and country
+    for server in results:
+        # Reconstruct the final tagged URL
+        original_url = server.get('Proxy', {}).get('OriginalURL', '')
+        if not original_url:
             continue
-        if country not in servers_by_country:
-            servers_by_country[country] = {
-                'servers': [], 
-                'code': r.get('Location', {}).get('CountryCode', '--')
-            }
-        servers_by_country[country]['servers'].append(r)
+        
+        clean_url = original_url.split('#')[0]
+        
+        location = server.get('Location', {})
+        asn = server.get('ASN', {})
+        
+        emoji = country_code_to_emoji(location.get('CountryCode'))
+        city_tag = ""
+        if location.get('City'):
+            city_tag = "-" + location.get('City').replace(" ", "")
+            
+        tag_content = "https://t.me/ForceRunVPN-{}{}-{:d}ms-{}".format(
+            emoji,
+            city_tag,
+            server.get('Latency', 999),
+            asn.get('ISP', 'Unknown')
+        )
+        final_url = f"{clean_url}#{urllib.parse.quote(tag_content)}"
 
-    md = []
-    update_time = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S (UTC)")
-    md.append(f"### 🎌 آخرین به‌روزرسانی: {update_time}")
-    md.append(f"### ✨ تعداد کل سرورهای فعال: {len(results)}\n")
+        # Group by protocol
+        protocol = server.get('Proxy', {}).get('Protocol', 'unknown').lower()
+        if protocol not in by_protocol:
+            by_protocol[protocol] = []
+        by_protocol[protocol].append(final_url)
 
-    sorted_countries = sorted(servers_by_country.items(), key=lambda item: len(item[1]['servers']), reverse=True)
+        # Group by country
+        country = location.get('Country', 'Unknown')
+        if country not in by_country:
+            by_country[country] = []
+        by_country[country].append(final_url)
 
-    for country, data in sorted_countries:
-        emoji = country_code_to_emoji(data['code'])
-        protocols = {}
-        for server in data['servers']:
-            proto = server.get('Proxy', {}).get('Protocol', 'N/A').upper()
-            protocols[proto] = protocols.get(proto, 0) + 1
-        protocol_counts = ", ".join([f"{p} ({c})" for p, c in sorted(protocols.items())])
-        md.append(f"#### {emoji} {country}")
-        md.append(f"**{len(data['servers'])} Server | Protocols: {protocol_counts}**\n")
+    # --- Write protocol files ---
+    proto_dir = "splitted-by-protocol"
+    os.makedirs(proto_dir, exist_ok=True)
+    for protocol, urls in by_protocol.items():
+        with open(os.path.join(proto_dir, f"{protocol}.txt"), "w", encoding="utf-8") as f:
+            f.write("\n".join(urls))
+    print(f"Successfully created {len(by_protocol)} protocol files.")
 
-    md_content = "\n".join(md)
-    update_readme(md_content)
-
-    with open("summary.md", "w", encoding="utf-8") as f:
-        f.write(md_content)
-    print("summary.md created successfully.")
+    # --- Write country files ---
+    country_dir = "splitted-by-country"
+    os.makedirs(country_dir, exist_ok=True)
+    for country, urls in by_country.items():
+        # Sanitize country name for filename
+        filename = country.replace(" ", "_") + ".txt"
+        with open(os.path.join(country_dir, filename), "w", encoding="utf-8") as f:
+            f.write("\n".join(urls))
+    print(f"Successfully created {len(by_country)} country files.")
 
 if __name__ == "__main__":
     main()
