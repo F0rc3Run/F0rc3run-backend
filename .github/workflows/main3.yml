@@ -1,0 +1,62 @@
+name: Process and Deploy to Public Repo
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Checkout private repo
+        run: |
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/all-sub-scrapper.git private_repo
+
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r private_repo/requirements.txt
+
+      
+      - name: Run the main Python script
+        working-directory: private_repo
+        run: python main.py
+
+      
+      - name: Deploy to Public Repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        run: |
+          PUBLIC_REPO_URL="https://github.com/F0rc3Run/F0rc3Run.git"
+          DESTINATION_FOLDER="splitted-by-protocol"
+
+          git clone $PUBLIC_REPO_URL ../public_repo
+          mkdir -p ../public_repo/"$DESTINATION_FOLDER"
+
+          # کپی کردن تمام محتویات پوشه output به مسیر مقصد
+          cp -r private_repo/output/* ../public_repo/"$DESTINATION_FOLDER"/
+          
+          cd ../public_repo
+          
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add "$DESTINATION_FOLDER/"
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          
+          git commit -m "bot: auto-update configs in '$DESTINATION_FOLDER'"
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/F0rc3Run/F0rc3Run.git HEAD:main

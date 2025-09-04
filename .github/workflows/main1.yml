@@ -1,0 +1,42 @@
+name: Telegram Proxy Fetcher
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # هر ۶ ساعت
+  workflow_dispatch:
+
+jobs:
+  fetch-proxies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone private repo (speacial-country)
+        run: |
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/speacial-country.git private-repo
+          cd private-repo
+          ls -la
+
+      - name: Install PHP
+        run: sudo apt update && sudo apt install php -y
+
+      - name: Run scraper
+        working-directory: private-repo
+        run: php telegram_scraper.php
+
+      - name: Clone public repo (output)
+        run: |
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/F0rc3Run.git public-repo
+
+      - name: Copy results
+        run: |
+          mkdir -p public-repo/Special
+          cp -r private-repo/Special/* public-repo/Special/
+
+      - name: Commit and push
+        working-directory: public-repo
+        run: |
+          git config user.name "F0rc3Run Bot"
+          git config user.email "bot@f0rc3run.local"
+          git add Special/
+          git commit -m "📦 Update Telegram proxies: $(date -u)" || echo "No changes"
+          git push origin main

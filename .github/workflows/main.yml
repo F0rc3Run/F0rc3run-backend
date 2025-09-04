@@ -1,0 +1,48 @@
+name: Run SSTP Scraper and Deploy to Repo B
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Clone private repo
+        run: |
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/sstp-scraper.git
+          cd sstp-scraper
+          pip install requests beautifulsoup4
+          python sstp_scraper.py
+          cd ..
+
+      
+      - name: Clone target public repo
+        run: |
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/F0rc3Run.git target_repo
+
+      
+      - name: Copy output to target repo
+        run: |
+          DESTINATION_FOLDER="sstp-configs"
+          mkdir -p target_repo/$DESTINATION_FOLDER
+          cp sstp-scraper/output/sstp_with_country.txt target_repo/$DESTINATION_FOLDER/
+
+      
+      - name: Commit and Push to target repo
+        run: |
+          cd target_repo
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add sstp-configs/sstp_with_country.txt
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "bot: auto-update SSTP servers"
+          git push https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/F0rc3Run.git HEAD:main
