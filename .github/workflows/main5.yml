@@ -41,11 +41,13 @@ jobs:
           go mod tidy
           go run .
 
-      - name: 📂 6. Move Result to FVL-S Folder
+      - name: 📂 6. Move Results to Public Repo
         run: |
           mkdir -p FVL-S
           OUTPUT_FILE=$(grep 'output:' ./go-app/config.yaml | awk '{print $2}')
           mv "./go-app/$OUTPUT_FILE" "./FVL-S/"
+          mv "./go-app/stats.json" "./stats.json"
+          mv "./go-app/sub.txt" "./FVL-S/"
 
       - name: ✨ 7. Commit and Push Results
         run: |
@@ -53,8 +55,10 @@ jobs:
           git config --global user.email "actions@github.com"
           OUTPUT_FILE=$(grep 'output:' ./go-app/config.yaml | awk '{print $2}')
           git add "FVL-S/$OUTPUT_FILE"
+          git add "FVL-S/sub.txt"
+          git add "stats.json"
           if ! git diff --staged --quiet; then
-            git commit -m "Update proxy list in FVL-S"
+            git commit -m "Update proxy list and subscription link"
             git push
           else
             echo "No changes to commit."
