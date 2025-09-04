@@ -1,2 +1,1 @@
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0VUI3QjRLMUFDazZjM1g0VHNuVUtU@62.210.88.22:443#https%3A%2F%2Ft.me%2FForceRunVPN-%F0%9F%87%AB%F0%9F%87%B7-Paris-359ms-Online%20S.A.S.
-trojan://f282b878-8711-45a1-8c69-5564172123c1@172.67.181.173:443?path=/Stupid-World/103.106.228.126-2053&security=tls&host=vpn.stupidworld.web.id&fp=chrome&type=ws&sni=vpn.stupidworld.web.id#https%3A%2F%2Ft.me%2FForceRunVPN-%F0%9F%87%AB%F0%9F%87%B7-Aulnay-sous-Bois-812ms-Cloudflare%20Inc.
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0VUI3QjRLMUFDazZjM1g0VHNuVUtU@62.210.88.22:443#https%3A%2F%2Ft.me%2FForceRunVPN-%F0%9F%87%AB%F0%9F%87%B7-Paris-430ms-Online%20S.A.S.
