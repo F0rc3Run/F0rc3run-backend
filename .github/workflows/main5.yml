@@ -1,75 +1,61 @@
-name: Check Proxies and Update Results
+name: Check Proxies and Publish to FVL-S
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */4 * * *'
   workflow_dispatch:
 
 jobs:
-  check-and-publish:
+  build-and-publish:
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: Checkout Private Repo
+      - name: 📥 1. Checkout Public Repo (for publishing)
+        uses: actions/checkout@v4
+
+      - name: 🔐 2. Checkout Private Repo (for source code)
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/vpn-config
           token: ${{ secrets.PAT }}
-          path: checker-repo
+          path: go-app
 
-      - name: Download and Setup Xray
-        working-directory: ./checker-repo
+      - name: ⚙️ 3. Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.19'
+
+      - name: 🔽 4. Download Xray Core
+        working-directory: ./go-app
         run: |
           wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
           unzip -o xray.zip xray
           chmod +x xray
           rm xray.zip
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install Dependencies
-        run: pip install -r checker-repo/requirements.txt
-
-      - name: Run Checker
-        working-directory: ./checker-repo
-        run: python main.py
-
-      - name: Check for Results File
-        id: check_results
+      - name: 🚀 5. Build and Run the Go App
+        working-directory: ./go-app
         run: |
-          if [ -f "checker-repo/output/all_servers.txt" ]; then
-            echo "results_exist=true" >> "$GITHUB_OUTPUT"
+          go mod tidy
+          go run .
+
+      - name: 📂 6. Move Result to FVL-S Folder
+        run: |
+          mkdir -p FVL-S
+          OUTPUT_FILE=$(grep 'output:' ./go-app/config.yaml | awk '{print $2}')
+          mv "./go-app/$OUTPUT_FILE" "./FVL-S/"
+
+      - name: ✨ 7. Commit and Push Results
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          OUTPUT_FILE=$(grep 'output:' ./go-app/config.yaml | awk '{print $2}')
+          git add "FVL-S/$OUTPUT_FILE"
+          if ! git diff --staged --quiet; then
+            git commit -m "Update proxy list in FVL-S"
+            git push
           else
-            echo "results_exist=false" >> "$GITHUB_OUTPUT"
-
-      - name: Checkout Public Repo
-        if: steps.check_results.outputs.results_exist == 'true'
-        uses: actions/checkout@v4
-        with:
-          repository: F0rc3Run/F0rc3run-backend
-          token: ${{ secrets.PAT }}
-          path: public-repo
-
-      - name: Sync Result File
-        if: steps.check_results.outputs.results_exist == 'true'
-        run: |
-          mkdir -p public-repo/FVL-S
-          cp checker-repo/output/all_servers.txt public-repo/FVL-S/all_servers.txt
-
-      - name: Commit and Push Changes
-        if: steps.check_results.outputs.results_exist == 'true'
-        run: |
-          cd public-repo
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git fetch origin main
-          git rebase origin/main || git rebase --abort
-          if [[ -n $(git status -s FVL-S/all_servers.txt) ]]; then
-            git add FVL-S/all_servers.txt
-            git commit -m "Update proxy results"
-            git push origin main
+            echo "No changes to commit."
+          fi
