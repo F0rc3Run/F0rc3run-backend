@@ -1,8 +1,8 @@
-name: Check Proxies and Update Stats
+name: F0rc3Run Vpn Configs FlowBridge
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */4 * * *'
   workflow_dispatch:
 
 jobs:
@@ -12,66 +12,71 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 1. Checkout Public Repo
+      - name: 📥 Checkout Destination Repo
         uses: actions/checkout@v4
         with:
+          repository: F0rc3Run/F0rc3Run
           token: ${{ secrets.PAT }}
+          path: final-destination
 
-      - name: 🔐 2. Checkout Private Repo (for Go source)
+      - name: 🔐 Checkout Private Source Repo
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/vpn-config
           token: ${{ secrets.PAT }}
-          path: go-app
+          path: source-app
 
-      - name: ⚙️ 3. Set up Go
-        uses: actions/setup-go@v4
+      - name: ⚙️ Set up Go with Cache
+        uses: actions/setup-go@v5
         with:
           go-version: '1.19'
+          cache-dependency-path: ./source-app/go.sum
 
-      - name: 🔽 4. Download Xray Core
-        working-directory: ./go-app
+      - name:  caching Xray Core
+        id: cache-xray
+        uses: actions/cache@v4
+        with:
+          path: ./source-app/xray
+          key: ${{ runner.os }}-xray-core
+
+      - name: 🔽 Download Xray Core
+        if: steps.cache-xray.outputs.cache-hit != 'true'
+        working-directory: ./source-app
         run: |
           wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
           unzip -o xray.zip xray
           chmod +x xray
           rm xray.zip
-
-      - name: 🚀 5. Run Go App to Generate Results
-        working-directory: ./go-app
+      
+      - name: 🚀 Run Go App to Generate Results
+        working-directory: ./source-app
         run: |
           go mod tidy
           go run .
 
-      - name: 📂 6. Organize Output Files
-        run: |
-          mkdir -p FVL-S
-          mv ./go-app/proxies.txt ./FVL-S/
-          mv ./go-app/sub.txt ./FVL-S/
-          mv ./go-app/stats.json ./stats.json
-
-      - name: 🐍 7. Set up Python
+      - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: 📊 8. Run Python Script to Split Proxies
+      - name: 📊 Run Python Script to Split Proxies
+        working-directory: ./source-app
         run: python generate_stats.py
+      
+      - name: 📂 Organize Output Files
+        run: |
+          mkdir -p ./final-destination/Best-Results
+          mv ./source-app/proxies.txt ./final-destination/Best-Results/
+          mv ./source-app/sub.txt ./final-destination/Best-Results/
+          mv ./source-app/splitted-by-protocol ./final-destination/
+          mv ./source-app/splitted-by-country ./final-destination/
 
-      - name: ✨ 9. Commit and Push All Changes
+      - name: ✨ Commit and Push All Changes
+        working-directory: ./final-destination
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          
-          # Add all main result files
-          git add FVL-S/proxies.txt
-          git add FVL-S/sub.txt
-          git add stats.json
-          git add summary.md
-          # Add the new categorized folders
-          git add splitted-by-protocol/
-          git add splitted-by-country/
-          
+          git add .
           if ! git diff --staged --quiet; then
             git commit -m "Update and categorize proxy lists"
             git push
