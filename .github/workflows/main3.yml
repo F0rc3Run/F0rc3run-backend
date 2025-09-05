@@ -1,8 +1,8 @@
-name: Process and Deploy to Public Repo
+name: all sub sc (pyold)
 
 on:
-  schedule:
-    - cron: '0 */6 * * *'
+ # schedule:
+  #  - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -43,7 +43,7 @@ jobs:
           git clone $PUBLIC_REPO_URL ../public_repo
           mkdir -p ../public_repo/"$DESTINATION_FOLDER"
 
-          # کپی کردن تمام محتویات پوشه output به مسیر مقصد
+          
           cp -r private_repo/output/* ../public_repo/"$DESTINATION_FOLDER"/
           
           cd ../public_repo
