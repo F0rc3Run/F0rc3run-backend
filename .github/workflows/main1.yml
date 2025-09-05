@@ -2,7 +2,7 @@ name: Telegram Proxy Fetcher
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # هر ۶ ساعت
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
