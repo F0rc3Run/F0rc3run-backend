@@ -1,1 +1,0 @@
-trojan://wQz5G4ybA9eC3BQDkd@ee-1.kamediorg.com:443?security=tls&headerType=none&fp=chrome&type=tcp&sni=ee-1.kamediorg.com#https%3A%2F%2Ft.me%2FForceRunVPN-%F0%9F%87%AA%F0%9F%87%AA-Tallinn-1066ms-xTom%20GmbH
