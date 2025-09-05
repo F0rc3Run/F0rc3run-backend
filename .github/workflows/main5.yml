@@ -2,7 +2,7 @@ name: F0rc3Run Vpn Configs FlowBridge
 
 on:
   schedule:
-    - cron: '0 */5 * * *'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -72,7 +72,9 @@ jobs:
           mv ./source-app/sub.txt ./final-destination/Best-Results/
           mv ./source-app/splitted-by-protocol ./final-destination/
           mv ./source-app/splitted-by-country ./final-destination/
-
+          mv ../source-app/stats.json ./final-destination/Best-Results/
+          mv ../source-app/summary.md ./final-destination/
+     
       - name: ✨ Commit and Push All Changes
         working-directory: ./final-destination
         run: |
