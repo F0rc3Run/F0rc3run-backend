@@ -1,4 +1,4 @@
-name: Run SSTP Scraper and Deploy to Repo B
+name: Run SSTP Scraper and Deploy
 
 on:
   schedule:
