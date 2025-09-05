@@ -64,7 +64,9 @@ jobs:
         run: python generate_stats.py
       
       - name: 📂 Organize Output Files
-        run: |
+        run: |          
+          rm -rf ./final-destination/splitted-by-protocol
+          rm -rf ./final-destination/splitted-by-country                    
           mkdir -p ./final-destination/Best-Results
           mv ./source-app/proxies.txt ./final-destination/Best-Results/
           mv ./source-app/sub.txt ./final-destination/Best-Results/
