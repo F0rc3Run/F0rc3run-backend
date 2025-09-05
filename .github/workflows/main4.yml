@@ -1,7 +1,7 @@
-name: Trigger Private Workflow
+name: Trigger link-tester
 
 on:
-  workflow_dispatch: # دستی اجرا میشه
+  workflow_dispatch:
 
 jobs:
   trigger:
