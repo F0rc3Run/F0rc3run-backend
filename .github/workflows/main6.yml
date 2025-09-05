@@ -40,7 +40,7 @@ jobs:
         run: |
          go mod tidy
          go mod download
-         go run . > ../final-destination/results.txt
+         sudo go run . > ../final-destination/results.txt
       
       - name: Commit and Push Results
         working-directory: ./final-destination
