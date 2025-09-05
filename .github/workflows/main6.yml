@@ -1,4 +1,4 @@
-name: Check Proxies fr
+name: Go-xray-tester (alpha version)
 on:
 #  schedule:
  #   - cron: '0 */4 * * *'
