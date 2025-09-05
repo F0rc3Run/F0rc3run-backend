@@ -1,12 +1,12 @@
-name: Check end
+name: WireGuard Endpoint Functional Test
 
 on:
  # schedule:
-  #  - cron: '0 */6 * * *'
+   # - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  functional-test:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,63 +25,29 @@ jobs:
           token: ${{ secrets.PAT }}
           path: source-app
 
-      - name: Set up Go with Cache
+      - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.19'
-          cache-dependency-path: ./source-app/go.sum
 
-      - name: Caching Xray Core
-        id: cache-xray
-        uses: actions/cache@v4
-        with:
-          path: ./source-app/xray
-          key: ${{ runner.os }}-xray-core
-
-      - name: Download Xray Core
-        if: steps.cache-xray.outputs.cache-hit != 'true'
-        working-directory: ./source-app
+      - name: Install Dependencies
         run: |
-          wget -q -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
-          unzip -o xray.zip xray
-          chmod +x xray
-          rm xray.zip
+          sudo apt-get update
+          sudo apt-get install -y wireguard-tools curl
+
+      - name: Run Go App to Test Endpoints
+        working-directory: ./source-app
+        run: go run . > ../final-destination/results.txt
       
-      - name: Run Go App to Generate Results
-        working-directory: ./source-app
-        run: |
-          go mod tidy
-          go run .
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: Run Python Script to Process Results
-        working-directory: ./source-app
-        run: python generate_stats.py
-      
-      - name: Organize Output Files
-        working-directory: ./final-destination
-        run: |
-          rm -rf ./splitted-by-protocol ./splitted-by-country
-          mv ../source-app/proxies.txt .
-          mv ../source-app/sub.txt .
-          mv ../source-app/stats.json .
-          mv ../source-app/summary.md .
-          mv ../source-app/splitted-by-protocol .
-          mv ../source-app/splitted-by-country .
-
-      - name: Commit and Push All Changes
+      - name: Commit and Push Results
         working-directory: ./final-destination
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add .
+          git add results.txt
           if ! git diff --staged --quiet; then
-            git commit -m "Update and categorize proxy lists"
+            git commit -m "Update WireGuard endpoint test results"
             git push
           else
-            echo "No changes to commit."
+            echo "No changes in results."
           fi
