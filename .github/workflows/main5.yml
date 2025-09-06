@@ -64,14 +64,16 @@ jobs:
         run: python generate_stats.py
       
       - name: 📂 Organize Output Files
-        run: |          
+        run: |
           rm -rf ./final-destination/splitted-by-protocol
-          rm -rf ./final-destination/splitted-by-country                    
+          rm -rf ./final-destination/splitted-by-country
           mkdir -p ./final-destination/Best-Results
           mv ./source-app/proxies.txt ./final-destination/Best-Results/
           mv ./source-app/sub.txt ./final-destination/Best-Results/
           mv ./source-app/splitted-by-protocol ./final-destination/
           mv ./source-app/splitted-by-country ./final-destination/
+          mv ./source-app/stats.json ./final-destination/Best-Results/
+          mv ./source-app/summary.md ./final-destination/
      
       - name: ✨ Commit and Push All Changes
         working-directory: ./final-destination
@@ -81,7 +83,6 @@ jobs:
           git add .
           if ! git diff --staged --quiet; then
             git commit -m "Update and categorize proxy lists"
-            git pull
             git push
           else
             echo "No changes to commit."
