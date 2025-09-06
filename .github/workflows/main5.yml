@@ -1,8 +1,8 @@
-name: Check P
+name: Check Prox
 
 on:
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       - name: 📥 Checkout Destination Repo
         uses: actions/checkout@v4
         with:
-          repository: F0rc3Run/F0rc3Run
+          repository: F0rc3run/F0rc3run
           token: ${{ secrets.PAT }}
           path: final-destination
 
@@ -48,21 +48,12 @@ jobs:
           chmod +x xray
           rm xray.zip
       
-      - name: 🚀 Run Go App to Generate Results
+      - name: 🚀 Run Go App to Generate All Files
         working-directory: ./source-app
         run: |
           go mod tidy
           go run .
 
-      - name: 🐍 Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: 📊 Run Python Script to Process Results
-        working-directory: ./source-app
-        run: python generate_stats.py
-      
       - name: 📂 Organize Output Files
         run: |
           rm -rf ./final-destination/splitted-by-protocol
