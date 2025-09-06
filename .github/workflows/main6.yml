@@ -33,7 +33,9 @@ jobs:
 
       - name: 🚀 Run Go App to Test Endpoints
         working-directory: ./source-app
-        run: go run . > ../final-destination/results.txt
+        run: |
+         go mod tidy
+         go run . > ../final-destination/results.txt
       
       - name: ✨ Commit and Push Results
         working-directory: ./final-destination
