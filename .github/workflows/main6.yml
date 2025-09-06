@@ -2,7 +2,7 @@ name: WireGuard Endpoint Functional Test
 
 on:
  # schedule:
-   # - cron: '0 */6 * * *'
+  #  - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -12,37 +12,30 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout Public Repo
+      - name: 📥 Checkout Public Repo
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.PAT }}
           path: final-destination
 
-      - name: Checkout Private Source Repo
+      - name: 🔐 Checkout Private Source Repo
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/Go-xray-tester
           token: ${{ secrets.PAT }}
           path: source-app
 
-      - name: Set up Go
+      - name: ⚙️ Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.19'
+          cache-dependency-path: ./source-app/go.sum
 
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wireguard-tools curl
-
-      - name: Run Go App to Test Endpoints
+      - name: 🚀 Run Go App to Test Endpoints
         working-directory: ./source-app
-        run: |
-         go mod tidy
-         go mod download
-         sudo go run . > ../final-destination/results.txt
+        run: go run . > ../final-destination/results.txt
       
-      - name: Commit and Push Results
+      - name: ✨ Commit and Push Results
         working-directory: ./final-destination
         run: |
           git config --global user.name "GitHub Actions"
