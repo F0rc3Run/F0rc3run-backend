@@ -40,10 +40,13 @@ jobs:
         run: |
           mkdir -p vendor/wireguard-go
           tar -xf wireguard-go-f333402bd9cbe0f3eeb02507bd14e23d7d639280.tar.xz -C vendor/wireguard-go --strip-components=1
-
+      
       - name: 🚀 Run Go App to Test Endpoints
         working-directory: ./source-app
-        run: go run . > ../final-destination/results.txt
+        run: |
+          go mod tidy
+          go mod vendor
+          go run . > ../final-destination/results.txt
       
       - name: ✨ Commit and Push Results
         working-directory: ./final-destination
