@@ -1,8 +1,8 @@
 name: WireGuard Endpoint Functional Test
 
 on:
- # schedule:
-  #  - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -29,13 +29,21 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-          cache-dependency-path: ./source-app/go.sum
+
+      - name: 🔧 Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wireguard-tools curl xz-utils
+
+      - name: 📦 Extract WireGuard-Go Archive
+        working-directory: ./source-app
+        run: |
+          mkdir -p vendor/wireguard-go
+          tar -xf wireguard-go-f333402bd9cbe0f3eeb02507bd14e23d7d639280.tar.xz -C vendor/wireguard-go --strip-components=1
 
       - name: 🚀 Run Go App to Test Endpoints
         working-directory: ./source-app
-        run: |
-         go mod tidy
-         go run . > ../final-destination/results.txt
+        run: go run . > ../final-destination/results.txt
       
       - name: ✨ Commit and Push Results
         working-directory: ./final-destination
