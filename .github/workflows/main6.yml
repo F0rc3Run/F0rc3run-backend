@@ -24,7 +24,7 @@ jobs:
           repository: F0rc3Run/Go-xray-tester
           token: ${{ secrets.PAT }}
           path: source-app
-          submodules: 'true' # <-- این خط بسیار مهم است
+          submodules: 'true'
 
       - name: ⚙️ Set up Go
         uses: actions/setup-go@v5
