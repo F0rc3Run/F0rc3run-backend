@@ -24,7 +24,7 @@ jobs:
           repository: F0rc3Run/Go-xray-tester
           token: ${{ secrets.PAT }}
           path: source-app
-          submodules: 'true'
+          submodules: 'true' # <-- این خط بسیار مهم است
 
       - name: ⚙️ Set up Go
         uses: actions/setup-go@v5
@@ -39,9 +39,7 @@ jobs:
       - name: 🚀 Run Go App to Test Endpoints
         working-directory: ./source-app
         run: |
-          # ابتدا تمام وابستگی‌ها را در پوشه vendor کپی می‌کند
           go mod vendor
-          # سپس با فلگ -mod=vendor برنامه را مجبور به استفاده از پوشه vendor می‌کند
           go run -mod=vendor . > ../final-destination/results.txt
       
       - name: ✨ Commit and Push Results
@@ -54,5 +52,5 @@ jobs:
             git commit -m "Update WireGuard endpoint test results"
             git push
           else
-            "No changes in results."
+            echo "No changes in results."
           fi
