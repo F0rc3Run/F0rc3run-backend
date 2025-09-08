@@ -18,12 +18,13 @@ jobs:
           token: ${{ secrets.PAT }}
           path: final-destination
 
-      - name: 🔐 Checkout Private Source Repo
+      - name: 🔐 Checkout Private Source Repo with Submodule
         uses: actions/checkout@v4
         with:
           repository: F0rc3Run/Go-xray-tester
           token: ${{ secrets.PAT }}
           path: source-app
+          submodules: 'true'
 
       - name: ⚙️ Set up Go
         uses: actions/setup-go@v5
@@ -33,20 +34,15 @@ jobs:
       - name: 🔧 Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y wireguard-tools curl xz-utils
+          sudo apt-get install -y wireguard-tools curl
 
-      - name: 📦 Extract WireGuard-Go Archive
-        working-directory: ./source-app
-        run: |
-          mkdir -p vendor/wireguard-go
-          tar -xf wireguard-go-f333402bd9cbe0f3eeb02507bd14e23d7d639280.tar.xz -C vendor/wireguard-go --strip-components=1
-      
       - name: 🚀 Run Go App to Test Endpoints
         working-directory: ./source-app
         run: |
-          go mod tidy
+          # ابتدا تمام وابستگی‌ها را در پوشه vendor کپی می‌کند
           go mod vendor
-          go run . > ../final-destination/results.txt
+          # سپس با فلگ -mod=vendor برنامه را مجبور به استفاده از پوشه vendor می‌کند
+          go run -mod=vendor . > ../final-destination/results.txt
       
       - name: ✨ Commit and Push Results
         working-directory: ./final-destination
@@ -58,5 +54,5 @@ jobs:
             git commit -m "Update WireGuard endpoint test results"
             git push
           else
-            echo "No changes in results."
+            "No changes in results."
           fi
