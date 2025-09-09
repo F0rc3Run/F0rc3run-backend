@@ -1,3 +1,6 @@
 
 --- 🏆 Final Results 🏆 ---
-🔴 No successful endpoints found.
+✅ 3 successful endpoints (sorted by download speed):
+  - 162.159.192.2:2408    	 Speed: 11363.19 KB/s
+  - 162.159.192.2:4500    	 Speed: 7592.01 KB/s
+  - 162.159.192.1:1701    	 Speed: 340.74 KB/s
