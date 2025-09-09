@@ -1,3 +1,3 @@
 
 --- 🏆 Final Results 🏆 ---
-🔴 No endpoints passed the functional test.
+🔴 No successful endpoints found.
