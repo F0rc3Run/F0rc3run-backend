@@ -39,7 +39,6 @@ jobs:
       - name: 🚀 Run Go App to Test Endpoints
         working-directory: ./source-app
         run: |
-          go mod tidy
           go mod vendor
           go run -mod=vendor . > ../final-destination/results.txt
       
