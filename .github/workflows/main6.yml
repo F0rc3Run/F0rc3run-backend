@@ -41,7 +41,7 @@ jobs:
         run: |
           go mod vendor
           go run -mod=vendor . > ../final-destination/results.txt
-      
+          go mod tidy
       - name: ✨ Commit and Push Results
         working-directory: ./final-destination
         run: |
