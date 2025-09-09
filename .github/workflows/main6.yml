@@ -1,8 +1,8 @@
 name: WireGuard Endpoint Functional Test
 
 on:
-#  schedule:
- #   - cron: '0 0 * * *'
+  schedule:
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
       - name: ⚙️ Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.23'
+          go-version: '1.21'
 
       - name: 🔧 Install System Dependencies
         run: |
@@ -39,6 +39,7 @@ jobs:
       - name: 🚀 Run Go App to Test Endpoints
         working-directory: ./source-app
         run: |
+          go mod tidy
           go mod vendor
           go run -mod=vendor . > ../final-destination/results.txt
       
