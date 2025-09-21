@@ -1,4 +1,0 @@
-
---- 🏆 Final Results 🏆 ---
-✅ 1 successful endpoints (sorted by download speed):
-  - 162.159.192.2:2408    	 Speed: 6643.36 KB/s
