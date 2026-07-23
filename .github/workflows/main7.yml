@@ -153,12 +153,13 @@ jobs:
           
       - name: Test upload to R2
         env:
-             AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-             AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+         AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
-           aws s3 cp ./r2-upload/servers.json \
-           s3://${{ secrets.R2_BUCKET }}/servers.json \
-           --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+         aws s3 cp ./r2-upload/servers.json \
+         s3://${{ secrets.R2_BUCKET }}/servers.json \
+          --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+          --debug
 
       # ============================================================
       - name: Remove generated JSON
