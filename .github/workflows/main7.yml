@@ -20,12 +20,11 @@ jobs:
       # 1. کلون کردن ریپازیتوری خصوصی (F0rc3Run/Test)
       # ============================================================
       - name: Clone private repository
-        run: |
-          echo "📦 Cloning private repository..."
-          git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/Test.git ./source
-          cd ./source
-          echo "✅ Repository cloned successfully"
-          ls -la
+        uses: actions/checkout@v4
+        with:
+         repository: F0rc3Run/Test
+         token: ${{ secrets.PAT }}
+         path: source
 
       # ============================================================
       # 2. Setup Go
@@ -33,19 +32,16 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: ${{ env.GO_VERSION }}
-          cache-dependency-path: ./source/go.sum
-
+         go-version: '1.22'
       # ============================================================
       # 3. نصب وابستگی‌ها
       # ============================================================
-      - name: Install Go dependencies
+      - name: Generate dependencies
         working-directory: ./source
         run: |
-          echo "📦 Installing dependencies..."
+          go mod tidy
           go mod download
           go mod verify
-
       # ============================================================
       # 4. دانلود Xray-core
       # ============================================================
@@ -57,10 +53,6 @@ jobs:
           unzip -q Xray-linux-64.zip
           chmod +x xray
           echo "✅ Xray-core downloaded"
-      - name: Tidy modules (fix checksum)
-        run: |
-         rm -f go.sum
-         go mod tidy
       # ============================================================
       # 5. اجرای برنامه
       # ============================================================
