@@ -136,27 +136,31 @@ jobs:
            ls -lh ./r2-upload
       # ============================================================
      
-      - name: Test R2 credentials
+      - name: Test R2 credentials   
+        env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+           sudo apt-get update
+           sudo apt-get install -y python3-pip
+
+           pip3 install awscli --break-system-packages
+
+           aws --version
+
+           aws s3 ls \
+           --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          
+      - name: Upload servers.json to R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
+         pip3 install awscli --break-system-packages
 
-          aws s3 ls \
-          --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
-      
-      - name: Upload to Cloudflare R2
-        if: steps.check_output.outputs.exists == 'true'
-        uses: ryand56/r2-upload-action@v1
-        with:
-          r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
-          r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
-          r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          r2-bucket: ${{ secrets.R2_BUCKET }}
-          source-dir: ./r2-upload
-          destination-dir: /
+         aws s3 cp ./r2-upload/servers.json \
+         s3://${{ secrets.R2_BUCKET }}/servers.json \
+         --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
 
       # ============================================================
       - name: Remove generated JSON
