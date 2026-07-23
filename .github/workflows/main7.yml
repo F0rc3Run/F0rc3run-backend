@@ -126,6 +126,14 @@ jobs:
 
       # ============================================================
       # 10. آپلود به Cloudflare R2 (اصلی)
+      - name: Prepare R2 upload
+        if: steps.check_output.outputs.exists == 'true'
+        run: |
+         mkdir -p ./r2-upload
+         cp ./source/output/servers.json ./r2-upload/servers.json
+    
+          echo "Files prepared for R2:"
+           ls -lh ./r2-upload
       # ============================================================
       - name: Upload to Cloudflare R2
         if: steps.check_output.outputs.exists == 'true'
@@ -135,10 +143,18 @@ jobs:
           r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
           r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           r2-bucket: ${{ secrets.R2_BUCKET }}
-          source-dir: ./source/output
+          source-dir: ./r2-upload
           destination-dir: /
 
       # ============================================================
+      - name: Remove generated JSON
+        if: always()
+        run: |
+           rm -rf ./r2-upload
+            rm -f ./source/output/servers.json
+    
+           echo "Generated JSON removed"
+      
       # 11. ذخیره خروجی به عنوان Artifact
       # ============================================================
       - name: Upload artifact
