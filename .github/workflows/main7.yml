@@ -135,9 +135,21 @@ jobs:
           echo "Files prepared for R2:"
            ls -lh ./r2-upload
       # ============================================================
+     
+      - name: Test R2 credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+          aws s3 ls \
+          --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      
       - name: Upload to Cloudflare R2
         if: steps.check_output.outputs.exists == 'true'
-        uses: ryand56/r2-upload-action@latest
+        uses: ryand56/r2-upload-action@v1
         with:
           r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
           r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
