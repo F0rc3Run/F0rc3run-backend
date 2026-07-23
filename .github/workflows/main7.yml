@@ -57,7 +57,10 @@ jobs:
           unzip -q Xray-linux-64.zip
           chmod +x xray
           echo "✅ Xray-core downloaded"
-
+      - name: Tidy modules (fix checksum)
+        run: |
+         rm -f go.sum
+         go mod tidy
       # ============================================================
       # 5. اجرای برنامه
       # ============================================================
