@@ -1,56 +1,36 @@
 {
-  "generated_at": "2026-07-24T02:47:49Z",
-  "total": 158,
+  "generated_at": "2026-07-24T10:17:29Z",
+  "total": 164,
   "servers": [
     {
       "protocol": "ss",
-      "country": "CA",
+      "country": "Canada",
       "countryCode": "CA",
       "port": "443",
       "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇨🇦 | 89.2 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.95.183:443#t.me/ForceRunVPN | 🇨🇦 | 89.2 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇨🇦 | 89.2 Mb/s | ✅\"\n    type: ss\n    server: \"149.22.95.183\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+      "tag": "t.me/ForceRunVPN | 🇨🇦 | 101.1 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.95.183:443#t.me/ForceRunVPN | 🇨🇦 | 101.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇨🇦 | 101.1 Mb/s | ✅\"\n    type: ss\n    server: \"149.22.95.183\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
     },
     {
       "protocol": "trojan",
-      "country": "Ireland",
-      "countryCode": "IE",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇮🇪 | 17.9 Mb/s | ✅",
-      "url": "trojan://NQ26071394@correct-starfish.rooster465.autos:443?security=tls\u0026sni=correct-starfish.rooster465.autos#t.me/ForceRunVPN | 🇮🇪 | 17.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇮🇪 | 17.9 Mb/s | ✅\"\n    type: trojan\n    server: \"correct-starfish.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"correct-starfish.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Ireland",
-      "countryCode": "IE",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇮🇪 | 18.4 Mb/s | ✅",
-      "url": "trojan://NQ26071394@fun-labrador.rooster465.autos:443?security=tls\u0026sni=fun-labrador.rooster465.autos#t.me/ForceRunVPN | 🇮🇪 | 18.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇮🇪 | 18.4 Mb/s | ✅\"\n    type: trojan\n    server: \"fun-labrador.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"fun-labrador.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Ireland",
-      "countryCode": "IE",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇮🇪 | 18.1 Mb/s | ✅",
-      "url": "trojan://WG39087154@grateful-unicorn.rooster465.autos:443?security=tls\u0026sni=grateful-unicorn.rooster465.autos#t.me/ForceRunVPN | 🇮🇪 | 18.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇮🇪 | 18.1 Mb/s | ✅\"\n    type: trojan\n    server: \"grateful-unicorn.rooster465.autos\"\n    port: 443\n    password: \"WG39087154\"\n    sni: \"grateful-unicorn.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "JP",
+      "country": "Japan",
       "countryCode": "JP",
       "port": "443",
       "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇯🇵 | 23.4 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.87.204:443#t.me/ForceRunVPN | 🇯🇵 | 23.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇯🇵 | 23.4 Mb/s | ✅\"\n    type: ss\n    server: \"149.22.87.204\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+      "tag": "t.me/ForceRunVPN | 🇯🇵 | 23.3 Mb/s | ✅",
+      "url": "trojan://IQ68037294@moved-osprey.rooster465.autos:443?security=tls\u0026sni=moved-osprey.rooster465.autos#t.me/ForceRunVPN | 🇯🇵 | 23.3 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇯🇵 | 23.3 Mb/s | ✅\"\n    type: trojan\n    server: \"moved-osprey.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"moved-osprey.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "The Netherlands",
+      "countryCode": "NL",
+      "port": "8388",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇳🇱 | 17.1 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpDSm1UQ0N4N0x0dWQ=@108.181.58.239:8388#t.me/ForceRunVPN | 🇳🇱 | 17.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇳🇱 | 17.1 Mb/s | ✅\"\n    type: ss\n    server: \"108.181.58.239\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"CJmTCCx7Ltud\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
@@ -58,79 +38,19 @@
       "countryCode": "US",
       "port": "443",
       "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 50.9 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@156.146.38.167:443#t.me/ForceRunVPN | 🇺🇸 | 50.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 50.9 Mb/s | ✅\"\n    type: ss\n    server: \"156.146.38.167\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "US",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 99.6 Mb/s | ✅",
-      "url": "trojan://CF68213490@54.245.167.246:443?security=tls\u0026sni=tolerant-rattler.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 99.6 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 99.6 Mb/s | ✅\"\n    type: trojan\n    server: \"54.245.167.246\"\n    port: 443\n    password: \"CF68213490\"\n    sni: \"tolerant-rattler.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "US",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 96.4 Mb/s | ✅",
-      "url": "trojan://HW85960347@dashing-possum.rooster465.autos:443?security=tls\u0026sni=dashing-possum.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 96.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 96.4 Mb/s | ✅\"\n    type: trojan\n    server: \"dashing-possum.rooster465.autos\"\n    port: 443\n    password: \"HW85960347\"\n    sni: \"dashing-possum.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 53.4 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@156.146.38.167:443#t.me/ForceRunVPN | 🇺🇸 | 53.4 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 53.4 Mb/s | ✅\"\n    type: ss\n    server: \"156.146.38.167\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
-      "country": "US",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 33.0 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@37.19.198.243:443#t.me/ForceRunVPN | 🇺🇸 | 33.0 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 33.0 Mb/s | ✅\"\n    type: ss\n    server: \"37.19.198.243\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇬🇧 | 17.9 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@141.98.101.179:443#t.me/ForceRunVPN | 🇬🇧 | 17.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇬🇧 | 17.9 Mb/s | ✅\"\n    type: ss\n    server: \"141.98.101.179\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
       "country": "United States",
       "countryCode": "US",
-      "port": "443",
+      "port": "8388",
       "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 98.9 Mb/s | ✅",
-      "url": "trojan://SX95078263@legal-glider.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇺🇸 | 98.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 98.9 Mb/s | ✅\"\n    type: trojan\n    server: \"legal-glider.rooster465.autos\"\n    port: 443\n    password: \"SX95078263\"\n    sni: \"legal-glider.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 85.9 Mb/s | ✅",
-      "url": "trojan://NQ26071394@44.252.127.212:443?security=tls\u0026sni=better-silkworm.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 85.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 85.9 Mb/s | ✅\"\n    type: trojan\n    server: \"44.252.127.212\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"better-silkworm.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 96.8 Mb/s | ✅",
-      "url": "trojan://HW85960347@firm-squid.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇺🇸 | 96.8 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 96.8 Mb/s | ✅\"\n    type: trojan\n    server: \"firm-squid.rooster465.autos\"\n    port: 443\n    password: \"HW85960347\"\n    sni: \"firm-squid.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 156.4 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpHNXA2d3c0bzY3SEI=@108.181.118.10:8388#t.me/ForceRunVPN | 🇺🇸 | 156.4 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 156.4 Mb/s | ✅\"\n    type: ss\n    server: \"108.181.118.10\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"G5p6ww4o67HB\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
@@ -138,9 +58,49 @@
       "countryCode": "US",
       "port": "443",
       "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 36.2 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@37.19.198.244:443#t.me/ForceRunVPN | 🇺🇸 | 36.2 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 36.2 Mb/s | ✅\"\n    type: ss\n    server: \"37.19.198.244\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 109.0 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@173.244.56.6:443#t.me/ForceRunVPN | 🇺🇸 | 109.0 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 109.0 Mb/s | ✅\"\n    type: ss\n    server: \"173.244.56.6\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "United States",
+      "countryCode": "US",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 35.0 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@37.19.198.160:443#t.me/ForceRunVPN | 🇺🇸 | 35.0 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 35.0 Mb/s | ✅\"\n    type: ss\n    server: \"37.19.198.160\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "United States",
+      "countryCode": "US",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 36.6 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@37.19.198.243:443#t.me/ForceRunVPN | 🇺🇸 | 36.6 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 36.6 Mb/s | ✅\"\n    type: ss\n    server: \"37.19.198.243\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "United States",
+      "countryCode": "US",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 35.6 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@37.19.198.236:443#t.me/ForceRunVPN | 🇺🇸 | 35.6 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 35.6 Mb/s | ✅\"\n    type: ss\n    server: \"37.19.198.236\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "United States",
+      "countryCode": "US",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 127.1 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@173.244.56.9:443#t.me/ForceRunVPN | 🇺🇸 | 127.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 127.1 Mb/s | ✅\"\n    type: ss\n    server: \"173.244.56.9\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
@@ -156,11 +116,11 @@
       "protocol": "ss",
       "country": "United States",
       "countryCode": "US",
-      "port": "8388",
+      "port": "443",
       "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 194.5 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpHNXA2d3c0bzY3SEI=@108.181.118.10:8388#t.me/ForceRunVPN | 🇺🇸 | 194.5 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 194.5 Mb/s | ✅\"\n    type: ss\n    server: \"108.181.118.10\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"G5p6ww4o67HB\"\n    udp: true\n"
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 59.1 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@156.146.38.170:443#t.me/ForceRunVPN | 🇺🇸 | 59.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 59.1 Mb/s | ✅\"\n    type: ss\n    server: \"156.146.38.170\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
@@ -168,79 +128,9 @@
       "countryCode": "US",
       "port": "443",
       "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 59.8 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@156.146.38.169:443#t.me/ForceRunVPN | 🇺🇸 | 59.8 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 59.8 Mb/s | ✅\"\n    type: ss\n    server: \"156.146.38.169\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 102.2 Mb/s | ✅",
-      "url": "trojan://CF68213490@16.145.201.0:443?security=tls\u0026sni=capable-eel.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 102.2 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 102.2 Mb/s | ✅\"\n    type: trojan\n    server: \"16.145.201.0\"\n    port: 443\n    password: \"CF68213490\"\n    sni: \"capable-eel.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 102.1 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpoQ0NXT2NJc0s1d3JGejRPWDcwcldm@216.105.168.18:443#t.me/ForceRunVPN | 🇺🇸 | 102.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 102.1 Mb/s | ✅\"\n    type: ss\n    server: \"216.105.168.18\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"hCCWOcIsK5wrFz4OX70rWf\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 100.7 Mb/s | ✅",
-      "url": "trojan://KV63147582@52.43.195.42:443?security=tls\u0026sni=winning-manatee.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 100.7 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 100.7 Mb/s | ✅\"\n    type: trojan\n    server: \"52.43.195.42\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"winning-manatee.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 93.1 Mb/s | ✅",
-      "url": "trojan://NQ26071394@35.164.15.250:443?security=tls\u0026sni=emerging-hagfish.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 93.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 93.1 Mb/s | ✅\"\n    type: trojan\n    server: \"35.164.15.250\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"emerging-hagfish.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 99.6 Mb/s | ✅",
-      "url": "trojan://IQ68037294@integral-elf.rooster465.autos:443?security=tls\u0026sni=integral-elf.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 99.6 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 99.6 Mb/s | ✅-2\"\n    type: trojan\n    server: \"integral-elf.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"integral-elf.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 102.5 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@173.244.56.9:443#t.me/ForceRunVPN | 🇺🇸 | 102.5 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 102.5 Mb/s | ✅\"\n    type: ss\n    server: \"173.244.56.9\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 84.0 Mb/s | ✅",
-      "url": "trojan://KV63147582@wondrous-dogfish.rooster465.autos:443?security=tls\u0026sni=wondrous-dogfish.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 84.0 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 84.0 Mb/s | ✅\"\n    type: trojan\n    server: \"wondrous-dogfish.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"wondrous-dogfish.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 51.1 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@156.146.38.169:443#t.me/ForceRunVPN | 🇺🇸 | 51.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 51.1 Mb/s | ✅\"\n    type: ss\n    server: \"156.146.38.169\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
@@ -248,59 +138,9 @@
       "countryCode": "US",
       "port": "8388",
       "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 141.6 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpHNXA2d3c0bzY3SEI=@108.181.0.177:8388#t.me/ForceRunVPN | 🇺🇸 | 141.6 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 141.6 Mb/s | ✅\"\n    type: ss\n    server: \"108.181.0.177\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"G5p6ww4o67HB\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 91.4 Mb/s | ✅",
-      "url": "trojan://CF68213490@capable-eel.rooster465.autos:443?security=tls\u0026sni=capable-eel.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 91.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 91.4 Mb/s | ✅\"\n    type: trojan\n    server: \"capable-eel.rooster465.autos\"\n    port: 443\n    password: \"CF68213490\"\n    sni: \"capable-eel.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 99.9 Mb/s | ✅",
-      "url": "trojan://WG39087154@caring-ghoul.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇺🇸 | 99.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 99.9 Mb/s | ✅\"\n    type: trojan\n    server: \"caring-ghoul.rooster465.autos\"\n    port: 443\n    password: \"WG39087154\"\n    sni: \"caring-ghoul.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 91.0 Mb/s | ✅",
-      "url": "trojan://ON38567014@harmless-akita.rooster465.autos:443?security=tls\u0026sni=harmless-akita.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 91.0 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 91.0 Mb/s | ✅\"\n    type: trojan\n    server: \"harmless-akita.rooster465.autos\"\n    port: 443\n    password: \"ON38567014\"\n    sni: \"harmless-akita.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 96.8 Mb/s | ✅",
-      "url": "trojan://PD07395842@sterling-dinosaur.rooster465.autos:443?security=tls\u0026sni=sterling-dinosaur.rooster465.autos#t.me/ForceRunVPN | 🇺🇸 | 96.8 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 96.8 Mb/s | ✅-2\"\n    type: trojan\n    server: \"sterling-dinosaur.rooster465.autos\"\n    port: 443\n    password: \"PD07395842\"\n    sni: \"sterling-dinosaur.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "United States",
-      "countryCode": "US",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇺🇸 | 123.4 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@173.244.56.6:443#t.me/ForceRunVPN | 🇺🇸 | 123.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 123.4 Mb/s | ✅\"\n    type: ss\n    server: \"173.244.56.6\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+      "tag": "t.me/ForceRunVPN | 🇺🇸 | 158.0 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpHNXA2d3c0bzY3SEI=@108.181.0.177:8388#t.me/ForceRunVPN | 🇺🇸 | 158.0 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇺🇸 | 158.0 Mb/s | ✅\"\n    type: ss\n    server: \"108.181.0.177\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"G5p6ww4o67HB\"\n    udp: true\n"
     },
     {
       "protocol": "trojan",
@@ -317,40 +157,20 @@
       "country": "Unknown",
       "countryCode": "--",
       "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://XG59623478@concise-buck.rooster465.autos:443?security=tls\u0026sni=concise-buck.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-2\"\n    type: trojan\n    server: \"concise-buck.rooster465.autos\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"concise-buck.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
+      "url": "trojan://ON38567014@strong-haddock.rooster465.autos:443?security=tls\u0026sni=strong-haddock.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅\"\n    type: trojan\n    server: \"strong-haddock.rooster465.autos\"\n    port: 443\n    password: \"ON38567014\"\n    sni: \"strong-haddock.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
     },
     {
       "protocol": "ss",
       "country": "Unknown",
       "countryCode": "--",
       "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.149:8080#t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅\"\n    type: ss\n    server: \"82.38.31.149\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 4.2 Mb/s | ✅",
-      "url": "trojan://IQ68037294@humane-bird.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 4.2 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 4.2 Mb/s | ✅\"\n    type: trojan\n    server: \"humane-bird.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"humane-bird.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@37.19.198.236:443#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅\"\n    type: ss\n    server: \"37.19.198.236\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.186:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-2\"\n    type: ss\n    server: \"82.38.31.186\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
@@ -369,1158 +189,8 @@
       "port": "8080",
       "status": "RISKY",
       "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.46:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-4\"\n    type: ss\n    server: \"82.38.31.46\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.187:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-5\"\n    type: ss\n    server: \"82.38.31.187\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.210:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-6\"\n    type: ss\n    server: \"82.38.31.210\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.192:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-7\"\n    type: ss\n    server: \"82.38.31.192\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.34:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-8\"\n    type: ss\n    server: \"82.38.31.34\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@adapting-ghost.rooster465.autos:443?security=tls\u0026sni=adapting-ghost.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-9\"\n    type: trojan\n    server: \"adapting-ghost.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"adapting-ghost.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://OD90375861@wired-tick.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-10\"\n    type: trojan\n    server: \"wired-tick.rooster465.autos\"\n    port: 443\n    password: \"OD90375861\"\n    sni: \"wired-tick.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.174:8080#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-2\"\n    type: ss\n    server: \"82.38.31.174\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.214:8080#t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅\"\n    type: ss\n    server: \"82.38.31.214\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 2.9 Mb/s | ✅",
-      "url": "trojan://NQ26071394@thankful-piranha.rooster465.autos:443?security=tls\u0026sni=thankful-piranha.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 2.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 2.9 Mb/s | ✅\"\n    type: trojan\n    server: \"thankful-piranha.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"thankful-piranha.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 47.5 Mb/s | ✅",
-      "url": "trojan://IQ68037294@sincere-man.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 47.5 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 47.5 Mb/s | ✅\"\n    type: trojan\n    server: \"sincere-man.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"sincere-man.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
-      "url": "trojan://NQ26071394@funky-opossum.rooster465.autos:443?security=tls\u0026sni=funky-opossum.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅-2\"\n    type: trojan\n    server: \"funky-opossum.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"funky-opossum.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.2:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-11\"\n    type: ss\n    server: \"82.38.31.2\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.155:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-12\"\n    type: ss\n    server: \"82.38.31.155\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 11.9 Mb/s | ✅",
-      "url": "trojan://IQ68037294@moving-wren.rooster465.autos:443?security=tls\u0026sni=moving-wren.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 11.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 11.9 Mb/s | ✅\"\n    type: trojan\n    server: \"moving-wren.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"moving-wren.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.189:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-13\"\n    type: ss\n    server: \"82.38.31.189\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "trojan://JA96378052@primary-mallard.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-3\"\n    type: trojan\n    server: \"primary-mallard.rooster465.autos\"\n    port: 443\n    password: \"JA96378052\"\n    sni: \"primary-mallard.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 74.5 Mb/s | ✅",
-      "url": "trojan://CF68213490@tolerant-rattler.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 74.5 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 74.5 Mb/s | ✅\"\n    type: trojan\n    server: \"tolerant-rattler.rooster465.autos\"\n    port: 443\n    password: \"CF68213490\"\n    sni: \"tolerant-rattler.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "trojan://IQ68037294@correct-pony.rooster465.autos:443?security=tls\u0026sni=correct-pony.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-4\"\n    type: trojan\n    server: \"correct-pony.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"correct-pony.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.9 Mb/s | ✅",
-      "url": "trojan://WG39087154@nearby-cod.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 0.9 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.9 Mb/s | ✅\"\n    type: trojan\n    server: \"nearby-cod.rooster465.autos\"\n    port: 443\n    password: \"WG39087154\"\n    sni: \"nearby-cod.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@193.29.139.235:8080#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-5\"\n    type: ss\n    server: \"193.29.139.235\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.57:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-14\"\n    type: ss\n    server: \"82.38.31.57\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@definite-giraffe.rooster465.autos:443?security=tls\u0026sni=definite-giraffe.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-15\"\n    type: trojan\n    server: \"definite-giraffe.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"definite-giraffe.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "49361",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://0ebb269c9f2d4e8e46b0cd4105a55134@163.245.196.68:49361?security=tls\u0026sni=163.245.196.68.sslip.io#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-16\"\n    type: trojan\n    server: \"163.245.196.68\"\n    port: 49361\n    password: \"0ebb269c9f2d4e8e46b0cd4105a55134\"\n    sni: \"163.245.196.68.sslip.io\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@aware-pika.rooster465.autos:443?security=tls\u0026sni=aware-pika.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-17\"\n    type: trojan\n    server: \"aware-pika.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"aware-pika.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.186:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-18\"\n    type: ss\n    server: \"82.38.31.186\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@193.29.139.204:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-19\"\n    type: ss\n    server: \"193.29.139.204\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.48:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-20\"\n    type: ss\n    server: \"82.38.31.48\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://PD07395842@pro-crane.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-21\"\n    type: trojan\n    server: \"pro-crane.rooster465.autos\"\n    port: 443\n    password: \"PD07395842\"\n    sni: \"pro-crane.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
-      "url": "trojan://IQ68037294@fun-salmon.rooster465.autos:443?security=tls\u0026sni=fun-salmon.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅-2\"\n    type: trojan\n    server: \"fun-salmon.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"fun-salmon.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.191:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-22\"\n    type: ss\n    server: \"82.38.31.191\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8388",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToxaGhycXJva2ozYWc=@209.46.102.22:8388#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-23\"\n    type: ss\n    server: \"209.46.102.22\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"1hhrqrokj3ag\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://NQ26071394@kind-unicorn.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-24\"\n    type: trojan\n    server: \"kind-unicorn.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"kind-unicorn.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://KV63147582@more-trout.rooster465.autos:443?security=tls\u0026sni=more-trout.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-25\"\n    type: trojan\n    server: \"more-trout.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"more-trout.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://NQ26071394@ready-lion.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-26\"\n    type: trojan\n    server: \"ready-lion.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"ready-lion.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://OD90375861@ideal-robin.rooster465.autos:443?security=tls\u0026sni=ideal-robin.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-27\"\n    type: trojan\n    server: \"ideal-robin.rooster465.autos\"\n    port: 443\n    password: \"OD90375861\"\n    sni: \"ideal-robin.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8388",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpDSm1UQ0N4N0x0dWQ=@108.181.58.239:8388#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-28\"\n    type: ss\n    server: \"108.181.58.239\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"CJmTCCx7Ltud\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@158.173.20.171:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-29\"\n    type: ss\n    server: \"158.173.20.171\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://XG59623478@82.117.225.56:443?security=tls\u0026sni=stirring-dane.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-30\"\n    type: trojan\n    server: \"82.117.225.56\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"stirring-dane.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8388",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpDSm1UQ0N4N0x0dWQ=@108.181.126.122:8388#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-31\"\n    type: ss\n    server: \"108.181.126.122\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"CJmTCCx7Ltud\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@fair-reptile.rooster465.autos:443?security=tls\u0026sni=fair-reptile.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-32\"\n    type: trojan\n    server: \"fair-reptile.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"fair-reptile.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@endless-kiwi.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-33\"\n    type: trojan\n    server: \"endless-kiwi.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"endless-kiwi.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 85.4 Mb/s | ✅",
-      "url": "trojan://PD07395842@tidy-gopher.rooster465.autos:443?security=tls\u0026sni=tidy-gopher.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 85.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 85.4 Mb/s | ✅\"\n    type: trojan\n    server: \"tidy-gopher.rooster465.autos\"\n    port: 443\n    password: \"PD07395842\"\n    sni: \"tidy-gopher.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@giving-bird.rooster465.autos:443?security=tls\u0026sni=giving-bird.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-34\"\n    type: trojan\n    server: \"giving-bird.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"giving-bird.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@robust-toucan.rooster465.autos:443?security=tls\u0026sni=robust-toucan.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-35\"\n    type: trojan\n    server: \"robust-toucan.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"robust-toucan.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@glowing-deer.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-36\"\n    type: trojan\n    server: \"glowing-deer.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"glowing-deer.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@full-mackerel.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-37\"\n    type: trojan\n    server: \"full-mackerel.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"full-mackerel.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@artistic-pigeon.rooster465.autos:443?security=tls\u0026sni=artistic-pigeon.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-38\"\n    type: trojan\n    server: \"artistic-pigeon.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"artistic-pigeon.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@eager-louse.rooster465.autos:443?security=tls\u0026sni=eager-louse.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-39\"\n    type: trojan\n    server: \"eager-louse.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"eager-louse.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@casual-stallion.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-40\"\n    type: trojan\n    server: \"casual-stallion.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"casual-stallion.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@select-marmoset.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-41\"\n    type: trojan\n    server: \"select-marmoset.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"select-marmoset.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://PD07395842@true-pony.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-42\"\n    type: trojan\n    server: \"true-pony.rooster465.autos\"\n    port: 443\n    password: \"PD07395842\"\n    sni: \"true-pony.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "trojan://IQ68037294@whole-perch.rooster465.autos:443?security=tls\u0026sni=whole-perch.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-6\"\n    type: trojan\n    server: \"whole-perch.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"whole-perch.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 6.6 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.179:8080#t.me/ForceRunVPN | 🇒🇒 | 6.6 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 6.6 Mb/s | ✅\"\n    type: ss\n    server: \"82.38.31.179\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@accurate-drake.rooster465.autos:443?security=tls\u0026sni=accurate-drake.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-43\"\n    type: trojan\n    server: \"accurate-drake.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"accurate-drake.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://CF68213490@emerging-weevil.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-44\"\n    type: trojan\n    server: \"emerging-weevil.rooster465.autos\"\n    port: 443\n    password: \"CF68213490\"\n    sni: \"emerging-weevil.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@pleased-sawfly.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-45\"\n    type: trojan\n    server: \"pleased-sawfly.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"pleased-sawfly.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@37.19.198.160:443#t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅\"\n    type: ss\n    server: \"37.19.198.160\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@adjusted-labrador.rooster465.autos:443?security=tls\u0026sni=adjusted-labrador.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-46\"\n    type: trojan\n    server: \"adjusted-labrador.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"adjusted-labrador.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@whole-woodcock.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-47\"\n    type: trojan\n    server: \"whole-woodcock.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"whole-woodcock.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://XG59623478@growing-oyster.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-48\"\n    type: trojan\n    server: \"growing-oyster.rooster465.autos\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"growing-oyster.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://XG59623478@82.117.225.216:443?security=tls\u0026sni=concise-buck.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-49\"\n    type: trojan\n    server: \"82.117.225.216\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"concise-buck.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://NQ26071394@pretty-mollusk.rooster465.autos:443?security=tls\u0026sni=pretty-mollusk.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-50\"\n    type: trojan\n    server: \"pretty-mollusk.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"pretty-mollusk.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "vmess",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "vmess://eyJhZGQiOiI5NC4xMzEuMTA4LjM2IiwiYWlkIjowLCJpZCI6Ijk4NTVmMWYwLWE4MDAtNDBkNC04YjM4LWM3ZDNlYjc5MzAyZCIsIm5ldCI6IndzIiwicG9ydCI6IjQ0MyIsInBzIjoidC5tZS9Gb3JjZVJ1blZQTiB8IPCfh5Lwn4eSIHwgUklTS1kg8J+UtCIsInYiOiIyIn0=",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-51\"\n    type: vmess\n    server: \"94.131.108.36\"\n    port: 443\n    uuid: \"9855f1f0-a800-40d4-8b38-c7d3eb79302d\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/\"\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://NQ26071394@grateful-bedbug.rooster465.autos:443?security=tls\u0026sni=grateful-bedbug.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-52\"\n    type: trojan\n    server: \"grateful-bedbug.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"grateful-bedbug.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
-      "url": "trojan://XG59623478@renewed-chigger.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅-2\"\n    type: trojan\n    server: \"renewed-chigger.rooster465.autos\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"renewed-chigger.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://PI36027154@62.112.222.26:443?security=tls\u0026sni=upright-hamster.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-53\"\n    type: trojan\n    server: \"62.112.222.26\"\n    port: 443\n    password: \"PI36027154\"\n    sni: \"upright-hamster.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@square-anchovy.rooster465.autos:443?security=tls\u0026sni=square-anchovy.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-54\"\n    type: trojan\n    server: \"square-anchovy.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"square-anchovy.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://HW85960347@eminent-lamb.rooster465.autos:443?security=tls\u0026sni=eminent-lamb.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-55\"\n    type: trojan\n    server: \"eminent-lamb.rooster465.autos\"\n    port: 443\n    password: \"HW85960347\"\n    sni: \"eminent-lamb.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.87.241:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-56\"\n    type: ss\n    server: \"149.22.87.241\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.87.240:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-57\"\n    type: ss\n    server: \"149.22.87.240\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://PI36027154@upright-hamster.rooster465.autos:443?security=tls\u0026sni=upright-hamster.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-58\"\n    type: trojan\n    server: \"upright-hamster.rooster465.autos\"\n    port: 443\n    password: \"PI36027154\"\n    sni: \"upright-hamster.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.219:8080#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-7\"\n    type: ss\n    server: \"82.38.31.219\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.16:8080#t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅\"\n    type: ss\n    server: \"82.38.31.16\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@casual-bullfrog.rooster465.autos:443?security=tls\u0026sni=casual-bullfrog.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-59\"\n    type: trojan\n    server: \"casual-bullfrog.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"casual-bullfrog.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://KV63147582@game-firefly.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-60\"\n    type: trojan\n    server: \"game-firefly.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"game-firefly.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://NQ26071394@certain-prawn.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-61\"\n    type: trojan\n    server: \"certain-prawn.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"certain-prawn.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "16233",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-62\"\n    type: ss\n    server: \"102.133.165.160\"\n    port: 16233\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"Xsy8Ox4yOV3xLlpxtjzs3X\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-63\"\n    type: ss\n    server: \"102.37.156.224\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"aduB9HGxQHjA2SBMRjkHX6\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
-      "url": "trojan://KV63147582@selected-bison.rooster465.autos:443?security=tls\u0026sni=selected-bison.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅-3\"\n    type: trojan\n    server: \"selected-bison.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"selected-bison.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.15:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-64\"\n    type: ss\n    server: \"82.38.31.15\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.202:8080#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-8\"\n    type: ss\n    server: \"82.38.31.202\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "50099",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg001287h3p.cybervena.com:50099#t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅-2\"\n    type: ss\n    server: \"r3mrcg001287h3p.cybervena.com\"\n    port: 50099\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"7e731ec3-f8e1-43f6-92cf-3978d14705c4\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://OD90375861@87.121.33.171:443?security=tls\u0026sni=selected-bison.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-65\"\n    type: trojan\n    server: \"87.121.33.171\"\n    port: 443\n    password: \"OD90375861\"\n    sni: \"selected-bison.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://HW85960347@185.14.47.195:443?security=tls\u0026sni=eminent-lamb.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-66\"\n    type: trojan\n    server: \"185.14.47.195\"\n    port: 443\n    password: \"HW85960347\"\n    sni: \"eminent-lamb.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.35:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-67\"\n    type: ss\n    server: \"82.38.31.35\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://KV63147582@89.39.70.233:443?security=tls\u0026sni=game-firefly.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-68\"\n    type: trojan\n    server: \"89.39.70.233\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"game-firefly.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "7001",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "ss://YWVzLTI1Ni1nY206UmV4bkJnVTdFVjVBRHhH@94.156.250.148:7001#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-9\"\n    type: ss\n    server: \"94.156.250.148\"\n    port: 7001\n    cipher: \"aes-256-gcm\"\n    password: \"RexnBgU7EV5ADxG\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.216:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-69\"\n    type: ss\n    server: \"82.38.31.216\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.218:8080#t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅\"\n    type: ss\n    server: \"82.38.31.218\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.176:8080#t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅\"\n    type: ss\n    server: \"82.38.31.176\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "50099",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg001286ek2.cybervena.com:50099#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-70\"\n    type: ss\n    server: \"r3mrcg001286ek2.cybervena.com\"\n    port: 50099\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"7e731ec3-f8e1-43f6-92cf-3978d14705c4\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.194:8080#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-10\"\n    type: ss\n    server: \"82.38.31.194\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 13.0 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.36:443#t.me/ForceRunVPN | 🇒🇒 | 13.0 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 13.0 Mb/s | ✅\"\n    type: ss\n    server: \"82.38.31.36\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 2.0 Mb/s | ✅",
-      "url": "trojan://NQ26071394@quiet-condor.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 2.0 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 2.0 Mb/s | ✅\"\n    type: trojan\n    server: \"quiet-condor.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"quiet-condor.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "50099",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg00129437x.cybervena.com:50099#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-71\"\n    type: ss\n    server: \"r3mrcg00129437x.cybervena.com\"\n    port: 50099\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"7e731ec3-f8e1-43f6-92cf-3978d14705c4\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "28061",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.6 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.71:28061#t.me/ForceRunVPN | 🇒🇒 | 0.6 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.6 Mb/s | ✅\"\n    type: ss\n    server: \"103.111.114.71\"\n    port: 28061\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"WOir3lXBhMHDcLFPQdEZXPu37_pTQDCXfm\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "url": "trojan://CF68213490@harmless-lab.rooster465.autos:443?security=tls\u0026sni=harmless-lab.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-11\"\n    type: trojan\n    server: \"harmless-lab.rooster465.autos\"\n    port: 443\n    password: \"CF68213490\"\n    sni: \"harmless-lab.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "vmess",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "80",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "vmess://eyJhZGQiOiIxNTIuNjcuOC4yMDUiLCJhaWQiOjAsImlkIjoiOWRiNGM3MDgtYWVmOC00MzU5LTgyMWItMzhlNDc5OTBiZTBkIiwibmV0Ijoid3MiLCJwb3J0IjoiODAiLCJwcyI6InQubWUvRm9yY2VSdW5WUE4gfCDwn4eS8J+HkiB8IFJJU0tZIPCflLQiLCJzbmkiOiIxNTIuNjcuOC4yMDUiLCJ2IjoiMiJ9",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-72\"\n    type: vmess\n    server: \"152.67.8.205\"\n    port: 80\n    uuid: \"9db4c708-aef8-4359-821b-38e47990be0d\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/\"\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://IQ68037294@prepared-turkey.rooster465.autos:443?security=tls\u0026sni=prepared-turkey.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-73\"\n    type: trojan\n    server: \"prepared-turkey.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"prepared-turkey.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 2.4 Mb/s | ✅",
-      "url": "trojan://XG59623478@3.249.67.252:443?security=tls\u0026sni=singular-lark.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 2.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 2.4 Mb/s | ✅\"\n    type: trojan\n    server: \"3.249.67.252\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"singular-lark.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 35.4 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@156.146.38.170:443#t.me/ForceRunVPN | 🇒🇒 | 35.4 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 35.4 Mb/s | ✅\"\n    type: ss\n    server: \"156.146.38.170\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "28061",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.82:28061#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-74\"\n    type: ss\n    server: \"103.111.114.82\"\n    port: 28061\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"WOir3lXBhMHDcLFPQdEZXPu37_pTQDCXfm\"\n    udp: true\n"
-    },
-    {
-      "protocol": "vmess",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "25686",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "vmess://eyJhZGQiOiIxNDAuODMuNTEuMTYxIiwiYWlkIjowLCJob3N0IjoianAwMi5hMGEueHl6IiwiaWQiOiI2NzMzYzM1Ny1iYTExLTRlOWYtZjAwZi03ZDg3ZjI3NzZmZjkiLCJuZXQiOiJ3cyIsInBhdGgiOiIvY2N0djEzLm0zdTgiLCJwb3J0IjoiMjU2ODYiLCJwcyI6InQubWUvRm9yY2VSdW5WUE4gfCDwn4eS8J+HkiB8IFJJU0tZIPCflLQiLCJ2IjoiMiJ9",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-75\"\n    type: vmess\n    server: \"140.83.51.161\"\n    port: 25686\n    uuid: \"6733c357-ba11-4e9f-f00f-7d87f2776ff9\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/cctv13.m3u8\"\n      headers:\n        Host: \"jp02.a0a.xyz\"\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 2.2 Mb/s | ✅",
-      "url": "trojan://NQ26071394@ready-kangaroo.rooster465.autos:443?security=tls\u0026sni=ready-kangaroo.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 2.2 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 2.2 Mb/s | ✅\"\n    type: trojan\n    server: \"ready-kangaroo.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"ready-kangaroo.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@141.98.101.181:443#t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅-4\"\n    type: ss\n    server: \"141.98.101.181\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.217:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-76\"\n    type: ss\n    server: \"82.38.31.217\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "62685",
-      "status": "VERIFIED",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | 3.3 Mb/s | ✅",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpWcEtBQmNPcE5OQTBsNUcyQVZPbXc4@213.109.147.242:62685#t.me/ForceRunVPN | 🇒🇒 | 3.3 Mb/s | ✅",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 3.3 Mb/s | ✅\"\n    type: ss\n    server: \"213.109.147.242\"\n    port: 62685\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"VpKABcOpNNA0l5G2AVOmw8\"\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://OD90375861@busy-hermit.rooster465.autos:443?security=tls\u0026sni=busy-hermit.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-77\"\n    type: trojan\n    server: \"busy-hermit.rooster465.autos\"\n    port: 443\n    password: \"OD90375861\"\n    sni: \"busy-hermit.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "8080",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.10:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-78\"\n    type: ss\n    server: \"82.38.31.10\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
-    },
-    {
-      "protocol": "vmess",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "4010",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "vmess://eyJhZGQiOiI0NS43Ni4yMDIuNDUiLCJhaWQiOjAsImlkIjoiMDcxYThhNzEtYzY1Ni00ZmI2LWE5MDgtNGU0MmViNzIyNDNkIiwibmV0Ijoid3MiLCJwYXRoIjoiL2xpa3N1emNwIiwicG9ydCI6IjQwMTAiLCJwcyI6InQubWUvRm9yY2VSdW5WUE4gfCDwn4eS8J+HkiB8IFJJU0tZIPCflLQiLCJ2IjoiMiJ9",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-79\"\n    type: vmess\n    server: \"45.76.202.45\"\n    port: 4010\n    uuid: \"071a8a71-c656-4fb6-a908-4e42eb72243d\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/liksuzcp\"\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://KV63147582@evolving-baboon.rooster465.autos:443?security=tls\u0026sni=evolving-baboon.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-80\"\n    type: trojan\n    server: \"evolving-baboon.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"evolving-baboon.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "trojan",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "trojan://XG59623478@enabling-asp.rooster465.autos:443?security=tls\u0026sni=enabling-asp.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-81\"\n    type: trojan\n    server: \"enabling-asp.rooster465.autos\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"enabling-asp.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@141.98.101.182:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-82\"\n    type: ss\n    server: \"141.98.101.182\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@141.98.101.178:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-83\"\n    type: ss\n    server: \"141.98.101.178\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "28061",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.80:28061#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-84\"\n    type: ss\n    server: \"103.111.114.80\"\n    port: 28061\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"WOir3lXBhMHDcLFPQdEZXPu37_pTQDCXfm\"\n    udp: true\n"
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.35:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-4\"\n    type: ss\n    server: \"82.38.31.35\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
@@ -1530,37 +200,7 @@
       "status": "RISKY",
       "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
       "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.208:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-85\"\n    type: ss\n    server: \"82.38.31.208\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
-    },
-    {
-      "protocol": "ss",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "443",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo5dHFoTWRJclRrZ1E0NlB2aHlBdE1I@switcher-nick-croquet.freesocks.work:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-86\"\n    type: ss\n    server: \"switcher-nick-croquet.freesocks.work\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"9tqhMdIrTkgQ46PvhyAtMH\"\n    udp: true\n"
-    },
-    {
-      "protocol": "vmess",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "44867",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "vmess://eyJhZGQiOiI0Ny4yNDQuMTIwLjE5NyIsImFpZCI6MCwiaG9zdCI6IjQ3LjI0NC4xMjAuMTk3IiwiaWQiOiI4NDVlNmIwOC0yOTE5LTQyOTAtYWRlMC01ZGM3ZGNlYTU5Y2EiLCJuZXQiOiJ3cyIsInBhdGgiOiIvYXJraT9lZD0yMDQ4IiwicG9ydCI6IjQ0ODY3IiwicHMiOiJ0Lm1lL0ZvcmNlUnVuVlBOIHwg8J+HkvCfh5IgfCBSSVNLWSDwn5S0IiwidiI6IjIifQ==",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-87\"\n    type: vmess\n    server: \"47.244.120.197\"\n    port: 44867\n    uuid: \"845e6b08-2919-4290-ade0-5dc7dcea59ca\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/arki?ed=2048\"\n      headers:\n        Host: \"47.244.120.197\"\n"
-    },
-    {
-      "protocol": "vmess",
-      "country": "Unknown",
-      "countryCode": "--",
-      "port": "44867",
-      "status": "RISKY",
-      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "vmess://eyJhZGQiOiI0Ny4yNDQuMTIwLjE5NyIsImFpZCI6MCwiaWQiOiI4NDVlNmIwOC0yOTE5LTQyOTAtYWRlMC01ZGM3ZGNlYTU5Y2EiLCJuZXQiOiJ3cyIsInBhdGgiOiIvYXJraT9lZD0yMDQ4IiwicG9ydCI6IjQ0ODY3IiwicHMiOiJ0Lm1lL0ZvcmNlUnVuVlBOIHwg8J+HkvCfh5IgfCBSSVNLWSDwn5S0IiwidiI6IjIifQ==",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-88\"\n    type: vmess\n    server: \"47.244.120.197\"\n    port: 44867\n    uuid: \"845e6b08-2919-4290-ade0-5dc7dcea59ca\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/arki?ed=2048\"\n"
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-5\"\n    type: ss\n    server: \"82.38.31.208\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
     },
     {
       "protocol": "ss",
@@ -1569,8 +209,1348 @@
       "port": "8080",
       "status": "RISKY",
       "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.35:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-89\"\n    type: ss\n    server: \"82.38.31.35\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.184:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-6\"\n    type: ss\n    server: \"82.38.31.184\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.15:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-7\"\n    type: ss\n    server: \"82.38.31.15\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.48:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-8\"\n    type: ss\n    server: \"82.38.31.48\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.57:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-9\"\n    type: ss\n    server: \"82.38.31.57\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.187:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-10\"\n    type: ss\n    server: \"82.38.31.187\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@193.29.139.151:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-11\"\n    type: ss\n    server: \"193.29.139.151\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.34:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-12\"\n    type: ss\n    server: \"82.38.31.34\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.210:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-13\"\n    type: ss\n    server: \"82.38.31.210\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.49:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-14\"\n    type: ss\n    server: \"82.38.31.49\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.219:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-15\"\n    type: ss\n    server: \"82.38.31.219\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.149:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-16\"\n    type: ss\n    server: \"82.38.31.149\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "49361",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://0ebb269c9f2d4e8e46b0cd4105a55134@163.245.196.68:49361?security=tls\u0026sni=163.245.196.68.sslip.io#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-17\"\n    type: trojan\n    server: \"163.245.196.68\"\n    port: 49361\n    password: \"0ebb269c9f2d4e8e46b0cd4105a55134\"\n    sni: \"163.245.196.68.sslip.io\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.46:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-18\"\n    type: ss\n    server: \"82.38.31.46\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.202:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-19\"\n    type: ss\n    server: \"82.38.31.202\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@humane-bird.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-20\"\n    type: trojan\n    server: \"humane-bird.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"humane-bird.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@definite-giraffe.rooster465.autos:443?security=tls\u0026sni=definite-giraffe.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-21\"\n    type: trojan\n    server: \"definite-giraffe.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"definite-giraffe.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.191:8080#t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅-2\"\n    type: ss\n    server: \"82.38.31.191\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.155:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-22\"\n    type: ss\n    server: \"82.38.31.155\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://ON38567014@lucky-marmot.rooster465.autos:443?security=tls\u0026sni=lucky-marmot.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅\"\n    type: trojan\n    server: \"lucky-marmot.rooster465.autos\"\n    port: 443\n    password: \"ON38567014\"\n    sni: \"lucky-marmot.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.179:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-23\"\n    type: ss\n    server: \"82.38.31.179\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.205:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-24\"\n    type: ss\n    server: \"82.38.31.205\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://XG59623478@upward-hedgehog.rooster465.autos:443?security=tls\u0026sni=upward-hedgehog.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-2\"\n    type: trojan\n    server: \"upward-hedgehog.rooster465.autos\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"upward-hedgehog.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.174:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-25\"\n    type: ss\n    server: \"82.38.31.174\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
+      "url": "trojan://IQ68037294@neat-duck.rooster465.autos:443?security=tls\u0026sni=neat-duck.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅\"\n    type: trojan\n    server: \"neat-duck.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"neat-duck.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://UZ15382649@moral-dolphin.rooster465.autos:443?security=tls\u0026sni=moral-dolphin.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-26\"\n    type: trojan\n    server: \"moral-dolphin.rooster465.autos\"\n    port: 443\n    password: \"UZ15382649\"\n    sni: \"moral-dolphin.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://WG39087154@nearby-cod.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-3\"\n    type: trojan\n    server: \"nearby-cod.rooster465.autos\"\n    port: 443\n    password: \"WG39087154\"\n    sni: \"nearby-cod.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.189:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-27\"\n    type: ss\n    server: \"82.38.31.189\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@193.29.139.235:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-28\"\n    type: ss\n    server: \"193.29.139.235\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://ON38567014@one-quail.rooster465.autos:443?security=tls\u0026sni=one-quail.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-29\"\n    type: trojan\n    server: \"one-quail.rooster465.autos\"\n    port: 443\n    password: \"ON38567014\"\n    sni: \"one-quail.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
+      "url": "trojan://PI36027154@upright-hamster.rooster465.autos:443?security=tls\u0026sni=upright-hamster.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅\"\n    type: trojan\n    server: \"upright-hamster.rooster465.autos\"\n    port: 443\n    password: \"PI36027154\"\n    sni: \"upright-hamster.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://PD07395842@pro-crane.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-30\"\n    type: trojan\n    server: \"pro-crane.rooster465.autos\"\n    port: 443\n    password: \"PD07395842\"\n    sni: \"pro-crane.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://OD90375861@ideal-robin.rooster465.autos:443?security=tls\u0026sni=ideal-robin.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-4\"\n    type: trojan\n    server: \"ideal-robin.rooster465.autos\"\n    port: 443\n    password: \"OD90375861\"\n    sni: \"ideal-robin.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
+      "url": "trojan://KV63147582@more-trout.rooster465.autos:443?security=tls\u0026sni=more-trout.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅\"\n    type: trojan\n    server: \"more-trout.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"more-trout.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@next-ringtail.rooster465.autos:443?security=tls\u0026sni=next-ringtail.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-31\"\n    type: trojan\n    server: \"next-ringtail.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"next-ringtail.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@casual-bullfrog.rooster465.autos:443?security=tls\u0026sni=casual-bullfrog.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-32\"\n    type: trojan\n    server: \"casual-bullfrog.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"casual-bullfrog.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@193.29.139.204:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-33\"\n    type: ss\n    server: \"193.29.139.204\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@patient-gannet.rooster465.autos:443?security=tls\u0026sni=patient-gannet.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-34\"\n    type: trojan\n    server: \"patient-gannet.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"patient-gannet.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://NQ26071394@ready-lion.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-35\"\n    type: trojan\n    server: \"ready-lion.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"ready-lion.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://PI36027154@62.112.222.26:443?security=tls\u0026sni=upright-hamster.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-36\"\n    type: trojan\n    server: \"62.112.222.26\"\n    port: 443\n    password: \"PI36027154\"\n    sni: \"upright-hamster.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://CF68213490@emerging-weevil.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-37\"\n    type: trojan\n    server: \"emerging-weevil.rooster465.autos\"\n    port: 443\n    password: \"CF68213490\"\n    sni: \"emerging-weevil.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://PD07395842@fast-ghost.rooster465.autos:443?security=tls\u0026sni=fast-ghost.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-38\"\n    type: trojan\n    server: \"fast-ghost.rooster465.autos\"\n    port: 443\n    password: \"PD07395842\"\n    sni: \"fast-ghost.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@eternal-swift.rooster465.autos:443?security=tls\u0026sni=eternal-swift.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-39\"\n    type: trojan\n    server: \"eternal-swift.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"eternal-swift.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "vmess",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "4010",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "vmess://eyJhZGQiOiI0NS43Ni4yMDIuNDUiLCJhaWQiOjAsImlkIjoiMDcxYThhNzEtYzY1Ni00ZmI2LWE5MDgtNGU0MmViNzIyNDNkIiwibmV0Ijoid3MiLCJwYXRoIjoiL2xpa3N1emNwIiwicG9ydCI6IjQwMTAiLCJwcyI6InQubWUvRm9yY2VSdW5WUE4gfCDwn4eS8J+HkiB8IFJJU0tZIPCflLQiLCJ2IjoiMiJ9",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-40\"\n    type: vmess\n    server: \"45.76.202.45\"\n    port: 4010\n    uuid: \"071a8a71-c656-4fb6-a908-4e42eb72243d\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/liksuzcp\"\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://XG59623478@renewed-chigger.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-41\"\n    type: trojan\n    server: \"renewed-chigger.rooster465.autos\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"renewed-chigger.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@polite-martin.rooster465.autos:443?security=tls\u0026sni=polite-martin.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-42\"\n    type: trojan\n    server: \"polite-martin.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"polite-martin.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://KV63147582@game-firefly.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-43\"\n    type: trojan\n    server: \"game-firefly.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"game-firefly.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@eager-louse.rooster465.autos:443?security=tls\u0026sni=eager-louse.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-44\"\n    type: trojan\n    server: \"eager-louse.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"eager-louse.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
+      "url": "trojan://XG59623478@82.117.225.56:443?security=tls\u0026sni=stirring-dane.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅-2\"\n    type: trojan\n    server: \"82.117.225.56\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"stirring-dane.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8388",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpDSm1UQ0N4N0x0dWQ=@108.181.126.122:8388#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-45\"\n    type: ss\n    server: \"108.181.126.122\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"CJmTCCx7Ltud\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://KV63147582@legible-possum.rooster465.autos:443?security=tls\u0026sni=legible-possum.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-46\"\n    type: trojan\n    server: \"legible-possum.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"legible-possum.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://ON38567014@smiling-ray.rooster465.autos:443?security=tls\u0026sni=smiling-ray.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-47\"\n    type: trojan\n    server: \"smiling-ray.rooster465.autos\"\n    port: 443\n    password: \"ON38567014\"\n    sni: \"smiling-ray.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8388",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToxaGhycXJva2ozYWc=@209.46.102.22:8388#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-5\"\n    type: ss\n    server: \"209.46.102.22\"\n    port: 8388\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"1hhrqrokj3ag\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://FC60532879@true-alpaca.rooster465.autos:443?security=tls\u0026sni=true-alpaca.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-48\"\n    type: trojan\n    server: \"true-alpaca.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"true-alpaca.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@moral-buzzard.rooster465.autos:443?security=tls\u0026sni=moral-buzzard.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-49\"\n    type: trojan\n    server: \"moral-buzzard.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"moral-buzzard.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://NQ26071394@kind-unicorn.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-50\"\n    type: trojan\n    server: \"kind-unicorn.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"kind-unicorn.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://IQ68037294@brave-cattle.rooster465.autos:443?security=tls\u0026sni=brave-cattle.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-6\"\n    type: trojan\n    server: \"brave-cattle.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"brave-cattle.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@cheerful-swan.rooster465.autos:443?security=tls\u0026sni=cheerful-swan.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-51\"\n    type: trojan\n    server: \"cheerful-swan.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"cheerful-swan.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://KV63147582@89.39.70.233:443?security=tls\u0026sni=game-firefly.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-52\"\n    type: trojan\n    server: \"89.39.70.233\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"game-firefly.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅",
+      "url": "trojan://IQ68037294@casual-stallion.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅\"\n    type: trojan\n    server: \"casual-stallion.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"casual-stallion.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://NQ26071394@grateful-bedbug.rooster465.autos:443?security=tls\u0026sni=grateful-bedbug.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-53\"\n    type: trojan\n    server: \"grateful-bedbug.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"grateful-bedbug.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://PD07395842@big-bonefish.rooster465.autos:443?security=tls\u0026sni=big-bonefish.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-54\"\n    type: trojan\n    server: \"big-bonefish.rooster465.autos\"\n    port: 443\n    password: \"PD07395842\"\n    sni: \"big-bonefish.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅",
+      "url": "trojan://PD07395842@true-pony.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.5 Mb/s | ✅-2\"\n    type: trojan\n    server: \"true-pony.rooster465.autos\"\n    port: 443\n    password: \"PD07395842\"\n    sni: \"true-pony.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://IQ68037294@correct-pony.rooster465.autos:443?security=tls\u0026sni=correct-pony.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-7\"\n    type: trojan\n    server: \"correct-pony.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"correct-pony.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@giving-bird.rooster465.autos:443?security=tls\u0026sni=giving-bird.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-55\"\n    type: trojan\n    server: \"giving-bird.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"giving-bird.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://FC60532879@resolved-gelding.rooster465.autos:443?security=tls\u0026sni=resolved-gelding.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-56\"\n    type: trojan\n    server: \"resolved-gelding.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"resolved-gelding.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.6 Mb/s | ✅",
+      "url": "trojan://IQ68037294@fair-reptile.rooster465.autos:443?security=tls\u0026sni=fair-reptile.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.6 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.6 Mb/s | ✅\"\n    type: trojan\n    server: \"fair-reptile.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"fair-reptile.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://IQ68037294@fun-salmon.rooster465.autos:443?security=tls\u0026sni=fun-salmon.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-8\"\n    type: trojan\n    server: \"fun-salmon.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"fun-salmon.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.7 Mb/s | ✅",
+      "url": "trojan://IQ68037294@full-mackerel.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | 0.7 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.7 Mb/s | ✅\"\n    type: trojan\n    server: \"full-mackerel.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"full-mackerel.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.214:8080#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-9\"\n    type: ss\n    server: \"82.38.31.214\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.192:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-57\"\n    type: ss\n    server: \"82.38.31.192\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@37.19.198.244:443#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-10\"\n    type: ss\n    server: \"37.19.198.244\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@endless-kiwi.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-58\"\n    type: trojan\n    server: \"endless-kiwi.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"endless-kiwi.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@open-eel.rooster465.autos:443?security=tls\u0026sni=open-eel.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-59\"\n    type: trojan\n    server: \"open-eel.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"open-eel.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://FC60532879@actual-chicken.rooster465.autos:443?security=tls\u0026sni=actual-chicken.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-11\"\n    type: trojan\n    server: \"actual-chicken.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"actual-chicken.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@sweeping-parakeet.rooster465.autos:443?security=tls\u0026sni=sweeping-parakeet.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-60\"\n    type: trojan\n    server: \"sweeping-parakeet.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"sweeping-parakeet.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://FC60532879@welcome-labrador.rooster465.autos:443?security=tls\u0026sni=welcome-labrador.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-61\"\n    type: trojan\n    server: \"welcome-labrador.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"welcome-labrador.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://XG59623478@concise-buck.rooster465.autos:443?security=tls\u0026sni=concise-buck.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-62\"\n    type: trojan\n    server: \"concise-buck.rooster465.autos\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"concise-buck.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@prepared-turkey.rooster465.autos:443?security=tls\u0026sni=prepared-turkey.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-63\"\n    type: trojan\n    server: \"prepared-turkey.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"prepared-turkey.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@meet-doe.rooster465.autos:443?security=tls\u0026sni=meet-doe.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-64\"\n    type: trojan\n    server: \"meet-doe.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"meet-doe.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://NQ26071394@89.39.70.85:443?security=tls\u0026sni=grateful-bedbug.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-65\"\n    type: trojan\n    server: \"89.39.70.85\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"grateful-bedbug.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@sterling-fowl.rooster465.autos:443?security=tls\u0026sni=sterling-fowl.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-66\"\n    type: trojan\n    server: \"sterling-fowl.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"sterling-fowl.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://NQ26071394@pretty-mollusk.rooster465.autos:443?security=tls\u0026sni=pretty-mollusk.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-67\"\n    type: trojan\n    server: \"pretty-mollusk.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"pretty-mollusk.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@pleased-sawfly.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-68\"\n    type: trojan\n    server: \"pleased-sawfly.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"pleased-sawfly.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.8 Mb/s | ✅",
+      "url": "trojan://FC60532879@outgoing-ladybird.rooster465.autos:443?security=tls\u0026sni=outgoing-ladybird.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.8 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.8 Mb/s | ✅\"\n    type: trojan\n    server: \"outgoing-ladybird.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"outgoing-ladybird.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 8.8 Mb/s | ✅",
+      "url": "trojan://IQ68037294@robust-toucan.rooster465.autos:443?security=tls\u0026sni=robust-toucan.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 8.8 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 8.8 Mb/s | ✅\"\n    type: trojan\n    server: \"robust-toucan.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"robust-toucan.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://XG59623478@growing-oyster.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-69\"\n    type: trojan\n    server: \"growing-oyster.rooster465.autos\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"growing-oyster.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.7 Mb/s | ✅",
+      "url": "trojan://XG59623478@82.117.225.216:443?security=tls\u0026sni=concise-buck.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.7 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.7 Mb/s | ✅-2\"\n    type: trojan\n    server: \"82.117.225.216\"\n    port: 443\n    password: \"XG59623478\"\n    sni: \"concise-buck.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://FC60532879@faithful-panther.rooster465.autos:443?security=tls\u0026sni=faithful-panther.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-70\"\n    type: trojan\n    server: \"faithful-panther.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"faithful-panther.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@glowing-deer.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-71\"\n    type: trojan\n    server: \"glowing-deer.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"glowing-deer.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://IQ68037294@artistic-pigeon.rooster465.autos:443?security=tls\u0026sni=artistic-pigeon.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-12\"\n    type: trojan\n    server: \"artistic-pigeon.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"artistic-pigeon.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
+      "url": "trojan://IQ68037294@whole-perch.rooster465.autos:443?security=tls\u0026sni=whole-perch.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅-2\"\n    type: trojan\n    server: \"whole-perch.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"whole-perch.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@select-marmoset.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-72\"\n    type: trojan\n    server: \"select-marmoset.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"select-marmoset.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://FC60532879@classic-pug.rooster465.autos:443?security=tls\u0026sni=classic-pug.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-73\"\n    type: trojan\n    server: \"classic-pug.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"classic-pug.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.9 Mb/s | ✅",
+      "url": "trojan://HW85960347@185.14.47.195:443?security=tls\u0026sni=eminent-lamb.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.9 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.9 Mb/s | ✅\"\n    type: trojan\n    server: \"185.14.47.195\"\n    port: 443\n    password: \"HW85960347\"\n    sni: \"eminent-lamb.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@whole-woodcock.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-74\"\n    type: trojan\n    server: \"whole-woodcock.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"whole-woodcock.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://FC60532879@exotic-chicken.rooster465.autos:443?security=tls\u0026sni=exotic-chicken.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-75\"\n    type: trojan\n    server: \"exotic-chicken.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"exotic-chicken.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@adjusted-labrador.rooster465.autos:443?security=tls\u0026sni=adjusted-labrador.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-76\"\n    type: trojan\n    server: \"adjusted-labrador.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"adjusted-labrador.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@141.98.101.182:443#t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.2 Mb/s | ✅-3\"\n    type: ss\n    server: \"141.98.101.182\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "trojan://IQ68037294@square-anchovy.rooster465.autos:443?security=tls\u0026sni=square-anchovy.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-13\"\n    type: trojan\n    server: \"square-anchovy.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"square-anchovy.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@accurate-drake.rooster465.autos:443?security=tls\u0026sni=accurate-drake.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-77\"\n    type: trojan\n    server: \"accurate-drake.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"accurate-drake.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.87.240:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-78\"\n    type: ss\n    server: \"149.22.87.240\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "57925",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 2.7 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpGWHBEZjdXVjZsZkQ2bjlocHo3SEYy@157.22.240.141:57925#t.me/ForceRunVPN | 🇒🇒 | 2.7 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 2.7 Mb/s | ✅\"\n    type: ss\n    server: \"157.22.240.141\"\n    port: 57925\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"FXpDf7WV6lfD6n9hpz7HF2\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.87.241:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-79\"\n    type: ss\n    server: \"149.22.87.241\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://NQ26071394@79.133.126.190:443?security=tls\u0026sni=renewed-phoenix.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-80\"\n    type: trojan\n    server: \"79.133.126.190\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"renewed-phoenix.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@141.98.101.181:443#t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.1 Mb/s | ✅-14\"\n    type: ss\n    server: \"141.98.101.181\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@141.98.101.179:443#t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.4 Mb/s | ✅-3\"\n    type: ss\n    server: \"141.98.101.179\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://FC60532879@rested-pheasant.rooster465.autos:443?security=tls\u0026sni=rested-pheasant.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-81\"\n    type: trojan\n    server: \"rested-pheasant.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"rested-pheasant.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://NQ26071394@89.39.70.143:443?security=tls\u0026sni=thorough-falcon.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-82\"\n    type: trojan\n    server: \"89.39.70.143\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"thorough-falcon.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://HW85960347@eminent-lamb.rooster465.autos:443?security=tls\u0026sni=eminent-lamb.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-83\"\n    type: trojan\n    server: \"eminent-lamb.rooster465.autos\"\n    port: 443\n    password: \"HW85960347\"\n    sni: \"eminent-lamb.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "vmess",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "vmess://eyJhZGQiOiJ4c2owMDQtMTAuZmFjYWkyMDI0LmNvbSIsImFpZCI6MCwiaG9zdCI6InhzajAwNC0xMC5mYWNhaTIwMjQuY29tIiwiaWQiOiIxZjFhYTM2Mi0yNTc2LTQ5ODktOGZkYi03Y2YxYzJjOTY0OTAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvMWYxYWEzNjItMjUiLCJwb3J0IjoiNDQzIiwicHMiOiJ0Lm1lL0ZvcmNlUnVuVlBOIHwg8J+HkvCfh5IgfCBSSVNLWSDwn5S0IiwidGxzIjoidGxzIiwidiI6IjIifQ==",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-84\"\n    type: vmess\n    server: \"xsj004-10.facai2024.com\"\n    port: 443\n    uuid: \"1f1aa362-2576-4989-8fdb-7cf1c2c96490\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    tls: true\n    skip-cert-verify: true\n    servername: \"xsj004-10.facai2024.com\"\n    network: ws\n    ws-opts:\n      path: \"/1f1aa362-25\"\n      headers:\n        Host: \"xsj004-10.facai2024.com\"\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@149.22.87.204:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-85\"\n    type: ss\n    server: \"149.22.87.204\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "vmess",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅",
+      "url": "vmess://eyJhZGQiOiI5NC4xMzEuMTA4LjM2IiwiYWlkIjowLCJpZCI6Ijk4NTVmMWYwLWE4MDAtNDBkNC04YjM4LWM3ZDNlYjc5MzAyZCIsIm5ldCI6IndzIiwicG9ydCI6IjQ0MyIsInBzIjoidC5tZS9Gb3JjZVJ1blZQTiB8IPCfh5Lwn4eSIHwgMC4wIE1iL3MgfCDinIUiLCJ2IjoiMiJ9",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.0 Mb/s | ✅-3\"\n    type: vmess\n    server: \"94.131.108.36\"\n    port: 443\n    uuid: \"9855f1f0-a800-40d4-8b38-c7d3eb79302d\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/\"\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpoQ0NXT2NJc0s1d3JGejRPWDcwcldm@216.105.168.18:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-86\"\n    type: ss\n    server: \"216.105.168.18\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"hCCWOcIsK5wrFz4OX70rWf\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://FC60532879@wise-longhorn.rooster465.autos:443?security=tls\u0026sni=wise-longhorn.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-87\"\n    type: trojan\n    server: \"wise-longhorn.rooster465.autos\"\n    port: 443\n    password: \"FC60532879\"\n    sni: \"wise-longhorn.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@141.98.101.178:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-88\"\n    type: ss\n    server: \"141.98.101.178\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@158.173.20.171:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-89\"\n    type: ss\n    server: \"158.173.20.171\"\n    port: 443\n    cipher: \"aes-128-gcm\"\n    password: \"shadowsocks\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.35:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-90\"\n    type: ss\n    server: \"82.38.31.35\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@major-duckling.rooster465.autos:443?security=tls\u0026sni=major-duckling.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-91\"\n    type: trojan\n    server: \"major-duckling.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"major-duckling.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-92\"\n    type: ss\n    server: \"102.37.156.224\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"aduB9HGxQHjA2SBMRjkHX6\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅",
+      "url": "trojan://KV63147582@selected-bison.rooster465.autos:443?security=tls\u0026sni=selected-bison.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅\"\n    type: trojan\n    server: \"selected-bison.rooster465.autos\"\n    port: 443\n    password: \"KV63147582\"\n    sni: \"selected-bison.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "vmess",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "43063",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "vmess://eyJhZGQiOiI0Ny4yNTAuNDUuMjM0IiwiYWlkIjowLCJpZCI6ImM3N2Y0OGY1LTRiZTMtNDQ2MS1iNTJiLTQ5OTk4ZTdiODk3YiIsIm5ldCI6IndzIiwicGF0aCI6Ii9hcmtpP2VkPTIwNDgiLCJwb3J0IjoiNDMwNjMiLCJwcyI6InQubWUvRm9yY2VSdW5WUE4gfCDwn4eS8J+HkiB8IFJJU0tZIPCflLQiLCJ2IjoiMiJ9",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-93\"\n    type: vmess\n    server: \"47.250.45.234\"\n    port: 43063\n    uuid: \"c77f48f5-4be3-4461-b52b-49998e7b897b\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/arki?ed=2048\"\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://OD90375861@87.121.33.171:443?security=tls\u0026sni=selected-bison.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-94\"\n    type: trojan\n    server: \"87.121.33.171\"\n    port: 443\n    password: \"OD90375861\"\n    sni: \"selected-bison.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "50099",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 11.8 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg001287h3p.cybervena.com:50099#t.me/ForceRunVPN | 🇒🇒 | 11.8 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 11.8 Mb/s | ✅\"\n    type: ss\n    server: \"r3mrcg001287h3p.cybervena.com\"\n    port: 50099\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"7e731ec3-f8e1-43f6-92cf-3978d14705c4\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://IQ68037294@eternal-frog.rooster465.autos:443?security=tls\u0026sni=eternal-frog.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-95\"\n    type: trojan\n    server: \"eternal-frog.rooster465.autos\"\n    port: 443\n    password: \"IQ68037294\"\n    sni: \"eternal-frog.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "7001",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://YWVzLTI1Ni1nY206UmV4bkJnVTdFVjVBRHhH@94.156.250.148:7001#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-96\"\n    type: ss\n    server: \"94.156.250.148\"\n    port: 7001\n    cipher: \"aes-256-gcm\"\n    password: \"RexnBgU7EV5ADxG\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://JA96378052@evident-gnat.rooster465.autos:443?security=tls#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-97\"\n    type: trojan\n    server: \"evident-gnat.rooster465.autos\"\n    port: 443\n    password: \"JA96378052\"\n    sni: \"evident-gnat.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "16233",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-98\"\n    type: ss\n    server: \"102.133.165.160\"\n    port: 16233\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"Xsy8Ox4yOV3xLlpxtjzs3X\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.176:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-99\"\n    type: ss\n    server: \"82.38.31.176\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "28061",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.71:28061#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-100\"\n    type: ss\n    server: \"103.111.114.71\"\n    port: 28061\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"WOir3lXBhMHDcLFPQdEZXPu37_pTQDCXfm\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "28061",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.80:28061#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-101\"\n    type: ss\n    server: \"103.111.114.80\"\n    port: 28061\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"WOir3lXBhMHDcLFPQdEZXPu37_pTQDCXfm\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "28061",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.82:28061#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-102\"\n    type: ss\n    server: \"103.111.114.82\"\n    port: 28061\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"WOir3lXBhMHDcLFPQdEZXPu37_pTQDCXfm\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.36:443#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-103\"\n    type: ss\n    server: \"82.38.31.36\"\n    port: 443\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.2:8080#t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 0.3 Mb/s | ✅-2\"\n    type: ss\n    server: \"82.38.31.2\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "VERIFIED",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅",
+      "url": "trojan://NQ26071394@ready-kangaroo.rooster465.autos:443?security=tls\u0026sni=ready-kangaroo.rooster465.autos#t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | 1.0 Mb/s | ✅-2\"\n    type: trojan\n    server: \"ready-kangaroo.rooster465.autos\"\n    port: 443\n    password: \"NQ26071394\"\n    sni: \"ready-kangaroo.rooster465.autos\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "50099",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ=@r3mrcg00129437x.cybervena.com:50099#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-104\"\n    type: ss\n    server: \"r3mrcg00129437x.cybervena.com\"\n    port: 50099\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"7e731ec3-f8e1-43f6-92cf-3978d14705c4\"\n    udp: true\n"
     },
     {
       "protocol": "vmess",
@@ -1580,7 +1560,87 @@
       "status": "RISKY",
       "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
       "url": "vmess://eyJhZGQiOiIxNTIuNjcuMjE4LjM4IiwiYWlkIjowLCJpZCI6ImI1ZTk0ODBhLWI3YWEtNDBhNC1mOWE3LTUyOTliNWUzNjNiNCIsIm5ldCI6IndzIiwicG9ydCI6IjQ0MyIsInBzIjoidC5tZS9Gb3JjZVJ1blZQTiB8IPCfh5Lwn4eSIHwgUklTS1kg8J+UtCIsInYiOiIyIn0=",
-      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-90\"\n    type: vmess\n    server: \"152.67.218.38\"\n    port: 443\n    uuid: \"b5e9480a-b7aa-40a4-f9a7-5299b5e363b4\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/\"\n"
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-105\"\n    type: vmess\n    server: \"152.67.218.38\"\n    port: 443\n    uuid: \"b5e9480a-b7aa-40a4-f9a7-5299b5e363b4\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/\"\n"
+    },
+    {
+      "protocol": "vmess",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "80",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "vmess://eyJhZGQiOiIxNTIuNjcuOC4yMDUiLCJhaWQiOjAsImlkIjoiOWRiNGM3MDgtYWVmOC00MzU5LTgyMWItMzhlNDc5OTBiZTBkIiwibmV0Ijoid3MiLCJwb3J0IjoiODAiLCJwcyI6InQubWUvRm9yY2VSdW5WUE4gfCDwn4eS8J+HkiB8IFJJU0tZIPCflLQiLCJzbmkiOiIxNTIuNjcuOC4yMDUiLCJ2IjoiMiJ9",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-106\"\n    type: vmess\n    server: \"152.67.8.205\"\n    port: 80\n    uuid: \"9db4c708-aef8-4359-821b-38e47990be0d\"\n    alterId: 0\n    cipher: \"auto\"\n    udp: true\n    network: ws\n    ws-opts:\n      path: \"/\"\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "62685",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpWcEtBQmNPcE5OQTBsNUcyQVZPbXc4@213.109.147.242:62685#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-107\"\n    type: ss\n    server: \"213.109.147.242\"\n    port: 62685\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"VpKABcOpNNA0l5G2AVOmw8\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.194:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-108\"\n    type: ss\n    server: \"82.38.31.194\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "trojan",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "443",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "trojan://S.ibYdZshHTF-ne.M+.Fznp_-hyFFnCSix@149.104.104.58:443?security=tls\u0026sni=149.104.104.58#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-109\"\n    type: trojan\n    server: \"149.104.104.58\"\n    port: 443\n    password: \"S.ibYdZshHTF-ne.M+.Fznp_-hyFFnCSix\"\n    sni: \"149.104.104.58\"\n    skip-cert-verify: true\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.216:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-110\"\n    type: ss\n    server: \"82.38.31.216\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@82.38.31.10:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-111\"\n    type: ss\n    server: \"82.38.31.10\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"oZIoA69Q8yhcQV8ka3Pa3A\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.217:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-112\"\n    type: ss\n    server: \"82.38.31.217\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
+    },
+    {
+      "protocol": "ss",
+      "country": "Unknown",
+      "countryCode": "--",
+      "port": "8080",
+      "status": "RISKY",
+      "tag": "t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "url": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.199:8080#t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴",
+      "clash": "  - name: \"t.me/ForceRunVPN | 🇒🇒 | RISKY 🔴-113\"\n    type: ss\n    server: \"82.38.31.199\"\n    port: 8080\n    cipher: \"chacha20-ietf-poly1305\"\n    password: \"k1dBOmOB4oqi7Ump37a1bQ\"\n    udp: true\n"
     }
   ]
 }
