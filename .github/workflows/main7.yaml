@@ -108,34 +108,34 @@ jobs:
       # ============================================================
       # 8.
       # ============================================================
-      - name: Copy servers.json to public repo (optional)
-        if: steps.check_output.outputs.exists == 'true'
-        run: |
-          echo "📋 Copying servers.json..."
-          mkdir -p ./public/servers
-          cp ./source/output/servers.json ./public/servers/servers.json
-          echo "✅ servers.json copied to ./public/servers/"
+      #- name: Copy servers.json to public repo (optional)
+      #  if: steps.check_output.outputs.exists == 'true'
+      #  run: |
+      #    echo "📋 Copying servers.json..."
+      #    mkdir -p ./public/servers
+      #    cp ./source/output/servers.json ./public/servers/servers.json
+      #    echo "✅ servers.json copied to ./public/servers/"
 
       # ============================================================
       # 9.
       # ============================================================
-      - name: Commit and push servers.json (optional)
-        if: steps.check_output.outputs.exists == 'true'
-        working-directory: ./public
-        run: |
-          git config user.name "F0rc3Run Bot"
-          git config user.email "bot@f0rc3run.local"
+     # - name: Commit and push servers.json (optional)
+     #   if: steps.check_output.outputs.exists == 'true'
+     #   working-directory: ./public
+     #   run: |
+     #     git config user.name "F0rc3Run Bot"
+     #     git config user.email "bot@f0rc3run.local"
           
-          git add servers/servers.json
+     #     git add servers/servers.json
           
-          if git diff --staged --quiet; then
-            echo "📝 No changes to servers.json"
-          else
-            echo "📝 Committing servers.json..."
-            git commit -m "🔄 Update servers.json - $(date -u '+%Y-%m-%d %H:%M:%S UTC') - Count: ${{ steps.check_output.outputs.count }}"
-            git push origin main
-            echo "✅ servers.json pushed successfully"
-          fi
+     #     if git diff --staged --quiet; then
+     #       echo "📝 No changes to servers.json"
+     #     else
+     #       echo "📝 Committing servers.json..."
+     #       git commit -m "🔄 Update servers.json - $(date -u '+%Y-%m-%d %H:%M:%S UTC') - Count: ${{ steps.check_output.outputs.count }}"
+     #       git push origin main
+     #       echo "✅ servers.json pushed successfully"
+      #    fi
 
       # ============================================================
       # 10.
