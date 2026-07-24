@@ -2,7 +2,7 @@ name: Update VPN Servers
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # هر 6 ساعت
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 env:
@@ -17,7 +17,7 @@ jobs:
     
     steps:
       # ============================================================
-      # 1. کلون کردن ریپازیتوری خصوصی (F0rc3Run/Test)
+      # 1.
       # ============================================================
       - name: Clone private repository
         uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
         with:
          go-version: '1.22'
       # ============================================================
-      # 3. نصب وابستگی‌ها
+      # 3.
       # ============================================================
       - name: Generate dependencies
         working-directory: ./source
@@ -43,7 +43,7 @@ jobs:
           go mod download
           go mod verify
       # ============================================================
-      # 4. دانلود Xray-core
+      # 4.Xray-core
       # ============================================================
       - name: Download Xray-core
         working-directory: ./source
@@ -54,7 +54,7 @@ jobs:
           chmod +x xray
           echo "✅ Xray-core downloaded"
       # ============================================================
-      # 5. اجرای برنامه
+      # 5.
       # ============================================================
       - name: Run proxy checker
         working-directory: ./source
@@ -64,7 +64,7 @@ jobs:
         continue-on-error: false
 
       # ============================================================
-      # 5.5 دیباگ - نمایش دقیق محل فایل‌های تولید شده (در صورت بروز مشکل مسیر)
+      # 5.
       # ============================================================
       - name: Debug output location
         if: always()
@@ -77,7 +77,7 @@ jobs:
           ls -la ./output 2>/dev/null || echo "./output does not exist"
 
       # ============================================================
-      # 6. بررسی فایل خروجی
+      # 6.
       # ============================================================
       - name: Check output
         working-directory: ./source
@@ -95,7 +95,7 @@ jobs:
           echo "count=$SERVER_COUNT" >> $GITHUB_OUTPUT
 
       # ============================================================
-      # 7. کلون کردن ریپازیتوری عمومی (با استفاده از PAT)
+      # 7.
       # ============================================================
       - name: Clone public repository
         if: steps.check_output.outputs.exists == 'true'
@@ -106,7 +106,7 @@ jobs:
           echo "✅ Public repository cloned"
 
       # ============================================================
-      # 8. کپی فایل به دایرکتوری servers (اختیاری - برای commit)
+      # 8.
       # ============================================================
       - name: Copy servers.json to public repo (optional)
         if: steps.check_output.outputs.exists == 'true'
@@ -117,7 +117,7 @@ jobs:
           echo "✅ servers.json copied to ./public/servers/"
 
       # ============================================================
-      # 9. Commit و Push (اختیاری - فقط برای نگهداری نسخه)
+      # 9.
       # ============================================================
       - name: Commit and push servers.json (optional)
         if: steps.check_output.outputs.exists == 'true'
@@ -138,7 +138,7 @@ jobs:
           fi
 
       # ============================================================
-      # 10. آپلود servers.json به Cloudflare R2 (bucket: servers-bucket)
+      # 10.
       # ============================================================
       - name: Prepare R2 upload
         if: steps.check_output.outputs.exists == 'true'
@@ -162,7 +162,7 @@ jobs:
           echo "✅ servers.json uploaded to R2"
 
       # ============================================================
-      # 11. ذخیره خروجی به عنوان Artifact
+      # 11.
       # ============================================================
       - name: Upload artifact
         if: steps.check_output.outputs.exists == 'true'
@@ -180,7 +180,7 @@ jobs:
           echo "Generated JSON removed"
 
       # ============================================================
-      # 12. ارسال اعلان به تلگرام
+      # 12.
       # ============================================================
       - name: Send Telegram notification
         if: always()
