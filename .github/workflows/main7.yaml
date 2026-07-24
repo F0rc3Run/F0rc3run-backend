@@ -97,13 +97,13 @@ jobs:
       # ============================================================
       # 7.
       # ============================================================
-      - name: Clone public repository
-        if: steps.check_output.outputs.exists == 'true'
-        run: |
-          echo "📦 Cloning public repository..."
-          git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/F0rc3run-backend.git ./public
-          cd ./public
-          echo "✅ Public repository cloned"
+    #  - name: Clone public repository
+    #    if: steps.check_output.outputs.exists == 'true'
+    #    run: |
+    #      echo "📦 Cloning public repository..."
+    #      git clone https://x-access-token:${{ secrets.PAT }}@github.com/F0rc3Run/F0rc3run-backend.git ./public
+    #      cd ./public
+    #      echo "✅ Public repository cloned"
 
       # ============================================================
       # 8.
