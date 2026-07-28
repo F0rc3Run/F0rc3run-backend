@@ -194,6 +194,6 @@ jobs:
           fi
           
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="7846092422" \
+            -d chat_id="73383302" \
             -d text="🔄 *VPN Servers Update*%0A%0A📊 Status: $STATUS%0A$DETAILS%0A🕐 Time: $(date '+%Y-%m-%d %H:%M:%S UTC')%0A🔗 Repo: F0rc3run-backend" \
             -d parse_mode="Markdown"
